@@ -1,6 +1,66 @@
+import { createElement, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleWorksite, clearWorksiteDetails } from "../features/company/companySlice";
+import { Outlet, useParams } from "react-router-dom";
+import { SideNavbar } from "../components";
+
 const SingleWorksite = () => {
+    const {id} = useParams();
+    
+    const dispatch = useDispatch();
+    const company = useSelector(state => state.companyState)
+    const [ActiveComponent, setActiveComponent] = useState(null);
+
+    const handleLinkClick = (Component) => {
+        setActiveComponent(() => Component);
+    }
+    
+    useEffect(() => {
+        dispatch(fetchSingleWorksite(id))
+
+        return () => {
+            dispatch(clearWorksiteDetails());
+        }
+    }, [id,dispatch])
+    
+    const worksiteDetails = company?.worksiteDetails
+    // console.log("testi",worksiteDetails);
+
+    if (company.loading || !worksiteDetails) {
+        return (
+            <section className="text-center">
+                <span className="loading loading-spinner loading-xs bg-green-900"></span>
+                <span className="loading loading-spinner loading-sm bg-green-800"></span>
+                <span className="loading loading-spinner loading-md bg-green-700"></span>
+                <span className="loading loading-spinner loading-lg bg-green-600"></span>
+            </section>
+        )
+    }
+
+    
     return (
-        <h1>SingleWorksite </h1>
+        // <section className="text-center ">
+        //     <h1>{worksiteDetails._id}</h1>
+        //     <h1>{worksiteDetails.address}</h1>
+
+        // </section>
+        <div className="flex flex-col lg:flex-row ">
+        {/* Sivunavigaatio */}
+            <div className="w-full lg:w-1/6 bg-slate-100 p-4 lg:min-h-screen overflow-y-auto">
+                    <ul className="flex flex-row justify-around lg:flex-col lg:space-y-0">
+                        <SideNavbar onLinkClick={handleLinkClick}/>
+                    </ul>
+                
+            </div>
+
+            {/* Sisältö */}
+            <div className="flex flex-col justify-center items-center w-full lg:w-3/4 p-4 mx-auto">
+                <h1>{worksiteDetails._id}</h1>
+                <h1>{worksiteDetails.address}</h1>
+                {ActiveComponent ? createElement(ActiveComponent) : <div>valitse komponentti</div>}
+                
+            </div>
+        </div>
     )
 }
 

@@ -3,7 +3,7 @@ import { store } from "../store";
 import { customFetch } from "../utils";
 import { useEffect } from "react";
 import { fetchUserDetails } from "../features/auth/authSlice";
-import {fetchCompanyDetails} from '../features/company/companySlice'
+import {fetchCompanyDetails, fetchCompanyWorksites} from '../features/company/companySlice'
 import { CompanyComponent } from "../components";
 
 
@@ -14,6 +14,7 @@ const Company = () => {
     const id = user.user._id;
     
     
+    
 
     useEffect(() => {
         dispatch(fetchUserDetails(id));
@@ -22,14 +23,17 @@ const Company = () => {
 
     useEffect(() => {
         dispatch(fetchCompanyDetails())
-    }, [dispatch]);
+        
+        
+    }, [id,dispatch]);
     
     
     const companyExists = company?.company;
     
+    
 
     return (
-        <section>
+        <section className="">
             {companyExists ? <CompanyComponent companyData={companyExists}/> : <h1>eilöydy</h1>}
         </section>
     )

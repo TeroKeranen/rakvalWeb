@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../features/auth/authSlice";
+import {clearCompanyDetails } from '../features/company/companySlice'
 
 const Header = () => {
 
@@ -14,6 +15,7 @@ const Header = () => {
     const handleLogout = () => {
         navigate('/');
         dispatch(logoutUser())
+        dispatch(clearCompanyDetails())
     }
 
     return (

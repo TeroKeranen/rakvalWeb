@@ -93,6 +93,8 @@ const authSlice = createSlice({
         },
         logoutUser: (state) => {
             state.user = null;
+            state.company = null;
+            state.worksites = null
             localStorage.removeItem('user');
             
         },

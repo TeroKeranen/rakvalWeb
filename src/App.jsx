@@ -12,7 +12,8 @@ import {
   Register,
   HomeLayout,
   Error,
-  SingleWorksite
+  SingleWorksite,
+  Floorplan
   } from './pages'
 import { ErrorElement } from './components'
 
@@ -52,7 +53,8 @@ const router = createBrowserRouter([
           <ProtectedRoute>
             <Worksites />
           </ProtectedRoute>
-        )
+        ),
+        
       },
       {
         path:'worksites/:id',
@@ -60,7 +62,8 @@ const router = createBrowserRouter([
           <ProtectedRoute>     
             <SingleWorksite />
           </ProtectedRoute>
-        )
+        ),
+        
       },
       {
         path:'company',

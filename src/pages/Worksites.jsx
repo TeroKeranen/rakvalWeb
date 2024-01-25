@@ -1,6 +1,28 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCompanyWorksites } from "../features/company/companySlice";
+import { WorksitesComponent } from "../components";
+
+
 const Worksites = () => {
+
+    const dispatch = useDispatch();
+    const company = useSelector(state => state.companyState);
+    const user = useSelector(state=> state.userState)
+    
+
+    useEffect(() => {
+        dispatch(fetchCompanyWorksites());
+    }, [dispatch])
+
+    
+
+    const worksite = company?.worksites;
+
     return (
-        <h1>Worksites </h1>
+        <>
+            {worksite ? <WorksitesComponent worksites={worksite}/> : <h1>ei dataa</h1>}
+        </>
     )
 }
 
