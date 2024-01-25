@@ -48,7 +48,7 @@ const SingleWorksite = () => {
         {/* Sivunavigaatio */}
             <div className="w-full lg:w-1/6 bg-slate-100 p-4 lg:min-h-screen overflow-y-auto">
                     <ul className="flex flex-row justify-around lg:flex-col lg:space-y-0">
-                        <SideNavbar onLinkClick={handleLinkClick}/>
+                        <SideNavbar onLinkClick={handleLinkClick} address={worksiteDetails.address}/>
                     </ul>
                 
             </div>
