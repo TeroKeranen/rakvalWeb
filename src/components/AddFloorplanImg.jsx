@@ -11,7 +11,7 @@ const AddFloorplanImg = ({worksiteId}) => {
     
     const handleImageChange = (e) => {
         const file = e.target.files[0]
-        console.log("fiilee", file);
+        
         if (file && file.type.startsWith('image/')) {
             setSelectedImage(URL.createObjectURL(file));
             setSelectedFile(file); // Tallenna tiedosto lähetykseen
@@ -52,8 +52,8 @@ const AddFloorplanImg = ({worksiteId}) => {
             <dialog id="my_modal_1" className="modal">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">Valitse kuva </h3>
-                <input type="text" placeholder="Anna otsikko kuvalle" value={title} onChange={handleTitleChange} />
                 <input type="file" className="file-input w-full max-w-xs" onChange={handleImageChange}/>
+                <input className="p-2 rounded-lg mt-3" type="text" placeholder="Anna otsikko kuvalle" value={title} onChange={handleTitleChange} />
                 {selectedImage && <img src={selectedImage} alt="Preview" className="mt-4" />}
                 <p className="py-4">Press ESC key or click the button below to close</p>
                 <div className="modal-action">

@@ -1,19 +1,21 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import MarkerDetails from "./MarkerDetails";
 
 
 const Floorplan = () => {
     const url = "https://rakval7aa91a47d6bf4bffbcb7aa26cf06c2b294331-rakval.s3.eu-west-1.amazonaws.com/public/"
     const {id} = useParams();
-    const worksiteDetails2 = useSelector(state => state.companyState.worksiteDetails.floorplanKeys)
-    console.log(worksiteDetails2);
     const worksiteDetails = useSelector(state => state.companyState.worksiteDetails)
+    
+    const [activeMarker, setActiveMarker] = useState(null); // asetetaan klikattavan markerin tiedot tänne, josta ne viedään MarkerDetails komponenttiin.
     
 
     const worksiteFloorplankeys = worksiteDetails.floorplanKeys;
     const markers = worksiteDetails.markers;
 
-    console.log("floorplan",markers);
+    
 
     const originalImageWidth = 400; // Esimerkki alkuperäisestä leveydestä
     const originalImageHeight = 400; // Esimerkki alkuperäisestä korkeudesta
@@ -26,6 +28,12 @@ const Floorplan = () => {
             y: (marker.y / originalImageHeight) * currentImageHeight,
         };
     };
+
+    const handleMarkerClick = (marker) => {
+        
+        setActiveMarker(marker);
+        
+    }
     
 
     return (
@@ -43,6 +51,7 @@ const Floorplan = () => {
                                 <img src={`${url}${floorplan.key}`} style={{ width: "100%", height: "auto",objectFit: 'contain' }} />
                             {/* Renderöi tämän kuvan markerit */}
                             {markers.filter(marker => marker.floorplanIndex === index).map((marker, markerIndex) => {
+                                
                                 const scaledPosition = scaleMarkerPosition(marker);
                                 return (
                                     <div 
@@ -56,8 +65,10 @@ const Floorplan = () => {
                                             height: "20px",
                                             borderRadius: 10
                                         }}
+                                        onClick={() => handleMarkerClick(marker)}
                                     >
                                         {/* Markerin sisältö */}
+                                        {marker.markerNumber}
                                     </div>
                                 );
                             })}
@@ -65,6 +76,8 @@ const Floorplan = () => {
                     </div>
                 ))}
             </div>
+
+            {activeMarker && <MarkerDetails marker={activeMarker} setActiveMarker={setActiveMarker} />} 
             
             <div className="flex justify-center w-full py-2 gap-2">
                 
