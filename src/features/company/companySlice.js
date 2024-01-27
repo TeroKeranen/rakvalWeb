@@ -73,6 +73,31 @@ export const fetchSingleWorksite = createAsyncThunk(
   }
 )
 
+export const addWorksiteFloorplanKey = createAsyncThunk(
+  'worksite/addFloorplan',
+  async({worksiteId, key, title}, {getState, rejectWithValue}) => {
+    
+    try {
+      const token = getState().userState.user.token;
+      const response = await customFetch.post(`/worksites/${worksiteId}/floorplan`,
+        {key, title},
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        if (response.status !== 200) {
+          throw new Error("virhe lähettäessä floorplankey")
+        }
+        return response.data;
+
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+)
+
 const initialState = {
     company: null,
     worksites: null,
@@ -138,7 +163,15 @@ const companySlice = createSlice({
       .addCase(fetchSingleWorksite.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
-      });
+      })
+
+      //käsittely floorplankeyn lähettämiseen
+      .addCase(addWorksiteFloorplanKey.fulfilled, (state,action) => {
+        const updatedWorksite = action.payload;
+        if (state.worksiteDetails && state.worksiteDetails._id === updatedWorksite._id) {
+          state.worksiteDetails = updatedWorksite;
+      }
+      })
     }
 })
 

@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 const Floorplan = () => {
     const url = "https://rakval7aa91a47d6bf4bffbcb7aa26cf06c2b294331-rakval.s3.eu-west-1.amazonaws.com/public/"
     const {id} = useParams();
-    console.log(id);
+    const worksiteDetails2 = useSelector(state => state.companyState.worksiteDetails.floorplanKeys)
+    console.log(worksiteDetails2);
     const worksiteDetails = useSelector(state => state.companyState.worksiteDetails)
     
 
@@ -29,6 +30,7 @@ const Floorplan = () => {
 
     return (
         <div>
+            
             
             <div className=" max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
                 {worksiteFloorplankeys.map((floorplan, index) => (
@@ -65,9 +67,6 @@ const Floorplan = () => {
             </div>
             
             <div className="flex justify-center w-full py-2 gap-2">
-                {worksiteFloorplankeys.map((_, index) => (
-                        <a href={`#item${index}`} className="btn btn-xs" key={index}>{index + 1}</a>
-                    ))}
                 
             </div>
             

@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
+    "aws-amplify": "^6.0.13",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "react": "^18.2.0",

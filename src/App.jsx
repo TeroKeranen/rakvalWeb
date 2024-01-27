@@ -13,7 +13,7 @@ import {
   HomeLayout,
   Error,
   SingleWorksite,
-  Floorplan
+  
   } from './pages'
 import { ErrorElement } from './components'
 
