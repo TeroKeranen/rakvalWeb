@@ -32,9 +32,9 @@ const SideNavbar = ({onLinkClick, address}) => {
                 <h1 className="text-gray-600 text-xl font-bold mb-4">{address}</h1>
             </div>
 
-            <div className="flex flex-row  lg:flex-col">
+            <div className="flex flex-row justify-center items-center lg:flex-col lg:items-stretch">
                 {links.map((link) => (
-                    <li key={link.id} className={`text-gray-600 border-2 py-2 cursor-pointer ${selectedId === link.id ? 'bg-blue-200 p-1' : ''}`} onClick={() => {
+                    <li key={link.id} className={`text-gray-600 border-2 rounded-lg p-2 my-2 mx-1 lg:mx-0 cursor-pointer ${selectedId === link.id ? 'bg-blue-200 p-1' : ''}`} onClick={() => {
                         onLinkClick(link.componentType);
                         setSelectedId(link.id);
                     }}>

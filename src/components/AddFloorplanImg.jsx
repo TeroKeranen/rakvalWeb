@@ -48,7 +48,7 @@ const AddFloorplanImg = ({worksiteId}) => {
     return (
         <section>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>Lisää kuva</button>
+            <button className="btn border-blue-100" onClick={()=>document.getElementById('my_modal_1').showModal()}>Lisää kuva</button>
             <dialog id="my_modal_1" className="modal">
             <div className="modal-box">
                 <h3 className="font-bold text-lg">Valitse kuva </h3>

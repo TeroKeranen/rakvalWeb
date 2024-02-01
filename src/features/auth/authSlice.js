@@ -22,6 +22,7 @@ const getThemeFromLocalStrorage = () => {
 const initialState = {
     user: getUserFromLocalStorage(),
     theme: getThemeFromLocalStrorage(),
+    urls: null
 }
 
 export const fetchUserDetails = createAsyncThunk(
@@ -53,6 +54,23 @@ export const fetchUserDetails = createAsyncThunk(
     }
 )
 
+// haetaan backendistä aws url ja laitetaan se stateen
+export const fetchAwsUrl = createAsyncThunk(
+    'aws/url',
+    async (_, {getState, rejectWithValue}) => {
+        try {
+            const token = getState().userState.user.token;
+            const response = await customFetch.get('/aws-url', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return response.data;
+        } catch (error) {
+            
+        }
+    }
+)
 // export const fetchUserCompany = createAsyncThunk(
 //     'company',
 //     async (_, {getState, rejectWithValue}) => {
@@ -122,7 +140,10 @@ const authSlice = createSlice({
         console.log(state,action);
         state.error = action.error.message;
         
-      });
+      })
+      .addCase(fetchAwsUrl.fulfilled, (state, action) => {
+        state.urls = action.payload
+      })
     }
 })
 
