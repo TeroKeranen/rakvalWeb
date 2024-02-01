@@ -117,6 +117,9 @@ const companySlice = createSlice({
         state.worksiteDetails = null,
         state.company = null,
         state.worksites = null
+      },
+      updateWorksiteDetails: (state,action) => {
+        state.worksiteDetails = action.payload;
       }
       
   
@@ -175,6 +178,6 @@ const companySlice = createSlice({
     }
 })
 
-export const {clearWorksiteDetails, clearCompanyDetails} = companySlice.actions;
+export const {clearWorksiteDetails, clearCompanyDetails, updateWorksiteDetails} = companySlice.actions;
 
 export default companySlice.reducer;

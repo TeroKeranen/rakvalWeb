@@ -14,7 +14,7 @@ const CompanyComponent = ({companyData}) => {
             <h1 className="text-slate-950">{name}</h1>
             <h1 className="text-slate-950">{address}</h1>
             <h1 className="text-slate-950">{city}</h1>
-            <h1 className="text-slate-950">{code}</h1>
+            <h1 className="text-slate-950">Company code: {code}</h1>
         </section>
     )
     

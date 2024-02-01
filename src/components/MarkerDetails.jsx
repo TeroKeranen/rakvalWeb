@@ -1,9 +1,12 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 
 const MarkerDetails = ({marker, setActiveMarker}) => {
-    const url = "https://rakval7aa91a47d6bf4bffbcb7aa26cf06c2b294331-rakval.s3.eu-west-1.amazonaws.com/public/"
-    console.log("markerdetails",marker)
+    // const url = "https://rakval7aa91a47d6bf4bffbcb7aa26cf06c2b294331-rakval.s3.eu-west-1.amazonaws.com/public/"
+    const url = useSelector(state => state.userState.urls)
+    
+    
     useEffect(() => {
         // Avaa dialogi, kun komponentti on ladattu
         const dialog = document.getElementById('my_modal_2');

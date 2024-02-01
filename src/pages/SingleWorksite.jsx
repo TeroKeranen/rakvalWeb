@@ -12,9 +12,7 @@ const SingleWorksite = () => {
     const company = useSelector(state => state.companyState)
     const [ActiveComponent, setActiveComponent] = useState(null);
 
-    // const handleLinkClick = (Component) => {
-    //     setActiveComponent(() => Component);
-    // }
+    
     const handleLinkClick = (componentType) => {
         setActiveComponent(componentType);
     }
