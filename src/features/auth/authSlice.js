@@ -71,6 +71,24 @@ export const fetchAwsUrl = createAsyncThunk(
         }
     }
 )
+
+// haetaa käyttäjän halutun käyttäjän tiedot id avulla
+export const fetchUser = createAsyncThunk(
+    'user/fetchUser',
+    async(userId, {getState, rejectWithValue}) => {
+        try {
+            const token = getState().userState.user.token;
+            const response = await customFetch.get(`users/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
 // export const fetchUserCompany = createAsyncThunk(
 //     'company',
 //     async (_, {getState, rejectWithValue}) => {

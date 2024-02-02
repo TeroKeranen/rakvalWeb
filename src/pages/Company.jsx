@@ -22,7 +22,10 @@ const Company = () => {
 
 
     useEffect(() => {
-        dispatch(fetchCompanyDetails())
+        if (id) {
+
+            dispatch(fetchCompanyDetails())
+        }
         
         
     }, [id,dispatch]);

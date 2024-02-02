@@ -4,8 +4,12 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
-const WorksitesComponent = ({worksites}) => {
+const WorksitesComponent = ({worksites, userInfo}) => {
     
+    const {email, _id, role} = userInfo;
+    
+    
+
     const theme = useSelector(state => state.userState.theme);
     
 
@@ -14,14 +18,16 @@ const WorksitesComponent = ({worksites}) => {
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
     
      // Suodata työmaat tyypin perusteella
-     const regularWorksites = worksites.filter(worksite => worksite.worktype === 'Construction site');
-     const smallWorksites = worksites.filter(worksite => worksite.worktype === 'Private client');
+     const regularWorksites = worksites.filter(worksite => worksite.worktype === 'Construction site' && (role ==='admin' || worksite.workers.includes(_id)));
+     const smallWorksites = worksites.filter(worksite => worksite.worktype === 'Private client' &&( role ==='admin' || worksite.workers.includes(_id)));
 
-     console.log(smallWorksites);
+     
 
 
+    
        // Renderöi työmaat collapse-komponentissa
     const renderWorksites = (worksites) => (
+        
         worksites.map(({ address, city, _id }, index) => (
             <Link to={`/worksites/${_id}`} key={_id} className="block">
                 
