@@ -2,85 +2,89 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {startWorkDay, endWorkDay} from '../features/worksite/worksiteSlice'
 import { toast } from "react-toastify";
+import WorkEntriesButton from "./WorkEntriesButton";
+import {fetchUser} from '../features/auth/authSlice'
 
 
 const WorkEntries = () => {
 
     const dispatch = useDispatch();
-    const details = useSelector(state => state.companyState.worksiteDetails); // Valitun työmaan tiedot
-    const companyWorksites = useSelector(state => state.companyState.worksites);
-    const userId = useSelector(state => state.userState.user._id); // Käyttäjän id
-    const workDay = details.workDays // valitun työmaan workDays tiedot
-    const worksiteId = details._id; // valitun työmaan id;
+    const allWorkEntries = useSelector(state => state.companyState.worksiteDetails.workDays) // katsotaan kaikki työmaan kirjaukset
+    const userRole = useSelector(state => state.userState?.user?.role); // otetaan ylös käyttäjän rooli
+    const userId = useSelector(state => state.userState?.user._id); // otetaan ylös käyttäjän id
+    const [ownWorkEntries, setOwnWorkEntries] = useState([]);
+    const [workEntriesWithUserDetails, setWorkEntriesWithUserDetails] = useState([]);
+    // console.log(allWorkEntries);
 
-    
 
-    const [dayIsOn, setDayIsOn] = useState(false);
-    
-    
 
-    const isRunningWorkDayOnAnyWorksite = () => {
-        // Käydään läpi jokainen työmaa
-        for (const worksite of companyWorksites) {
-            // Tarkistetaan, onko työmaalla käynnissä olevia työpäiviä
-            const runningWorkDay = worksite.workDays.find(workDay => workDay.running === true);
-            if (runningWorkDay) {
-                return true; // Löytyi käynnissä oleva työpäivä
-            }
-        }
-        return false; // Ei löytynyt käynnissä olevaa työpäivää
-    };
-
-    
-    
     
     useEffect(() => {
-        const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
-        // console.log("onkoonko", onGoingWorkDay.running);
-        if (onGoingWorkDay && onGoingWorkDay.running) {
-            setDayIsOn(true);
+
+        if (userRole === 'admin') {
+            setOwnWorkEntries(allWorkEntries);
         } else {
-            setDayIsOn(false);
+            const ownWorksites = allWorkEntries.filter(workEntry => workEntry.workerId === userId);
+            setOwnWorkEntries(ownWorksites);
+
         }
 
-    },[workDay,worksiteId])
+    },[allWorkEntries, userId])
 
-
-    const handleEndDay = () => {
-        const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
-
-        if (onGoingWorkDay) {
-            setDayIsOn(false);
-            dispatch(endWorkDay({worksiteId}))
-            toast.success("Nauhoitus suljettu")
-        } else {
-            toast.error("Tapahtui virhe");
+    useEffect(() => {
+        if (userRole === 'admin' && allWorkEntries.length > 0) {
+          const fetchUsers = async () => {
+            const userDetailsPromises = allWorkEntries.map(workEntry => 
+              dispatch(fetchUser(workEntry.workerId)).then(action => {
+                if (action.type === 'user/fetchUser/fulfilled') {
+                  return { ...workEntry, userName: action.payload.email };
+                } else {
+                  return { ...workEntry, userName: 'N/A' };
+                }
+              })
+            );
+    
+            const results = await Promise.all(userDetailsPromises);
+            setWorkEntriesWithUserDetails(results);
+          };
+    
+          fetchUsers();
         }
+      }, [dispatch, allWorkEntries, userRole]);
 
-    }
-    const handleStartDay = () => {
+    //   console.log(workEntriesWithUserDetails)
 
-        
-        // Katsotana onko käyttäjällä työpäivä käynnissä jossain työmaalla
-        const onGoingWorkDayAnyWorksite = isRunningWorkDayOnAnyWorksite();
-        const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
-        
-        if (onGoingWorkDayAnyWorksite || onGoingWorkDay) {
-            toast.error('Nauhoitus päällä jossain')
-        } else {
-            setDayIsOn(true);
-            toast.success('Aloitetaan nauhoitus')
-            dispatch(startWorkDay({ worksiteId }));
-        }
-        console.log("jatketaan");
      
-    };
-
+    const entriesToShow = userRole === 'admin' ? workEntriesWithUserDetails : ownWorkEntries;
+    
     return (
-        <div>
-            {dayIsOn ? <button className="btn border-blue-100 bg-red-600" onClick={handleEndDay}>Lopeta työpäivä</button> : <button className="btn border-blue-100 bg-green-400" onClick={handleStartDay}>Aloita työpäivä</button>}
-            {/* <button onClick={handleStartDay}>{onGoingWorkDay ? "Lopeta työpäivä" : "aloita työpäivö"}</button> */}
-        </div>
+        <section className="flex flex-col border-2 w-full h-auto">
+            <div className="mx-auto my-6">
+                <WorkEntriesButton />
+            </div>
+            <div className="border-2">
+                <h1 className="">Kirjaukset</h1>
+                {entriesToShow.map((workEntry, index) => {
+                    
+                    if (workEntry.running) {
+                        return (
+                            <div key={index}>
+                                <p>kesken</p>
+                            </div>
+                        )
+                    } else {
+
+                        return (
+                            <div className=" bg-green-300 border-2 rounded-lg p-2 my-2 bg- w-5/6 mx-auto" key={index}>
+                                {userRole === 'admin' && <p>{workEntry.userName}</p>}
+                                <p className="text-neutral-800">Aloitettu: {workEntry.startDate} {workEntry.startTime}</p>
+                                <p className="text-neutral-800">Lopetettu: {workEntry.endDate} {workEntry.endTime}</p>
+                            </div>
+                        )
+                    }
+                })}
+            </div>
+        </section>
     )
 }
 

@@ -10,7 +10,7 @@ export const fetchCompanyDetails = createAsyncThunk(
     async (_, { getState, rejectWithValue }) => {
       try {
         const token = getState().userState.user.token;
-  
+        
         const response = await customFetch.get('/company', {
           headers: {
             'Authorization': `Bearer ${token}`
