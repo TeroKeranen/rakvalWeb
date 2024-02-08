@@ -2,11 +2,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils";
 
+// Poistataan työntekijä työmaalta
 
+export const deleteWorkerfromWorksite = createAsyncThunk(
+  'company/deleteWorker',
+  async({worksiteId,workerId}, {getState, rejectWithValue}) => {
+
+    try {
+      const token = getState().userState.user.token;
+      const response = await customFetch.delete(`worksites/${worksiteId}/workers/${workerId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.status !== 200) {
+        throw new Error('Jotain meni vikaan työntekijän poistamisessa työmaalta')
+      }
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+)
+
+// Lisätään työntekijä työmaahan
 export const addWorkerToWorksite = createAsyncThunk(
   'company/addWorkertocompany',
   async({worksiteId,workerId}, {getState, rejectWithValue}) => {
-    console.log("adddworkerss", workerId);
+    
     try {
       const token = getState().userState.user.token;
       const response = await customFetch.post(`/worksites/${worksiteId}/add-worker`,{workerId}, {
@@ -20,7 +44,7 @@ export const addWorkerToWorksite = createAsyncThunk(
       }
       return response.data;
     } catch (error) {
-      
+      return rejectWithValue(error.message);
     }
   }
 )
@@ -255,6 +279,18 @@ const companySlice = createSlice({
       })
       .addCase(addWorkerToWorksite.rejected, (state,action) => {
         state.error = action.error.message;
+      })
+
+      // poistetaan työntekijö työmaalta
+      .addCase(deleteWorkerfromWorksite.fulfilled, (state, action) => {
+        
+        const updatedWorksite = action.payload.worksite;
+        if (state.worksiteDetails && state.worksiteDetails._id === updatedWorksite._id) {
+          // Päivitä worksiteDetails työmaan uudella tiedolla
+          state.worksiteDetails = updatedWorksite;
+        }
+        // Voi tallentaa viestin, jos haluaa näyttää ilmoituksen käyttäjälle
+        state.message = action.payload.message;
       })
     }
 })
