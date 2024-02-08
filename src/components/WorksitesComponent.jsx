@@ -21,6 +21,10 @@ const WorksitesComponent = ({worksites, userInfo}) => {
      const regularWorksites = worksites.filter(worksite => worksite.worktype === 'Construction site' && (role ==='admin' || worksite.workers.includes(_id)));
      const smallWorksites = worksites.filter(worksite => worksite.worktype === 'Private client' &&( role ==='admin' || worksite.workers.includes(_id)));
 
+
+     useEffect(() => {
+        
+     },[worksites])
      
 
 
