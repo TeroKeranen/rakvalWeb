@@ -1,9 +1,10 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import {companyWorkers, addWorkerToWorksite} from '../features/company/companySlice'
+import {companyWorkers, addWorkerToWorksite, deleteWorkerfromWorksite} from '../features/company/companySlice'
 import {fetchUser, clearWorksiteWorkersNames} from '../features/auth/authSlice'
 import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
+import { MdDeleteOutline } from "react-icons/md";
 
 const WorksiteWorkers = () => {
     const dispatch = useDispatch();
@@ -17,9 +18,14 @@ const WorksiteWorkers = () => {
 
     const [selectedWorker, setSelectedWorker] = useState('');
 
+
+    console.log("työntekijäöt", worksiteWorkers)
     const handleSelectChange = (event) => {
         setSelectedWorker(event.target.value);
     }
+
+
+    
 
    
     
@@ -50,7 +56,7 @@ const WorksiteWorkers = () => {
         dispatch(addWorkerToWorksite({worksiteId,workerId:selectedWorker}))
             .unwrap()
             .then(updatedWorksite => {
-                console.log("häh", updatedWorksite);
+                
                 if (updatedWorksite.message) {
                     toast.error(updatedWorksite.message);
                 } else {
@@ -60,6 +66,23 @@ const WorksiteWorkers = () => {
             .catch(error => {
                 console.log("hääää", error);
             })
+    }
+
+    // Työntekijän poistamiseen
+    const handleDelete = (userId) => {
+        dispatch(deleteWorkerfromWorksite({worksiteId, workerId:userId}))
+            .unwrap()
+            .then (updateWorksite => {
+                if (updateWorksite.message) {
+                    toast.success(updateWorksite.message)
+                } else {
+                    toast.error("jotain meni pieleen");
+                }
+            })
+            .catch(error => {
+                console.log("error työntekijän poistamisessa");
+            })
+        
     }
 
 
@@ -92,8 +115,9 @@ const WorksiteWorkers = () => {
                 {worksiteWorkersNames && Object.values(worksiteWorkersNames).map((user, index) => {
                     return (
 
-                        <div className='border-2 rounded-lg p-2 my-2' key={index}>
+                        <div className='border-2 flex flex-row justify-between rounded-lg p-2 my-2' key={index}>
                             <p>{user.email}</p>
+                            <MdDeleteOutline onClick={() => handleDelete(user._id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
                         </div>
                         )
                 })}
