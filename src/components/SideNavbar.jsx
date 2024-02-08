@@ -11,7 +11,7 @@ import WorksiteWorkers from "./WorksiteWorkers";
 
 
 
-const SideNavbar = ({onLinkClick, address}) => {
+const SideNavbar = ({userRole,onLinkClick, address}) => {
     const [selectedId, setSelectedId] = useState(null);
     const links = [
         // {id: 1, component: Floorplan, text: "Pohjakuva"},
@@ -33,14 +33,21 @@ const SideNavbar = ({onLinkClick, address}) => {
             </div>
 
             <div className="flex flex-row justify-center items-center lg:flex-col lg:items-stretch">
-                {links.map((link) => (
-                    <li key={link.id} className={`text-gray-600 border-2 rounded-lg p-2 my-2 mx-1 lg:mx-0 cursor-pointer ${selectedId === link.id ? 'bg-blue-200 p-1' : ''}`} onClick={() => {
-                        onLinkClick(link.componentType);
-                        setSelectedId(link.id);
-                    }}>
-                        {link.text}
-                    </li>
-                ))}
+                {links.map((link) => {
+
+                    if (link.componentType === 'worksiteWorkers' && userRole !== 'admin') {
+                        return null;
+                    }
+                    return (
+
+                        <li key={link.id} className={`text-gray-600 border-2 rounded-lg p-2 my-2 mx-1 lg:mx-0 cursor-pointer ${selectedId === link.id ? 'bg-blue-200 p-1' : ''}`} onClick={() => {
+                            onLinkClick(link.componentType);
+                            setSelectedId(link.id);
+                        }}>
+                            {link.text}
+                        </li>
+                        )
+                    })}
             </div>
         </section>
         

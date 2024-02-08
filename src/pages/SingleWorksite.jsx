@@ -10,8 +10,10 @@ const SingleWorksite = () => {
     
     const dispatch = useDispatch();
     const company = useSelector(state => state.companyState)
+    const userRole = useSelector(state => state.userState.user.role);
     const [ActiveComponent, setActiveComponent] = useState(null);
 
+    
     
     const handleLinkClick = (componentType) => {
         setActiveComponent(componentType);
@@ -50,7 +52,7 @@ const SingleWorksite = () => {
         {/* Sivunavigaatio */}
             <div className="w-full lg:w-1/6 bg-slate-100 p-4 lg:min-h-screen overflow-y-auto">
                     <ul className="flex flex-row justify-around lg:flex-col lg:space-y-0">
-                        <SideNavbar onLinkClick={handleLinkClick} address={worksiteDetails.address}/>
+                        <SideNavbar userRole={userRole} onLinkClick={handleLinkClick} address={worksiteDetails.address}/>
                     </ul>
                 
             </div>
