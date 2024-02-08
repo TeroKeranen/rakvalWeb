@@ -21,14 +21,14 @@ const Company = () => {
     },[id, dispatch])
 
 
-    useEffect(() => {
-        if (id) {
+    // useEffect(() => {
+    //     if (id) {
 
-            dispatch(fetchCompanyDetails())
-        }
+    //         dispatch(fetchCompanyDetails())
+    //     }
         
         
-    }, [id,dispatch]);
+    // }, [id,dispatch]);
     
     
     const companyExists = company?.company;

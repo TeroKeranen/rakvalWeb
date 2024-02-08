@@ -27,7 +27,7 @@ const Floorplan = () => {
 
     const worksiteFloorplankeys = worksiteDetails.floorplanKeys;
     const markers = worksiteDetails.markers;
-    console.log("worksitedetails", loading)
+    
 
     
 

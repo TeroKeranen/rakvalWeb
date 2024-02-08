@@ -3,7 +3,27 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils";
 
 
+export const addWorkerToWorksite = createAsyncThunk(
+  'company/addWorkertocompany',
+  async({worksiteId,workerId}, {getState, rejectWithValue}) => {
+    console.log("adddworkerss", workerId);
+    try {
+      const token = getState().userState.user.token;
+      const response = await customFetch.post(`/worksites/${worksiteId}/add-worker`,{workerId}, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
 
+      if (response.status !== 200) {
+        throw new Error("Jotain meni vikaan työntekijän lisäämisessä työmaahan")
+      }
+      return response.data;
+    } catch (error) {
+      
+    }
+  }
+)
 // AsyncThunk yrityksen tietojen hakemiseen
 export const fetchCompanyDetails = createAsyncThunk(
     'company/fetchDetails',
@@ -28,6 +48,7 @@ export const fetchCompanyDetails = createAsyncThunk(
     }
   );
 
+  // Haetaan yhtiön työmaat
 export const fetchCompanyWorksites = createAsyncThunk(
   'company/fetchWorksites',
   async (_, {getState, rejectWithValue}) => {
@@ -49,6 +70,7 @@ export const fetchCompanyWorksites = createAsyncThunk(
   }
 )
 
+// Haetaan yksittäinen työmaa
 export const fetchSingleWorksite = createAsyncThunk(
   'worksite/singleWorksite',
   async(id, {getState, rejectWithValue}) => {
@@ -73,6 +95,7 @@ export const fetchSingleWorksite = createAsyncThunk(
   }
 )
 
+// Lähetetään pohjakuvan keykoodi
 export const addWorksiteFloorplanKey = createAsyncThunk(
   'worksite/addFloorplan',
   async({worksiteId, key, title}, {getState, rejectWithValue}) => {
@@ -98,11 +121,39 @@ export const addWorksiteFloorplanKey = createAsyncThunk(
   }
 )
 
+//Etsitään työntekijät jotka ovat liittynyt yritykseen
+export const companyWorkers = createAsyncThunk(
+  'company/workers',
+  async(companyId, {getState, rejectWithValue}) => {
+    
+    try {
+      
+      const token = getState().userState.user.token;
+      const response = await customFetch.get(`company/${companyId}/users`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (response.status !== 200) {
+        throw new Error('virhe hakiessä yhtiön työntekijöitä')
+      }
+      return response.data
+
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+
+  }
+)
+
 const initialState = {
     company: null,
     worksites: null,
     worksiteDetails: null,
+    companyWorkers: null,
     loading: false,
+    message: null,
     error: null
   };
 
@@ -168,12 +219,42 @@ const companySlice = createSlice({
         state.loading = false;
       })
 
+      // Käsitellellään yhtiön työntekijöitten haku
+      .addCase(companyWorkers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(companyWorkers.fulfilled, (state, action) => {
+        state.companyWorkers = action.payload;
+        state.loading = false;
+      })
+      .addCase(companyWorkers.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
+
       //käsittely floorplankeyn lähettämiseen
       .addCase(addWorksiteFloorplanKey.fulfilled, (state,action) => {
         const updatedWorksite = action.payload;
         if (state.worksiteDetails && state.worksiteDetails._id === updatedWorksite._id) {
           state.worksiteDetails = updatedWorksite;
       }
+      })
+
+      // Lisätään työntekijö työmaalle
+      .addCase(addWorkerToWorksite.fulfilled, (state, action) => {
+        if (action.payload.message) {
+          state.message = action.payload.message;
+        } else {
+          const updatedWorksite = action.payload;
+
+          if (state.worksiteDetails && state.worksiteDetails._id === updatedWorksite._id) {
+            state.worksiteDetails = updatedWorksite;
+          }
+        }
+      })
+      .addCase(addWorkerToWorksite.rejected, (state,action) => {
+        state.error = action.error.message;
       })
     }
 })
