@@ -22,7 +22,8 @@ const getThemeFromLocalStrorage = () => {
 const initialState = {
     user: getUserFromLocalStorage(),
     theme: getThemeFromLocalStrorage(),
-    urls: null
+    urls: null,
+    usersById: {}
 }
 
 export const fetchUserDetails = createAsyncThunk(
@@ -113,6 +114,9 @@ const authSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        clearWorksiteWorkersNames: (state) => {
+            state.usersById = {}
+        },
         verifyUser: (state) => {
             if (state.user) {
                 state.user.isVerified = true;
@@ -155,16 +159,20 @@ const authSlice = createSlice({
       })
       .addCase(fetchUserDetails.rejected, (state, action) => {
         // Käsittele virhetilanne, jos pyyntö epäonnistuu
-        console.log(state,action);
+        
         state.error = action.error.message;
         
       })
       .addCase(fetchAwsUrl.fulfilled, (state, action) => {
         state.urls = action.payload
       })
+      .addCase(fetchUser.fulfilled, (state,action ) => {
+        const userData = action.payload;
+        state.usersById[userData._id] = userData;
+      })
     }
 })
 
-export const {loginUser,logoutUser,toggleTheme, verifyUser} = authSlice.actions;
+export const {loginUser,logoutUser,toggleTheme, verifyUser, clearWorksiteWorkersNames} = authSlice.actions;
 
 export default authSlice.reducer

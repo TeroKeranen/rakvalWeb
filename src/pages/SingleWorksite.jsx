@@ -60,7 +60,7 @@ const SingleWorksite = () => {
                 {ActiveComponent === 'floorplan' && <AddFloorplanImg worksiteId={id}/>}
                 {/* {ActiveComponent === 'workEntries' && <WorkEntriesButton />} */}
                 {ActiveComponent === 'worksiteCalendar' && <h1>kalöenteri</h1>}
-                {ActiveComponent === 'worksiteWorkers' && <h1>työntrekijät</h1>}
+                {/* {ActiveComponent === 'worksiteWorkers' && <h1>työntrekijät</h1>} */}
                 {/* {ActiveComponent ? createElement(ActiveComponent) : <div>valitse komponentti</div>}
                  */}
                 {ActiveComponent === 'floorplan' && <Floorplan />}
