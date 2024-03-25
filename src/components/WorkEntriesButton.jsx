@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {startWorkDay, endWorkDay} from '../features/worksite/worksiteSlice'
+import {startWorkDay, endWorkDay,worksiteReady} from '../features/worksite/worksiteSlice'
 import { toast } from "react-toastify";
 
 
-const WorkEntriesButton = () => {
+const WorkEntriesButton = ({companyWorksites}) => {
 
     const dispatch = useDispatch();
     const details = useSelector(state => state.companyState.worksiteDetails); // Valitun työmaan tiedot
-    const companyWorksites = useSelector(state => state.companyState.worksites);
+    const worksiteIsReady = useSelector(state => state.companyState.worksiteDetails.isReady); // Valitun työmaan tiedot
+    // const companyWorksites = useSelector(state => state.companyState.worksites);
     const userId = useSelector(state => state.userState.user._id); // Käyttäjän id
     const workDay = details.workDays // valitun työmaan workDays tiedot
     const worksiteId = details._id; // valitun työmaan id;
+    const user = useSelector(state => state.userState.user);
 
     
-
+    
     const [dayIsOn, setDayIsOn] = useState(false);
     
     
@@ -76,9 +78,34 @@ const WorkEntriesButton = () => {
      
     };
 
+    const handleWorksiteReady = () => {
+        const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
+
+        if (onGoingWorkDay) {
+            toast.error('Nauhoitus päällä jossain')
+        } else {
+            
+            toast.success('Työmaa merkitty valmiiski')
+            dispatch(worksiteReady({ worksiteId }));
+        }
+        console.log("jatketaan");
+    }
+
     return (
         <section>
-            {dayIsOn ? <button className="btn border-blue-100 bg-red-600" onClick={handleEndDay}>Lopeta työpäivä</button> : <button className="btn border-blue-100 bg-green-400" onClick={handleStartDay}>Aloita työpäivä</button>}
+            <div className="flex justify-around">
+
+            {!worksiteIsReady && (dayIsOn ?
+                <button className="btn border-blue-100 bg-red-600" onClick={handleEndDay}>Lopeta työpäivä</button> :
+                <button className="btn border-blue-100 bg-green-400" onClick={handleStartDay}>Aloita työpäivä</button>
+                
+                )}
+            {!worksiteIsReady && !dayIsOn ? 
+                <button className="btn border-blue-100 bg-green-400" onClick={handleWorksiteReady}>Merkitse työmaa valmiiksi</button> : null
+            }
+            </div>
+
+             {/* {dayIsOn ? <button className="btn border-blue-100 bg-red-600" onClick={handleEndDay}>Lopeta työpäivä</button> : <button className="btn border-blue-100 bg-green-400" onClick={handleStartDay}>Aloita työpäivä</button>} */}
             {/* <button onClick={handleStartDay}>{onGoingWorkDay ? "Lopeta työpäivä" : "aloita työpäivö"}</button> */}
         </section>
     )

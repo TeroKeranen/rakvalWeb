@@ -3,6 +3,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils/index";
 
+import apiMiddleware from "../middleWare/refresMiddleWare";
+
 const themes = {
     winter: 'winter',
     dracula: 'dracula',
@@ -26,70 +28,81 @@ const initialState = {
     usersById: {}
 }
 
+
+
 export const fetchUserDetails = createAsyncThunk(
-    'user/fetchDetails',
+    'company/fetchUserDetails',
     async (id, {getState,rejectWithValue}) => {
-        try {
-            const token = getState().userState.user.token;
-            
-            
-            const response = await customFetch.get(`/users/${id}`, {
+        
+        return apiMiddleware(async () => {
+            try {
+                const token = getState().userState.user.token;
+                console.log("autslice token", token);
+                const response = await customFetch.get(`/users/${id}`, {
                 
                 headers: {
                     'Authorization' : `Bearer ${token}`,
                     
                 }
             });
-            console.log("täh")
-            if (!response.status === 200) {
-                console.log("kskjs")
-                throw new Error('käöyttähjäj ei ole')
-            }
-            let testidata = {data: response.data}
-            return testidata
-        } catch (error) {
-            console.log("errrrooooooo");
-            return rejectWithValue(error.message);
             
-        }
+            
+            return response.data
+            } catch (error) {
+                console.log("errrrooooooo");
+                return rejectWithValue(error.message);
+            }
+        })
     }
 )
 
-// haetaan backendistä aws url ja laitetaan se stateen
+
+
+// // haetaan backendistä aws url ja laitetaan se stateen
 export const fetchAwsUrl = createAsyncThunk(
     'aws/url',
-    async (_, {getState, rejectWithValue}) => {
-        try {
-            const token = getState().userState.user.token;
-            const response = await customFetch.get('/aws-url', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            return response.data;
-        } catch (error) {
-            
-        }
+    async(_, {getState,rejectWithValue}) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = getState().userState.user.token;
+                const response = await customFetch.get('/aws-url', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                return response.data;
+            } catch (error) {
+                return rejectWithValue(error.message);
+            }
+        })
     }
 )
 
-// haetaa käyttäjän halutun käyttäjän tiedot id avulla
+
+
+// // haetaa käyttäjän halutun käyttäjän tiedot id avulla
 export const fetchUser = createAsyncThunk(
     'user/fetchUser',
-    async(userId, {getState, rejectWithValue}) => {
-        try {
-            const token = getState().userState.user.token;
-            const response = await customFetch.get(`users/${userId}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.message)
-        }
+    async(userId, {getState,rejectWithValue}) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = getState().userState.user.token;
+                const response = await customFetch.get(`users/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                return response.data;
+            } catch (error) {
+                return rejectWithValue(error.message)
+            }
+        })
     }
 )
+
+
+
+/// EI OLE OLLUT KÄYTÖSSÄ
 // export const fetchUserCompany = createAsyncThunk(
 //     'company',
 //     async (_, {getState, rejectWithValue}) => {
@@ -125,11 +138,19 @@ const authSlice = createSlice({
             }
         },
         loginUser: (state, action) => {
-            const user = {...action.payload.user, token: action.payload.token}
+            console.log("logintoken", action.payload);
+            const user = {...action.payload.user, token: action.payload.accessToken, refreshToken: action.payload.refreshToken, tokenExpiry: action.payload.tokenExpiry}
             
             state.user = user;
             
             localStorage.setItem('user', JSON.stringify(user))
+        },
+        updateAccessToken: (state, action) => {
+            if (state.user) {
+                state.user.token = action.payload.accessToken;
+                state.user.tokenExpiry = action.payload.tokenExpiry;
+                state.user.refreshToken = action.payload.refreshToken;
+            }
         },
         logoutUser: (state) => {
             state.user = null;
@@ -149,30 +170,39 @@ const authSlice = createSlice({
         builder
       .addCase(fetchUserDetails.pending, (state) => {
         // Voit asettaa tilaan esimerkiksi lataustilan
-        
+        console.log("fetchUserDetails pending");
       })
       .addCase(fetchUserDetails.fulfilled, (state, action) => {
         // Tallenna käyttäjän tiedot, kun pyyntö onnistuu
-        
+        console.log("fetchUserDetails", action.payload);
         state.user = { ...state.user, ...action.payload };
         
       })
       .addCase(fetchUserDetails.rejected, (state, action) => {
         // Käsittele virhetilanne, jos pyyntö epäonnistuu
-        
+        console.log("fetchUserDetails rejected", action.error.message);
         state.error = action.error.message;
         
       })
       .addCase(fetchAwsUrl.fulfilled, (state, action) => {
+        console.log("fetchawsurl", action.payload);
         state.urls = action.payload
       })
       .addCase(fetchUser.fulfilled, (state,action ) => {
         const userData = action.payload;
         state.usersById[userData._id] = userData;
       })
+
+      // tokenin uusiminen
+    //   .addCase(refreshAccessToken.fulfilled, (state,action) => {
+    //     state.user = {
+    //         ...state.user, token: action.payload.accessToken, tokenExpiry: action.payload.tokenExpiry
+    //     }
+    //     localStorage.setItem('user', JSON.stringify(state.user))
+    //   })
     }
 })
 
-export const {loginUser,logoutUser,toggleTheme, verifyUser, clearWorksiteWorkersNames} = authSlice.actions;
+export const {loginUser,updateAccessToken,logoutUser,toggleTheme, verifyUser, clearWorksiteWorkersNames} = authSlice.actions;
 
 export default authSlice.reducer

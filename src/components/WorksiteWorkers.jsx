@@ -15,11 +15,14 @@ const WorksiteWorkers = () => {
     const companyId = company?._id; // haetaan yrityksen id
     const worksiteWorkers = useSelector(state => state.companyState.worksiteDetails.workers); // haetaan työmaahan liitetyt työntekijöitten id:t
     const worksiteWorkersNames = useSelector(state => state.userState.usersById); // haetaan kaikki työntekijät jotka on lisätty työmaalle
-
+    console.log("työntekijät", worksiteWorkers)
     const [selectedWorker, setSelectedWorker] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    
 
+    
 
-    console.log("työntekijäöt", worksiteWorkers)
+    
     const handleSelectChange = (event) => {
         setSelectedWorker(event.target.value);
     }
@@ -44,35 +47,53 @@ const WorksiteWorkers = () => {
             dispatch(clearWorksiteWorkersNames());
 
             worksiteWorkers.map((userId) => {
+                setIsLoading(true);
                 dispatch(fetchUser(userId)) // tuodaan työntekijöitten tiedot tämän kautta useStaten.usersById
+                    .unwrap()
+                    .then(data => {
+                        if(data) {
+
+                            setIsLoading(false);   
+                        } else {
+                            setIsLoading(true);
+                        }
+                    })
             })
+            
         }
     },[dispatch,worksiteId, worksiteWorkers])
 
 
     // Lisätään työntekijä työmaalle
     const handleSendWorker = () => {
+        setIsLoading(true);
         
-        dispatch(addWorkerToWorksite({worksiteId,workerId:selectedWorker}))
-            .unwrap()
-            .then(updatedWorksite => {
-                
-                if (updatedWorksite.message) {
-                    toast.error(updatedWorksite.message);
-                } else {
-                    toast.success("Työntekijä lisätty työmaalle")
-                }
-            })
-            .catch(error => {
-                console.log("hääää", error);
-            })
-    }
 
+            dispatch(addWorkerToWorksite({worksiteId,workerId:selectedWorker}))
+                .unwrap()
+                .then(updatedWorksite => {
+                    setIsLoading(false);
+                    
+                    if (updatedWorksite.message) {
+                        toast.error(updatedWorksite.message);
+                    } else {
+                        toast.success("Työntekijä lisätty työmaalle")
+                    }
+                })
+                
+                .catch(error => {
+                    console.log("hääää", error);
+                })
+        
+    }
+    
     // Työntekijän poistamiseen
     const handleDelete = (userId) => {
+        setIsLoading(true);
         dispatch(deleteWorkerfromWorksite({worksiteId, workerId:userId}))
             .unwrap()
             .then (updateWorksite => {
+                setIsLoading(false);
                 if (updateWorksite.message) {
                     toast.success(updateWorksite.message)
                 } else {
@@ -87,6 +108,7 @@ const WorksiteWorkers = () => {
 
 
 
+   
     
 
     return (
@@ -112,15 +134,25 @@ const WorksiteWorkers = () => {
             </div>
             <div className='mx-auto w-3/4 p-4'>
                 <h1 className='flex justify-center text-2xl font-bold'>Työmaalle lisätyt henkilöt</h1>
-                {worksiteWorkersNames && Object.values(worksiteWorkersNames).map((user, index) => {
-                    return (
+                {isLoading ? (
+                    <section className="text-center">
+                        <span className="loading loading-spinner loading-xs bg-green-900"></span>
+                        <span className="loading loading-spinner loading-sm bg-green-800"></span>
+                        <span className="loading loading-spinner loading-md bg-green-700"></span>
+                        <span className="loading loading-spinner loading-lg bg-green-600"></span>
+                    </section>
+                ): (
+                    worksiteWorkersNames && Object.values(worksiteWorkersNames).map((user, index) => (
+                    
 
                         <div className='border-2 flex flex-row justify-between rounded-lg p-2 my-2' key={index}>
                             <p>{user.email}</p>
                             <MdDeleteOutline onClick={() => handleDelete(user._id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
                         </div>
-                        )
-                })}
+                        
+                    ))
+                )}
+                
                 
             </div>
             

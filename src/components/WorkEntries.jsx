@@ -4,13 +4,15 @@ import {startWorkDay, endWorkDay} from '../features/worksite/worksiteSlice'
 import { toast } from "react-toastify";
 import WorkEntriesButton from "./WorkEntriesButton";
 import {fetchUser} from '../features/auth/authSlice'
+import { fetchCompanyWorksites } from '../features/company/companySlice'
 
 
 const WorkEntries = () => {
 
     const dispatch = useDispatch();
-    const testi = useSelector(state => state.userState);
+    const worksiteIsReady = useSelector(state => state.companyState.worksiteDetails.isReady); // Katsotaan onko työmaa merkattu valmiiksi
     const allWorkEntries = useSelector(state => state.companyState.worksiteDetails.workDays) // katsotaan kaikki työmaan kirjaukset
+    const companyWorksites = useSelector(state => state.companyState.worksites);
     const userRole = useSelector(state => state.userState?.user?.role); // otetaan ylös käyttäjän rooli
     const userId = useSelector(state => state.userState?.user._id); // otetaan ylös käyttäjän id
     const [ownWorkEntries, setOwnWorkEntries] = useState([]);
@@ -18,8 +20,14 @@ const WorkEntries = () => {
 
     const usersById = useSelector(state => state.userState.usersById);
 
-    console.log("testi", testi);
+    
+    console.log("comapnyworksites",companyWorksites)
 
+    useEffect(() => {
+        if (!companyWorksites) {
+            dispatch(fetchCompanyWorksites())
+        }
+    },[dispatch, companyWorksites])
 
 
     
@@ -66,11 +74,13 @@ const WorkEntries = () => {
 
      
     const entriesToShow = userRole === 'admin' ? workEntriesWithUserDetails : ownWorkEntries;
+
+    console.log(entriesToShow);
     
     return (
-        <section className="flex flex-col  w-full h-auto">
-            <div className="mx-auto my-6">
-                <WorkEntriesButton />
+        <section className="flex flex-col  w-full h-full">
+            <div className="mx-auto my-6 w-full">
+                <WorkEntriesButton companyWorksites={companyWorksites}/>
             </div>
             <div className="">
                 
