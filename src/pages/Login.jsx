@@ -4,6 +4,7 @@ import { customFetch } from "../utils";
 import { loginUser } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { getTokenExpiry } from "../utils/calculateTokenExp";
 
 export const action = (store) => async ({request}) => {
     const formData = await request.formData();
@@ -12,7 +13,16 @@ export const action = (store) => async ({request}) => {
 
     try {
         const response = await customFetch.post('/signin', data)
-        store.dispatch(loginUser(response.data))
+        const tokenExpiry = getTokenExpiry(response.data.accessToken);
+        
+
+        const userData = {
+            ...response.data,
+            tokenExpiry
+        }
+        
+        store.dispatch(loginUser(userData))
+        
         // console.log(response);
         return redirect('/');
         // return null;

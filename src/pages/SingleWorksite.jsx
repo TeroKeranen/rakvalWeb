@@ -7,17 +7,25 @@ import WorksiteCalendar from "../components/WorksiteCalendar";
 
 const SingleWorksite = () => {
     const {id} = useParams();
-    
+    console.log("id", id);
     const dispatch = useDispatch();
     const company = useSelector(state => state.companyState)
     const userRole = useSelector(state => state.userState.user.role);
     const [ActiveComponent, setActiveComponent] = useState(null);
+    const worksiteDetails = company?.worksiteDetails
 
     
     
     const handleLinkClick = (componentType) => {
         setActiveComponent(componentType);
     }
+
+    useEffect(() => {
+        if (!worksiteDetails) {
+            dispatch(fetchSingleWorksite(id))
+        }
+    },[dispatch, worksiteDetails])
+
     useEffect(() => {
         dispatch(fetchSingleWorksite(id))
 
@@ -26,7 +34,6 @@ const SingleWorksite = () => {
         }
     }, [id,dispatch])
     
-    const worksiteDetails = company?.worksiteDetails
     
     // console.log("testi",worksiteDetails);
 
@@ -56,7 +63,7 @@ const SingleWorksite = () => {
                     </ul>
                 
             </div>
-
+            
             {/* Sisältö */}
             <div className="flex flex-col justify-center items-center w-full lg:w-3/4 p-4 mx-auto">
                 {ActiveComponent === 'floorplan' && <AddFloorplanImg worksiteId={id}/>}

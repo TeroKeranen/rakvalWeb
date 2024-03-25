@@ -2,174 +2,217 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../../utils";
 
-// Poistataan työntekijä työmaalta
+import { handleTokenExpiry } from "../../utils/calculateTokenExp";
+import apiMiddleware from "../middleWare/refresMiddleWare";
 
+
+async function makeRequestWithToken(url, method, data, token) {
+  try {
+    const config = {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      ...(data && { data }),
+    };
+
+    const response = await customFetch(url, config);
+    
+    return response;
+  } catch (error) {
+    
+    if (error.response && error.response.status === 401) {
+      // throw new Error('Token expired');
+      console.log("ERRORRORORORORORO")
+    }
+    // throw new Error("jotai tapahtui");
+    console.log
+  }
+}
+
+// Poistataan työntekijä työmaalta
 export const deleteWorkerfromWorksite = createAsyncThunk(
   'company/deleteWorker',
-  async({worksiteId,workerId}, {getState, rejectWithValue}) => {
-
-    try {
-      const token = getState().userState.user.token;
-      const response = await customFetch.delete(`worksites/${worksiteId}/workers/${workerId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+  async({worksiteId, workerId}, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.delete(`worksites/${worksiteId}/workers/${workerId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+  
+        if (response.status !== 200) {
+          throw new Error('Jotain meni vikaan työntekijän poistamisessa työmaalta')
         }
-      })
-
-      if (response.status !== 200) {
-        throw new Error('Jotain meni vikaan työntekijän poistamisessa työmaalta')
+        return response.data
+      } catch (error) {
+        return rejectWithValue(error.message);
       }
-      return response.data
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
+    })
   }
 )
+
+
 
 // Lisätään työntekijä työmaahan
 export const addWorkerToWorksite = createAsyncThunk(
   'company/addWorkertocompany',
-  async({worksiteId,workerId}, {getState, rejectWithValue}) => {
-    
-    try {
-      const token = getState().userState.user.token;
-      const response = await customFetch.post(`/worksites/${worksiteId}/add-worker`,{workerId}, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-
-      if (response.status !== 200) {
-        throw new Error("Jotain meni vikaan työntekijän lisäämisessä työmaahan")
-      }
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-)
-// AsyncThunk yrityksen tietojen hakemiseen
-export const fetchCompanyDetails = createAsyncThunk(
-    'company/fetchDetails',
-    async (_, { getState, rejectWithValue }) => {
+  async({worksiteId, workerId}, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
       try {
         const token = getState().userState.user.token;
-        
-        const response = await customFetch.get('/company', {
+        const response = await customFetch.post(`/worksites/${worksiteId}/add-worker`,{workerId}, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
-        });
+        })
   
         if (response.status !== 200) {
-          throw new Error('Yritystä ei löydy');
+          throw new Error("Jotain meni vikaan työntekijän lisäämisessä työmaahan")
         }
-  
         return response.data;
       } catch (error) {
         return rejectWithValue(error.message);
       }
+    })
+  }
+)
+
+
+
+// AsyncThunk yrityksen tietojen hakemiseen
+export const fetchCompanyDetails = createAsyncThunk(
+    'company/fetchDetails',
+    async (_, { getState, dispatch, rejectWithValue }) => {
+      return apiMiddleware(async () => {
+        try {
+          const token = getState().userState.user.token;
+
+          console.log("companySlice token", token);
+          
+          const response = await customFetch.get('/company', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          
+          if (response.status !== 200) {
+            throw new Error('yritystä ei ole')
+          }
+         
+          return response.data
+        } catch (error) {
+          return rejectWithValue(error.message);
+        }
+      })
     }
   );
+
 
   // Haetaan yhtiön työmaat
 export const fetchCompanyWorksites = createAsyncThunk(
   'company/fetchWorksites',
-  async (_, {getState, rejectWithValue}) => {
-    try {
-      const token = getState().userState.user.token;
-      const response = await customFetch.get('/worksites', {
-        headers: {
-          'Authorization': `Bearer ${token}`
+  async(_, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.get('/worksites', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        if (response.status !== 200) {
+          throw new Error('Yritystä ei löydy');
         }
-      })
-      if (response.status !== 200) {
-        throw new Error('Yritystä ei löydy');
+        return response.data
+      } catch (error) {
+        return rejectWithValue(error.message);
+        
       }
-
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
+    })
   }
 )
+
+
+
 
 // Haetaan yksittäinen työmaa
 export const fetchSingleWorksite = createAsyncThunk(
   'worksite/singleWorksite',
   async(id, {getState, rejectWithValue}) => {
-    try {
-      console.log("sliceee", id);
-
-      const token = getState().userState.user.token;
-      const response = await customFetch.get(`/worksites/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-
-      if (response.status !== 200) {
-        throw new Error('Yritystä ei löydy');
-      }
-
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-)
-
-// Lähetetään pohjakuvan keykoodi
-export const addWorksiteFloorplanKey = createAsyncThunk(
-  'worksite/addFloorplan',
-  async({worksiteId, key, title}, {getState, rejectWithValue}) => {
-    
-    try {
-      const token = getState().userState.user.token;
-      const response = await customFetch.post(`/worksites/${worksiteId}/floorplan`,
-        {key, title},
-        {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.get(`/worksites/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         })
 
         if (response.status !== 200) {
+          throw new Error('Yritystä ei lyödy')
+        }
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
+  }
+)
+
+
+// Lähetetään pohjakuvan keykoodi
+
+export const addWorksiteFloorplanKey = createAsyncThunk(
+  'worksite/addFloorplan',
+  async({worksiteId, key,title}, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.post(`/worksites/${worksiteId}/floorplan`, {key,title}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        if (response.status !== 200) {
           throw new Error("virhe lähettäessä floorplankey")
         }
         return response.data;
-
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
   }
 )
+
 
 //Etsitään työntekijät jotka ovat liittynyt yritykseen
 export const companyWorkers = createAsyncThunk(
   'company/workers',
   async(companyId, {getState, rejectWithValue}) => {
-    
-    try {
-      
-      const token = getState().userState.user.token;
-      const response = await customFetch.get(`company/${companyId}/users`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.get(`company/${companyId}/users`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        if (response.status !== 200) {
+          throw new Error('virhe hakiessä yhtiön työntekijöitä')
         }
-      })
-
-      if (response.status !== 200) {
-        throw new Error('virhe hakiessä yhtiön työntekijöitä')
-      }
       return response.data
-
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
   }
 )
+
+
 
 const initialState = {
     company: null,
@@ -178,7 +221,8 @@ const initialState = {
     companyWorkers: null,
     loading: false,
     message: null,
-    error: null
+    error: null,
+    testi: null
   };
 
 const companySlice = createSlice({
@@ -206,6 +250,7 @@ const companySlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCompanyDetails.fulfilled, (state, action) => {
+        
         state.company = action.payload;
         state.loading = false;
       })
@@ -231,6 +276,7 @@ const companySlice = createSlice({
 
       // Käsittely yksittäisen työmaan haulle
       .addCase(fetchSingleWorksite.pending, (state) => {
+        
         state.loading = true;
         state.error = null;
       })
@@ -266,7 +312,13 @@ const companySlice = createSlice({
       })
 
       // Lisätään työntekijö työmaalle
+      .addCase(addWorkerToWorksite.pending, (state) => {
+        
+        // state.loading = true;
+        state.error = null;
+      })
       .addCase(addWorkerToWorksite.fulfilled, (state, action) => {
+       
         if (action.payload.message) {
           state.message = action.payload.message;
         } else {
@@ -276,12 +328,17 @@ const companySlice = createSlice({
             state.worksiteDetails = updatedWorksite;
           }
         }
+        state.loading = false;
       })
       .addCase(addWorkerToWorksite.rejected, (state,action) => {
         state.error = action.error.message;
+        state.loading = false;
       })
 
       // poistetaan työntekijö työmaalta
+      .addCase(deleteWorkerfromWorksite.pending, (state) => {
+        
+      })
       .addCase(deleteWorkerfromWorksite.fulfilled, (state, action) => {
         
         const updatedWorksite = action.payload.worksite;
@@ -291,6 +348,7 @@ const companySlice = createSlice({
         }
         // Voi tallentaa viestin, jos haluaa näyttää ilmoituksen käyttäjälle
         state.message = action.payload.message;
+        state.loading = false;
       })
     }
 })
