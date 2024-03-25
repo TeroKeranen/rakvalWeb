@@ -45,7 +45,9 @@ const WorksitesComponent = ({worksites, userInfo}) => {
 
     return (
         <section className="w-3/6 mx-auto mt-10">
-
+            <div className="flex justify-center py-3">
+                <button className="btn border-blue-100">add worksite</button>
+            </div>
             <div className="collapse bg-base-200">
                 <input type="checkbox" className="peer" /> 
                 <div className="text-center text-lg font-semibold lg:text-xl lg:font-bold text- collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content">
