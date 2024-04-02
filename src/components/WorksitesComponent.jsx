@@ -4,15 +4,13 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
+
 const WorksitesComponent = ({worksites, userInfo}) => {
     
     const {email, _id, role} = userInfo;
-    
-    
-
     const theme = useSelector(state => state.userState.theme);
     
-
+    
 
     const boxBgColor = theme === 'dracula' ? 'bg-white' : 'bg-'
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
@@ -43,14 +41,21 @@ const WorksitesComponent = ({worksites, userInfo}) => {
         ))
     );
 
+ 
+
     return (
-        <section className="w-3/6 mx-auto mt-10">
+        <section className="w-9/12 mx-auto mt-10">
             <div className="flex justify-center py-3">
-                <button className="btn border-blue-100">add worksite</button>
+                {role === 'admin' && 
+                
+                    <Link to="/addworksite">
+                        <button className="btn border-blue-100">add worksite</button>
+                    </Link>
+                }
             </div>
             <div className="collapse bg-base-200">
                 <input type="checkbox" className="peer" /> 
-                <div className="text-center text-lg font-semibold lg:text-xl lg:font-bold text- collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content">
+                <div className="text-slate-950 text-center text-lg font-semibold lg:text-xl lg:font-bold text- collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content">
                     Työmaat
                 </div>
                 <div className="collapse-content bg-slate-100 text-primary-content peer-checked:bg-slate-800 peer-checked:text-secondary-content"> 
@@ -58,9 +63,9 @@ const WorksitesComponent = ({worksites, userInfo}) => {
                 </div>
             </div>
 
-            <div className="collapse bg-base-200 mt-4">
+            <div className="collapse bg-base-200 mt-4 ">
                 <input type="checkbox" className="peer" /> 
-                <div className="text-center text-lg font-semibold lg:text-xl lg:font-bold collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content ">
+                <div className="text-slate-950 text-center text-lg font-semibold lg:text-xl lg:font-bold collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content ">
                     Pikkukeikat
                 </div>
                 <div className="collapse-content bg-slate-100 text-primary-content peer-checked:bg-slate-800 peer-checked:text-secondary-content"> 

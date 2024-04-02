@@ -11,9 +11,7 @@ const Worksites = () => {
     const user = useSelector(state=> state.userState)
     const userInfo = user.user;
     
-    ///CONSOLE LOGGAA USER, COMAPNY, USERiNFO
-    console.log("companyInfo", company);
-    console.log("userInfo", user)
+   
     
 
     useEffect(() => {

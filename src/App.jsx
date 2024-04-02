@@ -27,6 +27,7 @@ import {loader as landingLoader} from './pages/Landing'
 import {action as registerAction} from './pages/Register'
 import {action as loginAction} from './pages/Login'
 import {action as verifyAction} from './pages/Verification'
+// import {action as addworksiteAction} from './pages/AddWorksite'
 
 import { store } from './store'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -73,6 +74,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         
+      },
+      {
+        path:'addworksite',
+        element:(
+          <ProtectedRoute>
+            <AddWorksite />
+          </ProtectedRoute>
+        ),
+        // action: addworksiteAction
       },
       {
         path:'about',

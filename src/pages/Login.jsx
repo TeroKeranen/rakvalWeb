@@ -15,7 +15,7 @@ export const action = (store) => async ({request}) => {
         const response = await customFetch.post('/signin', data)
         const tokenExpiry = getTokenExpiry(response.data.accessToken);
         
-
+        console.log("response", response);
         const userData = {
             ...response.data,
             tokenExpiry
