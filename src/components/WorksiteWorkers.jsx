@@ -101,7 +101,9 @@ const WorksiteWorkers = () => {
                 }
             })
             .catch(error => {
+                toast.error("Jotain meni vikaan")
                 console.log("error työntekijän poistamisessa");
+                
             })
         
     }

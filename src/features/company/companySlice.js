@@ -29,6 +29,29 @@ export const addNewWorksite = createAsyncThunk(
   }
 )
 
+// työmaan poistaminen
+export const deleteWorksite = createAsyncThunk(
+  'worksite/delete',
+  async(worksiteId, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.delete(`/worksites/${worksiteId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        if (response.status !== 200) {
+          throw new Error('Jotain meni vikaan työmaan poistossa')
+        }
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
+  }
+)
+
 
 // Poistataan työntekijä työmaalta
 export const deleteWorkerfromWorksite = createAsyncThunk(
@@ -349,6 +372,22 @@ const companySlice = createSlice({
         // Voi tallentaa viestin, jos haluaa näyttää ilmoituksen käyttäjälle
         state.message = action.payload.message;
         state.loading = false;
+      })
+
+      // työmaan poistaminen
+      .addCase(deleteWorksite.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteWorksite.fulfilled, (state,action) => {
+        
+        state.loading = false;
+        state.worksites = state.worksites.filter(worksite => worksite._id !== action.meta.arg); 
+        state.error = null;
+      })
+      .addCase(deleteWorksite.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       })
     }
 })

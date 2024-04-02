@@ -1,14 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompanyDetails } from "../features/company/companySlice";
+import { fetchCompanyDetails,deleteWorksite } from "../features/company/companySlice";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { MdDeleteOutline } from "react-icons/md";
+import { toast } from "react-toastify";
 
 
 
-const WorksitesComponent = ({worksites, userInfo}) => {
-    
+const WorksitesComponent = ({worksites, userInfo, userRole}) => {
+    const dispatch = useDispatch();
     const {email, _id, role} = userInfo;
     const theme = useSelector(state => state.userState.theme);
+    
+
+    
     
     
 
@@ -24,20 +29,37 @@ const WorksitesComponent = ({worksites, userInfo}) => {
         
      },[worksites])
      
+    const handleDelete = async (worksiteId) => {
 
+        try {
+            
+            await dispatch(deleteWorksite(worksiteId)).unwrap();
+            toast.success('työmaa poistettu onnistuneesti')
+
+        } catch (error) {
+            toast.error('Virhe työmaan poistossa: ', + error.message)
+        }
+            
+    }
 
     
        // Renderöi työmaat collapse-komponentissa
     const renderWorksites = (worksites) => (
         
         worksites.map(({ address, city, _id }, index) => (
+            <div key={_id} className={`bg-slate-100 py-4 ${boxShadowClass} rounded-lg overflow-hidden mb-4 text-center mx-auto w-full lg:w-1/2 ${index === 0 ? 'mt-4' : ''}`}>
+            
+            {userRole === 'admin' && 
+                <MdDeleteOutline onClick={() => handleDelete(_id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
+            }
             <Link to={`/worksites/${_id}`} key={_id} className="block">
                 
-                <div className={`bg-slate-100 py-4 ${boxShadowClass} rounded-lg overflow-hidden mb-4 text-center mx-auto w-full lg:w-1/2 ${index === 0 ? 'mt-4' : ''}`}>
+                <div >
                     <h1 className="text-lg font-semibold text-gray-800">{address}</h1>
                     <h1 className="text-md text-gray-600">{city}</h1>
                 </div>
             </Link>
+            </div>
         ))
     );
 
