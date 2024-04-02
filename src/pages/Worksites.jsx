@@ -10,9 +10,10 @@ const Worksites = () => {
     const company = useSelector(state => state.companyState);
     const user = useSelector(state=> state.userState)
     const userInfo = user.user;
+    const userRole = userInfo.role
     
     
-        
+    console.log(userRole)
 
     useEffect(() => {
         dispatch(fetchCompanyWorksites());
@@ -24,7 +25,7 @@ const Worksites = () => {
 
     return (
         <>
-            {worksite ? <WorksitesComponent worksites={worksite} userInfo={userInfo}/> : <h1>ei dataa</h1>}
+            {worksite ? <WorksitesComponent worksites={worksite} userInfo={userInfo} userRole={userRole}/> : <h1>ei dataa</h1>}
         </>
     )
 }
