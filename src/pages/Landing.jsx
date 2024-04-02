@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {fetchCompanyDetails, fetchCompanyWorksites} from '../features/company/companySlice'
 import { useEffect } from "react";
 import { fetchUserDetails } from "../features/auth/authSlice";
+import { LoggedInLanding, LoggedOutLanding } from "../components";
 
 
 
@@ -13,9 +14,9 @@ const Landing = () => {
 
     const dispatch = useDispatch();
     const testi = useSelector(state => state.companyState);
-    const user = useSelector(state => state.userState);
-    const userId = user?.user?._id
-    console.log("landing", user);
+    const userState = useSelector(state => state.userState);
+    const userId = userState?.user?._id
+    
     
     useEffect(() => {
         
@@ -29,8 +30,13 @@ const Landing = () => {
     
     // console.log("käyttäjä", user);
 
+    if (!userState.user) {
+        return (
+            <LoggedOutLanding />
+        )
+    }
     return (
-        <h1>Landing </h1>
+        <LoggedInLanding />
     )
 }
 
