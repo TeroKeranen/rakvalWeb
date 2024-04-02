@@ -15,7 +15,7 @@ const WorksiteWorkers = () => {
     const companyId = company?._id; // haetaan yrityksen id
     const worksiteWorkers = useSelector(state => state.companyState.worksiteDetails.workers); // haetaan työmaahan liitetyt työntekijöitten id:t
     const worksiteWorkersNames = useSelector(state => state.userState.usersById); // haetaan kaikki työntekijät jotka on lisätty työmaalle
-    console.log("työntekijät", worksiteWorkers)
+    
     const [selectedWorker, setSelectedWorker] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     

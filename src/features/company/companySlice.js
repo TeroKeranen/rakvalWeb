@@ -6,29 +6,29 @@ import { handleTokenExpiry } from "../../utils/calculateTokenExp";
 import apiMiddleware from "../middleWare/refresMiddleWare";
 
 
-async function makeRequestWithToken(url, method, data, token) {
-  try {
-    const config = {
-      method: method,
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
-      ...(data && { data }),
-    };
-
-    const response = await customFetch(url, config);
-    
-    return response;
-  } catch (error) {
-    
-    if (error.response && error.response.status === 401) {
-      // throw new Error('Token expired');
-      console.log("ERRORRORORORORORO")
-    }
-    // throw new Error("jotai tapahtui");
-    console.log
+export const addNewWorksite = createAsyncThunk(
+  'worksite/addnew',
+  async(data, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const {address,city, startTime, worktype} = data;
+        // console.log("lisätäääääää", address, city,startTime,worktype)
+        const token = getState().userState.user.token;
+        const response = await customFetch.post(`/worksites`, {address, city,startTime,worktype}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        if (response.status !== 200) {
+          throw new Error('Jotain meni vikaan työmaan lisäämisessä')
+        }
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
   }
-}
+)
+
 
 // Poistataan työntekijä työmaalta
 export const deleteWorkerfromWorksite = createAsyncThunk(

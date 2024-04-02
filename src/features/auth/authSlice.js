@@ -28,7 +28,33 @@ const initialState = {
     usersById: {}
 }
 
+export const logout = createAsyncThunk(
+    'user/logout',
+    async (_, { getState, dispatch }) => {
+        const storedUser = localStorage.getItem('user');
+        const user = storedUser ? JSON.parse(storedUser) : null;
 
+        // const refreshToken = getState().userState.user.refreshToken;
+        const refreshToken = user ? user.refreshToken : null;
+
+        
+        if (refreshToken) {
+            try {
+                // Lähetä pyyntö backendiin poistamaan refresh token
+                await customFetch.post('/logout', { refreshToken });
+
+                // Päivitä Redux storen tila
+                // dispatch(clearUserState());
+            } catch (error) {
+                // Käsittele mahdolliset virheet
+                console.error("Logout error: ", error);
+            }
+        } else {
+            // Päivitä Redux storen tila, jos ei refresh tokenia
+            // dispatch(clearUserState());
+        }
+    }
+)
 
 export const fetchUserDetails = createAsyncThunk(
     'company/fetchUserDetails',
