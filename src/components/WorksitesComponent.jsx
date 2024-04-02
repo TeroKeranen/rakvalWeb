@@ -12,6 +12,9 @@ const WorksitesComponent = ({worksites, userInfo}) => {
     const {email, _id, role} = userInfo;
     const theme = useSelector(state => state.userState.theme);
     
+
+    
+    
     
 
     const boxBgColor = theme === 'dracula' ? 'bg-white' : 'bg-'
@@ -26,9 +29,17 @@ const WorksitesComponent = ({worksites, userInfo}) => {
         
      },[worksites])
      
-    const handleDelete = (worksiteId) => {
-        console.log("työmaan id on: ", worksiteId)
-        dispatch(deleteWorksite(worksiteId))
+    const handleDelete = async (worksiteId) => {
+
+        try {
+            
+            await dispatch(deleteWorksite(worksiteId)).unwrap();
+            toast.success('työmaa poistettu onnistuneesti')
+
+        } catch (error) {
+            toast.error('Virhe työmaan poistossa: ', + error.message)
+        }
+            
     }
 
     
