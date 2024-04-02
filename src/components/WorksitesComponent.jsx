@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 
 
-const WorksitesComponent = ({worksites, userInfo}) => {
+const WorksitesComponent = ({worksites, userInfo, userRole}) => {
     const dispatch = useDispatch();
     const {email, _id, role} = userInfo;
     const theme = useSelector(state => state.userState.theme);
@@ -48,8 +48,10 @@ const WorksitesComponent = ({worksites, userInfo}) => {
         
         worksites.map(({ address, city, _id }, index) => (
             <div key={_id} className={`bg-slate-100 py-4 ${boxShadowClass} rounded-lg overflow-hidden mb-4 text-center mx-auto w-full lg:w-1/2 ${index === 0 ? 'mt-4' : ''}`}>
-
-            <MdDeleteOutline onClick={() => handleDelete(_id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
+            
+            {userRole === 'admin' && 
+                <MdDeleteOutline onClick={() => handleDelete(_id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
+            }
             <Link to={`/worksites/${_id}`} key={_id} className="block">
                 
                 <div >
