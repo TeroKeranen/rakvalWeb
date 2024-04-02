@@ -11,8 +11,8 @@ const Worksites = () => {
     const user = useSelector(state=> state.userState)
     const userInfo = user.user;
     
-   
     
+        
 
     useEffect(() => {
         dispatch(fetchCompanyWorksites());

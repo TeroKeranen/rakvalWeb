@@ -373,6 +373,22 @@ const companySlice = createSlice({
         state.message = action.payload.message;
         state.loading = false;
       })
+
+      // työmaan poistaminen
+      .addCase(deleteWorksite.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteWorksite.fulfilled, (state,action) => {
+        
+        state.loading = false;
+        state.worksites = state.worksites.filter(worksite => worksite._id !== action.meta.arg); 
+        state.error = null;
+      })
+      .addCase(deleteWorksite.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
     }
 })
 
