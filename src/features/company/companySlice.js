@@ -29,6 +29,29 @@ export const addNewWorksite = createAsyncThunk(
   }
 )
 
+// työmaan poistaminen
+export const deleteWorksite = createAsyncThunk(
+  'worksite/delete',
+  async(worksiteId, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.delete(`/worksites/${worksiteId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        if (response.status !== 200) {
+          throw new Error('Jotain meni vikaan työmaan poistossa')
+        }
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
+  }
+)
+
 
 // Poistataan työntekijä työmaalta
 export const deleteWorkerfromWorksite = createAsyncThunk(
