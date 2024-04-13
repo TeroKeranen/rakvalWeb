@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import {fetchCompanyDetails, fetchCompanyWorksites} from '../features/company/companySlice'
-import { useEffect } from "react";
+import {fetchCompanyDetails, fetchCompanyWorksites, fetchEvents} from '../features/company/companySlice'
+import { useEffect, useState } from "react";
 import { fetchUserDetails } from "../features/auth/authSlice";
 import { LoggedInLanding, LoggedOutLanding } from "../components";
 
@@ -13,22 +13,36 @@ export const loader = () => {
 const Landing = () => {
 
     const dispatch = useDispatch();
-    const testi = useSelector(state => state.companyState);
+    const companyState = useSelector(state => state.companyState);
     const userState = useSelector(state => state.userState);
     const userId = userState?.user?._id
+
+    const [events, setEvents] = useState([])
+    
+    console.log("LANDING TESTI", companyState);
     
     
     useEffect(() => {
-        
-        
+    
         // dispatch(fetchCompanyDetails())
         dispatch(fetchUserDetails(userId))
-        
-        
-        
-    }, [dispatch]);
+        // dispatch(fetchCompanyDetails())
+        dispatch(fetchCompanyWorksites());
+        dispatch(fetchEvents());
     
-    // console.log("käyttäjä", user);
+    }, [dispatch]);
+
+    // Etsitään tapahtumat ja käännetään ne siten että uusimmat tulee listan ekaksi...
+    useEffect(() => {
+        if (companyState.events) {
+            const reservedEvents = [...companyState.events].reverse();
+            setEvents(reservedEvents);
+        }
+    }, [companyState.events])
+    
+    
+
+    
 
     if (!userState.user) {
         return (
@@ -36,7 +50,7 @@ const Landing = () => {
         )
     }
     return (
-        <LoggedInLanding />
+        <LoggedInLanding events={events}/>
     )
 }
 
