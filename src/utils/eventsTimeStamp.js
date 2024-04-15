@@ -1,5 +1,5 @@
 
-
+// funktio jolla saadaan tapahtumien timestamppi muutettua parempaan muotoon
 export const changeEventsTimestamp = (timestamp) => {
     const date = new Date(timestamp);
 
