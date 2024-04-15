@@ -17,9 +17,11 @@ const Landing = () => {
     const userState = useSelector(state => state.userState);
     const userId = userState?.user?._id
 
+    const worksites = companyState.worksites;
+
     const [events, setEvents] = useState([])
     
-    console.log("LANDING TESTI", companyState);
+    
     
     
     useEffect(() => {
@@ -50,7 +52,7 @@ const Landing = () => {
         )
     }
     return (
-        <LoggedInLanding events={events}/>
+        <LoggedInLanding events={events} worksites={worksites}/>
     )
 }
 

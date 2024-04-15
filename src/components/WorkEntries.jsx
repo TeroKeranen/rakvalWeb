@@ -21,7 +21,7 @@ const WorkEntries = () => {
     const usersById = useSelector(state => state.userState.usersById);
 
     
-    console.log("comapnyworksites",companyWorksites)
+    
 
     useEffect(() => {
         if (!companyWorksites) {
@@ -75,7 +75,7 @@ const WorkEntries = () => {
      
     const entriesToShow = userRole === 'admin' ? workEntriesWithUserDetails : ownWorkEntries;
 
-    console.log(entriesToShow);
+    
     
     return (
         <section className="flex flex-col  w-full h-full">

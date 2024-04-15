@@ -7,6 +7,9 @@ export default {
         'customWinter':'0 10px 30px 0px rgba(40, 36, 36, 0.2)',
         'customDracula': '0 20px 40px 1px rgba(255, 255, 255, 0.2)',
         
+      },
+      colors: {
+        "testi": "#3E4153"
       }
     },
   },

@@ -51,13 +51,13 @@ const Navbar = () => {
                 <div className="navbard-end">
                     {/* theme setup */}
 
-                    <label className="swap swap-rotate">
-                        <input type="checkbox" onChange={handleTheme} />
+                    {/* <label className="swap swap-rotate"> */}
+                        {/* <input type="checkbox" onChange={handleTheme} /> */}
                         {/* sun icon */}
-                        <BsSunFill className="swap-on h-4 w-4" />
+                        {/* <BsSunFill className="swap-on h-4 w-4" /> */}
                         {/* moon icon */}
-                        <BsMoonFill className="swap-off h-4 w-4" />
-                    </label>
+                        {/* <BsMoonFill className="swap-off h-4 w-4" /> */}
+                    {/* </label> */}
                 </div>
             </div>
         </nav>
