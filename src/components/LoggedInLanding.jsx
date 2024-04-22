@@ -17,20 +17,24 @@ const LoggedInLanding = ({events, worksites}) => {
 
     return (
         <div className="flex flex-row justify-between">
-            <div className=" w-4/5 mx-auto">
-                <div className="grid grid-cols-2 gap-4 h-full">
+            <div className=" w-4/5 mx-auto ">
+                
 
-                    <div className="border my-5 bg-testi h-4/5">
-                        <LandingPageWorkOn worksites={worksites}/>
+                    <div className="border flex justify-around h-2/5">
+
+                        <div className="my-5 w-1/3">
+                            <LandingPageWorkOn worksites={worksites}/>
+                        </div>
+                        <div className="my-5 w-1/3 bg-base-200">
+                            
+                            <p>tänne jotain</p>
+                        </div>
                     </div>
-                    <div className="border my-5 bg-testi h-4/5">
+
+                    <div className="my-5 bg-testi min-h-48">
                         <p>tänne jotain</p>
                     </div>
-                    <div className="border my-5 bg-testi h-4/5">
-                        <p>tänne jotain</p>
-                    </div>
 
-                </div>
 
             </div>
 

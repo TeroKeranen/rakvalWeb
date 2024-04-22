@@ -17,20 +17,24 @@ const Landing = () => {
     const userState = useSelector(state => state.userState);
     const userId = userState?.user?._id
 
-    const worksites = companyState.worksites;
+    const worksites = companyState.worksites || [];
 
     const [events, setEvents] = useState([])
     
     
-    
+    console.log("WORKSITES", worksites);
+    console.log("USERid", userId)
     
     useEffect(() => {
-    
-        // dispatch(fetchCompanyDetails())
-        dispatch(fetchUserDetails(userId))
-        // dispatch(fetchCompanyDetails())
-        dispatch(fetchCompanyWorksites());
-        dispatch(fetchEvents());
+        
+        if (userId) {
+
+            // dispatch(fetchCompanyDetails())
+            dispatch(fetchUserDetails(userId))
+            // dispatch(fetchCompanyDetails())
+            dispatch(fetchCompanyWorksites());
+            dispatch(fetchEvents());
+        }
     
     }, [dispatch]);
 
