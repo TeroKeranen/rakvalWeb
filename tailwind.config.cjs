@@ -9,12 +9,12 @@ export default {
         
       },
       colors: {
-        "testi": "#3E4153"
+        "testi": "#F2EFD0"
       }
     },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
-    themes:['winter', 'dracula']
+    themes:['winter', 'dracula', 'retro']
   }
 };

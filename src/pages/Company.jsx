@@ -13,7 +13,7 @@ const Company = () => {
     const company = useSelector(state => state.companyState)
     const id = user.user._id;
     
-    console.log("companu", company)
+    
     
 
 
