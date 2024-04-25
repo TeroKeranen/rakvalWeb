@@ -1,5 +1,15 @@
 {
-    "landingpageworkon" : "Päällä olevat nauhoitukset"
+    "landingpageworkon" : "Päällä olevat nauhoitukset",
+
+    "work-start": "Työ aloitettu",
+    "work-end": "Työ lopetettu",
+    "added-marker": "Merkintä lisätty",
+    "update-marker": "Merkintää muokattu",
+    "remove-marker": "Merkintä poistettu",
+    "added-calendarmark": "Lisätty kalenteri merkintä",
+    "updated-calendarmark": "Kalenteri merkintää muokattu",
+    "deleted-calendarmark": "Kalenteri merkintä poistettu",
+    "search" : "Haku"
   
     
   }

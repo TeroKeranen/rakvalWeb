@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { changeEventsTimestamp } from "../utils/eventsTimeStamp";
+import { useTranslation } from 'react-i18next';
 
 const LandingPageEvents = ({ events }) => {
+    const {t} = useTranslation();
     const [filter, setFilter] = useState('');
+
+    
 
     console.log("events", events)
     const eventTypeToText = {
-        "work-start": "Työ aloitettu",
-        "work-end": "Työ lopetettu",
-        "added-marker": "Merkintä lisätty",
-        "update-marker": "Merkintää muokattu",
-        "remove-marker": "Merkintä poistettu",
-        "added-calendarmark": "Lisätty kalenteri merkintä",
-        "updated-calendarmark": "Kalenteri merkintää muokattu",
-        "deleted-calendarmark": "Kalenteri merkintä poistettu"
+        "work-start": t('work-start'),
+        "work-end": t('work-end'),
+        "added-marker": t('added-marker'),
+        "update-marker": t('update-marker'),
+        "remove-marker": t('remove-marker'),
+        "added-calendarmark": t('added-calendarmark'),
+        "updated-calendarmark": t('updated-calendarmark'),
+        "deleted-calendarmark": t('deleted-calendarmark')
     };
 
     const renderEvents = () => {
@@ -55,7 +59,7 @@ const LandingPageEvents = ({ events }) => {
         <div>
             <input
                 type="text"
-                placeholder="Hae tapahtumatyypeillä..."
+                placeholder={t('search')}
                 value={filter}
                 onChange={e => setFilter(e.target.value)}
                 className="mb-4 p-2 border rounded w-full"
