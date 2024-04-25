@@ -1,5 +1,15 @@
 {
-  "landingpageworkon" : "Current recordings"
+  "landingpageworkon" : "Current recordings",
+
+  "work-start": "Work started",
+  "work-end": "Work ended",
+  "added-marker": "Marker added",
+  "update-marker": "Marker updated",
+  "remove-marker": "Marker removed",
+  "added-calendarmark": "Calendar entry added",
+  "updated-calendarmark": "Calendar entry updated",
+  "deleted-calendarmark": "Calendar entry deleted",
+  "search" : "Search"
     
   }
   
