@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser, fetchUserDetails } from "../features/auth/authSlice";
+import { useTranslation } from "react-i18next";
 
 
 const LandingPageWorkOn = ({worksites}) => {
-
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [userDetails, setUserDetails] = useState({})
    
@@ -55,7 +56,7 @@ const LandingPageWorkOn = ({worksites}) => {
     return (
         <div className="bg-base-200 rounded-lg p-6 h-3/5">
             <div className="text-center">
-                <h1 className="text-xl font-bold ">Nauhoitukset päällä</h1>
+                <h1 className="text-xl font-bold ">{t('landingpageworkon')}</h1>
             </div>
             {runningWorkSites.map((worksite, index) => (
                 <div className="" key={index}>
