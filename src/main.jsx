@@ -7,6 +7,7 @@ import { store } from './store.js'
 import { Provider } from 'react-redux'
 import { Amplify } from 'aws-amplify'
 import awsconfig from '../amplifyconfiguration.json'
+import './utils/i18n.js'
 
 Amplify.configure(awsconfig)
 
