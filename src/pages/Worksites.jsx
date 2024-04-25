@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyWorksites } from "../features/company/companySlice";
 import { WorksitesComponent } from "../components";
+import logoImage from '../assets/logo-no-background.png'
 
 
 const Worksites = () => {
@@ -24,9 +25,10 @@ const Worksites = () => {
     const worksite = company?.worksites;
 
     return (
-        <>
+        
+        <div >
             {worksite ? <WorksitesComponent worksites={worksite} userInfo={userInfo} userRole={userRole}/> : <h1>ei dataa</h1>}
-        </>
+        </div>
     )
 }
 

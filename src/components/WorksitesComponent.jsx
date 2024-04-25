@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "react-toastify";
+import logoImage from '../assets/logo-no-background.png'
 
 
 
@@ -66,7 +67,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
  
 
     return (
-        <section className="w-9/12 mx-auto mt-10">
+        <section className="w-9/12 mx-auto mt-10" >
             <div className="flex justify-center py-3">
                 {role === 'admin' && 
                 

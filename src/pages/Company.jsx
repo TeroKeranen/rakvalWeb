@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { fetchUserDetails } from "../features/auth/authSlice";
 import {fetchCompanyDetails, fetchCompanyWorksites} from '../features/company/companySlice'
 import { CompanyComponent } from "../components";
+import logoImage from '../assets/logo-no-background.png'
 
 
 const Company = () => {
@@ -13,7 +14,7 @@ const Company = () => {
     const company = useSelector(state => state.companyState)
     const id = user.user._id;
     
-    console.log("companu", company)
+    
     
 
 
@@ -44,8 +45,10 @@ const Company = () => {
     
 
     return (
-        <section className="">
+        <section className="h-screen border" style={{backgroundImage: `url(${logoImage})`, backgroundSize: '50%', backgroundRepeat: 'no-repeat',backgroundPosition: "center", }}>
+            <div className="mt-10">
             {companyExists ? <CompanyComponent companyData={companyExists}/> : <h1>eilöydy</h1>}
+            </div>
         </section>
     )
 }

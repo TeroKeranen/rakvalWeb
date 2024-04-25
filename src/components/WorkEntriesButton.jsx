@@ -21,11 +21,13 @@ const WorkEntriesButton = ({companyWorksites}) => {
     
     
 
-    const isRunningWorkDayOnAnyWorksite = () => {
+    // Käydään työmaat läpi, ja katsotaan onko käyttäjällä jokin työmää nauhoituksella
+    const isRunningWorkDayOnAnyWorksite = (userId) => {
         // Käydään läpi jokainen työmaa
         for (const worksite of companyWorksites) {
             // Tarkistetaan, onko työmaalla käynnissä olevia työpäiviä
-            const runningWorkDay = worksite.workDays.find(workDay => workDay.running === true);
+            
+            const runningWorkDay = worksite.workDays.find(workDay => workDay.running === true && workDay.workerId === userId);
             if (runningWorkDay) {
                 return true; // Löytyi käynnissä oleva työpäivä
             }
@@ -64,8 +66,9 @@ const WorkEntriesButton = ({companyWorksites}) => {
 
         
         // Katsotana onko käyttäjällä työpäivä käynnissä jossain työmaalla
-        const onGoingWorkDayAnyWorksite = isRunningWorkDayOnAnyWorksite();
+        const onGoingWorkDayAnyWorksite = isRunningWorkDayOnAnyWorksite(userId);
         const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
+        
         
         if (onGoingWorkDayAnyWorksite || onGoingWorkDay) {
             toast.error('Nauhoitus päällä jossain')
@@ -96,12 +99,12 @@ const WorkEntriesButton = ({companyWorksites}) => {
             <div className="flex justify-around">
 
             {!worksiteIsReady && (dayIsOn ?
-                <button className="btn border-blue-100 bg-red-600" onClick={handleEndDay}>Lopeta työpäivä</button> :
-                <button className="btn border-blue-100 bg-green-400" onClick={handleStartDay}>Aloita työpäivä</button>
+                <button className="btn border-blue-100 bg-base-300" onClick={handleEndDay}>Lopeta työpäivä</button> :
+                <button className="btn border-blue-100 bg-base-300" onClick={handleStartDay}>Aloita työpäivä</button>
                 
                 )}
             {!worksiteIsReady && !dayIsOn ? 
-                <button className="btn border-blue-100 bg-green-400" onClick={handleWorksiteReady}>Merkitse työmaa valmiiksi</button> : null
+                <button className="btn border-blue-100 bg-base-300" onClick={handleWorksiteReady}>Merkitse työmaa valmiiksi</button> : null
             }
             </div>
 
