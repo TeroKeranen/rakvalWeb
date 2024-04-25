@@ -13,7 +13,7 @@ const apiMiddleware = async (requestFunction) => {
     // const refreshToken = getState().userState.user.refreshToken;
     const refreshToken = localuser ? localuser.refreshToken : null;
 
-    console.log("aktiivinen refresh", refreshToken)
+    
 
     if (user && user.tokenExpiry) {
       const currentTime = new Date().getTime();

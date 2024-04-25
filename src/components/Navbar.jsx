@@ -5,6 +5,7 @@ import {FaBarsStaggered} from 'react-icons/fa6'
 import NavLinks from "./NavLinks";
 import { useDispatch } from "react-redux";
 import { toggleTheme,logoutUser } from "../features/auth/authSlice";
+import logoImage from '../assets/logo-no-background.png'
 
 
 
@@ -30,8 +31,8 @@ const Navbar = () => {
             <div className="navbar align-element">
                 <div className="navbar-start">
                     {/* TITLE */}
-                    <NavLink to="/" className="hidden lg:flex btn btn-primary text-3xl items-center">
-                        C
+                    <NavLink to="/" className="hidden lg:flex btn btn-neutral text-3xl items-center">
+                        Rakival
                     </NavLink>
                     {/* {DROPDOWN} */}
                     <div className="dropdown">

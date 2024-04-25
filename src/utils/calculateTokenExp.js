@@ -40,14 +40,14 @@ export async function handleTokenExpiry(dispatch, actionCreator, getState) {
 
 
 export const refreshAccessToken = (refreshToken) => async (dispatch) => {
-    console.log("ajetaan refreshToken")
+    
     try {
       const response = await customFetch.post('/refresh', { token: refreshToken });
       const newAccessToken = response.data.accessToken;
       const newRefreshToken = response.data.refreshToken;
-      console.log("refresAccestoken", newAccessToken);
+      
       const newTokenExpiry = getTokenExpiry(newAccessToken); // Olettaen, että sinulla on funktio, joka laskee tokenin vanhentumisajan
-      console.log("SUORITETAAN LOGINuSER");
+      
 
       dispatch(updateAccessToken({
         accessToken: newAccessToken,

@@ -22,8 +22,7 @@ const Landing = () => {
     const [events, setEvents] = useState([])
     
     
-    console.log("WORKSITES", worksites);
-    console.log("USERid", userId)
+    
     
     useEffect(() => {
         

@@ -10,6 +10,9 @@ export default {
       },
       colors: {
         "testi": "#F2EFD0"
+      },
+      minHeight: {
+        '100' : '32rem'
       }
     },
   },
