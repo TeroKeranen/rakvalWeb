@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyDetails } from "../features/company/companySlice";
 import { useEffect } from "react";
 import logoImage from '../assets/logo-no-background.png'
+import { useTranslation } from "react-i18next";
 
 
 const CompanyComponent = ({companyData}) => {
+    const {t} = useTranslation();
     const theme = useSelector(state => state.userState.theme)
     
     const {id, name, address, city, code} = companyData;
@@ -15,7 +17,7 @@ const CompanyComponent = ({companyData}) => {
             <h1 className="">{name}</h1>
             <h1 className="">{address}</h1>
             <h1 className="">{city}</h1>
-            <h1 className="">Company code: {code}</h1>
+            <h1 className="">{t('companyComponentCompanyCode')}: {code}</h1>
         </section>
     )
     

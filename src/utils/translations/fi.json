@@ -1,4 +1,15 @@
 {
+    "nodata": "Ei dataa",
+    "address": "Osoite",
+    "city": "Kaupunki",
+    "startingDate": "Aloitus ajankohta",
+    "type": "Tyyppi",
+    "privateClient": "Yksityisasiakas",
+    "worksite": "Työmaa",
+    "duehours": "Työhön varattu aika",
+    "add": "Lisää",
+
+
     "landingpageworkon" : "Päällä olevat nauhoitukset",
 
     "work-start": "Työ aloitettu",
@@ -9,7 +20,22 @@
     "added-calendarmark": "Lisätty kalenteri merkintä",
     "updated-calendarmark": "Kalenteri merkintää muokattu",
     "deleted-calendarmark": "Kalenteri merkintä poistettu",
-    "search" : "Haku"
+    "search" : "Haku",
+
+    "companyComponentCompanyCode": "Yrityskoodi",
+
+    "companyPageNoCompany" : "Ei yritystä",
+
+    "worksiteCompAddWorksitebtn": "Lisää työmaa",
+    "worksiteCompConstructionsites": "Työmaat",
+    "worksiteCompPrivateClients": "Yksityisasiakkaat",
+    "worksiteCompToastSuccess": "Työmaa poistettu onnistuneesti",
+    "worksiteCompToastError": "Virhe työmaan poistossa",
+
+    "addWorksiteToastSuccess": "Työmaan lisäys onnistui",
+    "addWorksiteToastError": "Työmaan lisäys epäonnistui"
+
+    
   
     
   }

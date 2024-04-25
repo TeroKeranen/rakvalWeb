@@ -1,4 +1,14 @@
 {
+  "nodata": "No data",
+  "address": "Address",
+  "city": "City",
+  "startingDate": "Starting date",
+  "type": "Type",
+  "privateClient": "Private Client",
+  "worksite": "Construction site",
+  "duehours": "Time reserved for work",
+  "add": "Add",
+
   "landingpageworkon" : "Current recordings",
 
   "work-start": "Work started",
@@ -9,7 +19,20 @@
   "added-calendarmark": "Calendar entry added",
   "updated-calendarmark": "Calendar entry updated",
   "deleted-calendarmark": "Calendar entry deleted",
-  "search" : "Search"
+  "search" : "Search",
+
+  "companyComponentCompanyCode": "Company code",
+
+  "companyPageNoCompany" : "No company found",
+
+  "worksiteCompAddWorksitebtn": "Add worksite",
+  "worksiteCompConstructionsites": "Construction sites",
+  "worksiteCompPrivateClients": "Private clients",
+  "worksiteCompToastSuccess": "Worksite successfully removed",
+  "worksiteCompToastError": "Error removing worksite",
+
+  "addWorksiteToastSuccess": "Worksite addition was successful",
+    "addWorksiteToastError": "Worksite addition failed"
     
   }
   
