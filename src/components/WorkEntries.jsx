@@ -21,7 +21,7 @@ const WorkEntries = () => {
     const usersById = useSelector(state => state.userState.usersById);
 
     
-    console.log("comapnyworksites",companyWorksites)
+    
 
     useEffect(() => {
         if (!companyWorksites) {
@@ -75,7 +75,7 @@ const WorkEntries = () => {
      
     const entriesToShow = userRole === 'admin' ? workEntriesWithUserDetails : ownWorkEntries;
 
-    console.log(entriesToShow);
+    
     
     return (
         <section className="flex flex-col  w-full h-full">
@@ -97,10 +97,10 @@ const WorkEntries = () => {
                     } else {
 
                         return (
-                            <div className=" bg-green-200 border-2 rounded-lg p-2 my-2 bg- w-3/5 mx-auto" key={index}>
-                                {userRole === 'admin' && <p className="text-neutral-800 font-bold">{workEntry.userName}</p>}
-                                <p className="text-neutral-800 text-lg">Aloitettu: {workEntry.startDate} {workEntry.startTime}</p>
-                                <p className="text-neutral-800 text-lg">Lopetettu: {workEntry.endDate} {workEntry.endTime}</p>
+                            <div className="bg-base-200 border-2 rounded-lg p-2 my-2 bg- w-3/5 mx-auto" key={index}>
+                                {userRole === 'admin' && <p className=" font-bold">{workEntry.userName}</p>}
+                                <p className=" text-lg">Aloitettu: {workEntry.startDate} {workEntry.startTime}</p>
+                                <p className=" text-lg">Lopetettu: {workEntry.endDate} {workEntry.endTime}</p>
                             </div>
                         )
                     }

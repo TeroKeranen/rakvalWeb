@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import {fetchCompanyDetails, fetchCompanyWorksites} from '../features/company/companySlice'
-import { useEffect } from "react";
+import {fetchCompanyDetails, fetchCompanyWorksites, fetchEvents} from '../features/company/companySlice'
+import { useEffect, useState } from "react";
 import { fetchUserDetails } from "../features/auth/authSlice";
+import { LoggedInLanding, LoggedOutLanding } from "../components";
 
 
 
@@ -12,25 +13,49 @@ export const loader = () => {
 const Landing = () => {
 
     const dispatch = useDispatch();
-    const testi = useSelector(state => state.companyState);
-    const user = useSelector(state => state.userState);
-    const userId = user?.user?._id
-    console.log("landing", user);
+    const companyState = useSelector(state => state.companyState);
+    const userState = useSelector(state => state.userState);
+    const userId = userState?.user?._id
+
+    const worksites = companyState.worksites || [];
+
+    const [events, setEvents] = useState([])
+    
+    
+    
     
     useEffect(() => {
         
-        
-        // dispatch(fetchCompanyDetails())
-        dispatch(fetchUserDetails(userId))
-        
-        
-        
-    }, [dispatch]);
-    
-    // console.log("käyttäjä", user);
+        if (userId) {
 
+            // dispatch(fetchCompanyDetails())
+            dispatch(fetchUserDetails(userId))
+            // dispatch(fetchCompanyDetails())
+            dispatch(fetchCompanyWorksites());
+            dispatch(fetchEvents());
+        }
+    
+    }, [dispatch]);
+
+    // Etsitään tapahtumat ja käännetään ne siten että uusimmat tulee listan ekaksi...
+    useEffect(() => {
+        if (companyState.events) {
+            const reservedEvents = [...companyState.events].reverse();
+            setEvents(reservedEvents);
+        }
+    }, [companyState.events])
+    
+    
+
+    
+
+    if (!userState.user) {
+        return (
+            <LoggedOutLanding />
+        )
+    }
     return (
-        <h1>Landing </h1>
+        <LoggedInLanding events={events} worksites={worksites}/>
     )
 }
 

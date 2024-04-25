@@ -6,7 +6,7 @@ import { customFetch } from "../../utils/index";
 import apiMiddleware from "../middleWare/refresMiddleWare";
 
 const themes = {
-    winter: 'winter',
+    retro: 'retro',
     dracula: 'dracula',
 }
 
@@ -15,7 +15,7 @@ const getUserFromLocalStorage = () => {
 }
 
 const getThemeFromLocalStrorage = () => {
-    const theme =  localStorage.getItem('theme') || themes.winter
+    const theme =  localStorage.getItem('theme') || themes.retro
     document.documentElement.setAttribute('data-theme', theme)
     return theme;
 }
@@ -56,6 +56,7 @@ export const logout = createAsyncThunk(
     }
 )
 
+// Käytetään tätä kun haetaan kirjautuneen käyttäjän tiedot ja laitetaan ne storageen
 export const fetchUserDetails = createAsyncThunk(
     'company/fetchUserDetails',
     async (id, {getState,rejectWithValue}) => {
@@ -63,7 +64,7 @@ export const fetchUserDetails = createAsyncThunk(
         return apiMiddleware(async () => {
             try {
                 const token = getState().userState.user.token;
-                console.log("autslice token", token);
+                
                 const response = await customFetch.get(`/users/${id}`, {
                 
                 headers: {
@@ -186,8 +187,8 @@ const authSlice = createSlice({
             
         },
         toggleTheme: (state) => {
-            const {dracula, winter} = themes;
-            state.theme = state.theme === dracula ? winter : dracula
+            const {dracula, retro} = themes;
+            state.theme = state.theme === dracula ? retro : dracula
             document.documentElement.setAttribute('data-theme', state.theme)
             localStorage.setItem('theme', state.theme)
         }

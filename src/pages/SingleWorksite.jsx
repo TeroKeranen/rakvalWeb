@@ -2,7 +2,7 @@ import { createElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleWorksite, clearWorksiteDetails } from "../features/company/companySlice";
 import { Outlet, useParams } from "react-router-dom";
-import { AddFloorplanImg, Floorplan, SideNavbar, WorkEntries, WorkEntriesButton, WorksiteWorkers } from "../components";
+import { AddFloorplanImg, Floorplan, SideNavbar, SingleWorksiteLanding, WorkEntries, WorkEntriesButton, WorksiteWorkers } from "../components";
 import WorksiteCalendar from "../components/WorksiteCalendar";
 
 const SingleWorksite = () => {
@@ -13,6 +13,7 @@ const SingleWorksite = () => {
     const userRole = useSelector(state => state.userState.user.role);
     const [ActiveComponent, setActiveComponent] = useState(null);
     const worksiteDetails = company?.worksiteDetails
+    
 
     
     
@@ -66,6 +67,7 @@ const SingleWorksite = () => {
             
             {/* Sisältö */}
             <div className="flex flex-col justify-center items-center w-full lg:w-3/4 p-4 mx-auto">
+                {!ActiveComponent && <SingleWorksiteLanding worksiteDetails={worksiteDetails}/>}
                 {ActiveComponent === 'floorplan' && <AddFloorplanImg worksiteId={id}/>}
                 {/* {ActiveComponent === 'workEntries' && <WorkEntriesButton />} */}
                 {ActiveComponent === 'worksiteCalendar' && <h1>kalöenteri</h1>}

@@ -11,10 +11,10 @@ export const addNewWorksite = createAsyncThunk(
   async(data, {getState, rejectWithValue}) => {
     return apiMiddleware(async () => {
       try {
-        const {address,city, startTime, worktype} = data;
-        // console.log("lisätäääääää", address, city,startTime,worktype)
+        const {address,city, startTime, worktype, duehours} = data;
+        console.log("lisätäääääää", address, city,startTime,worktype,duehours)
         const token = getState().userState.user.token;
-        const response = await customFetch.post(`/worksites`, {address, city,startTime,worktype}, {
+        const response = await customFetch.post(`/worksites`, {address, city,startTime,worktype, duehours}, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -235,6 +235,30 @@ export const companyWorkers = createAsyncThunk(
   }
 )
 
+export const fetchEvents = createAsyncThunk(
+  'company/events',
+  async(_, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.get('/events', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        if (response.status !== 200) {
+          throw new Error("tapahtumien haku epäonnistui")
+        }
+
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
+  }
+
+)
+
 
 
 const initialState = {
@@ -245,7 +269,7 @@ const initialState = {
     loading: false,
     message: null,
     error: null,
-    testi: null
+    events: null,
   };
 
 const companySlice = createSlice({
@@ -258,7 +282,8 @@ const companySlice = createSlice({
       clearCompanyDetails: (state) => {
         state.worksiteDetails = null,
         state.company = null,
-        state.worksites = null
+        state.worksites = null,
+        state.events = null
       },
       updateWorksiteDetails: (state,action) => {
         state.worksiteDetails = action.payload;
@@ -389,6 +414,19 @@ const companySlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+
+      // tapahtumien hakuun
+      .addCase(fetchEvents.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchEvents.fulfilled, (state, action) => {
+        state.loading = false;
+        state.events = action.payload;
+      })
+      .addCase(fetchEvents.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
     }
 })
 
