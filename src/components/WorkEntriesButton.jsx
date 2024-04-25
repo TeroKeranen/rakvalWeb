@@ -99,12 +99,12 @@ const WorkEntriesButton = ({companyWorksites}) => {
             <div className="flex justify-around">
 
             {!worksiteIsReady && (dayIsOn ?
-                <button className="btn border-blue-100 bg-red-600" onClick={handleEndDay}>Lopeta työpäivä</button> :
-                <button className="btn border-blue-100 bg-green-400" onClick={handleStartDay}>Aloita työpäivä</button>
+                <button className="btn border-blue-100 bg-base-300" onClick={handleEndDay}>Lopeta työpäivä</button> :
+                <button className="btn border-blue-100 bg-base-300" onClick={handleStartDay}>Aloita työpäivä</button>
                 
                 )}
             {!worksiteIsReady && !dayIsOn ? 
-                <button className="btn border-blue-100 bg-green-400" onClick={handleWorksiteReady}>Merkitse työmaa valmiiksi</button> : null
+                <button className="btn border-blue-100 bg-base-300" onClick={handleWorksiteReady}>Merkitse työmaa valmiiksi</button> : null
             }
             </div>
 

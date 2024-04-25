@@ -64,7 +64,7 @@ export const fetchUserDetails = createAsyncThunk(
         return apiMiddleware(async () => {
             try {
                 const token = getState().userState.user.token;
-                console.log("autslice token", token);
+                
                 const response = await customFetch.get(`/users/${id}`, {
                 
                 headers: {

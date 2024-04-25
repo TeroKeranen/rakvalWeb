@@ -92,6 +92,13 @@ const AddWorksite = () => {
                         <option>Construction site</option>
                     </select>
 
+                    <FormInput 
+                        type="number"
+                        label="due Hours"
+                        name="duehours"
+                        defaultValue=""
+                    />
+
                     <div className="mt-4">
                         {/* <SubmitBtn text="lisää" />
                          */}

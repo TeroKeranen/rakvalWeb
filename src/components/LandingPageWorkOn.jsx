@@ -53,7 +53,7 @@ const LandingPageWorkOn = ({worksites}) => {
     
     
     return (
-        <div className="bg-base-200 rounded-lg p-6 h-full">
+        <div className="bg-base-200 rounded-lg p-6 h-3/5">
             <div className="text-center">
                 <h1 className="text-xl font-bold ">Nauhoitukset päällä</h1>
             </div>

@@ -129,7 +129,7 @@ const WorksiteWorkers = () => {
                         </select>
                     </div>
                     <div className='mx-auto my-3'>
-                        <button className='btn p-1border-blue-100 bg-green-600' onClick={handleSendWorker}>Lisää</button>
+                        <button className='btn bg-base-300' onClick={handleSendWorker}>Lisää</button>
                     </div>
                 
                 
@@ -147,7 +147,7 @@ const WorksiteWorkers = () => {
                     worksiteWorkersNames && Object.values(worksiteWorkersNames).map((user, index) => (
                     
 
-                        <div className='border-2 flex flex-row justify-between rounded-lg p-2 my-2' key={index}>
+                        <div className='border-2 flex flex-row justify-between rounded-lg p-2 my-2 bg-base-200' key={index}>
                             <p>{user.email}</p>
                             <MdDeleteOutline onClick={() => handleDelete(user._id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
                         </div>

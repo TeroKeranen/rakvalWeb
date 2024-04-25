@@ -11,10 +11,10 @@ export const addNewWorksite = createAsyncThunk(
   async(data, {getState, rejectWithValue}) => {
     return apiMiddleware(async () => {
       try {
-        const {address,city, startTime, worktype} = data;
-        // console.log("lisätäääääää", address, city,startTime,worktype)
+        const {address,city, startTime, worktype, duehours} = data;
+        console.log("lisätäääääää", address, city,startTime,worktype,duehours)
         const token = getState().userState.user.token;
-        const response = await customFetch.post(`/worksites`, {address, city,startTime,worktype}, {
+        const response = await customFetch.post(`/worksites`, {address, city,startTime,worktype, duehours}, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

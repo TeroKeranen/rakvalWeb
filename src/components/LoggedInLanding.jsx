@@ -2,6 +2,8 @@ import { useState } from "react";
 import LandingPageEvents from "./LandingPageEvents";
 import LandingPageEventsButton from "./LandingPageEventsButton";
 import LandingPageWorkOn from "./LandingPageWorkOn";
+import LandingpageWorksiteProgress from "./LandingpageWorksiteProgress";
+import logoImage from '../assets/logo-no-background.png'
 
 const LoggedInLanding = ({events, worksites}) => {
 
@@ -16,29 +18,27 @@ const LoggedInLanding = ({events, worksites}) => {
     
 
     return (
-        <div className="flex flex-row justify-between">
-            <div className=" w-4/5 mx-auto ">
+        <div className="flex flex-row justify-between" >
+            <div className=" w-4/5 mx-auto " style={{backgroundImage: `url(${logoImage})`, backgroundSize: '50%', backgroundRepeat: 'no-repeat',backgroundPosition: "center", }}>
                 
 
-                    <div className="border flex justify-around h-2/5">
+                    <div className="flex justify-around min-h-100" >
 
-                        <div className="my-5 w-1/3">
+                        <div className="my-5 w-1/4">
                             <LandingPageWorkOn worksites={worksites}/>
                         </div>
-                        <div className="my-5 w-1/3 bg-base-200">
+                        <div className="my-5 w-1/3 ">
                             
-                            <p>tänne jotain</p>
+                            <LandingpageWorksiteProgress worksites={worksites}/>
                         </div>
                     </div>
 
-                    <div className="my-5 bg-testi min-h-48">
-                        <p>tänne jotain</p>
-                    </div>
+                   
 
 
             </div>
 
-            <div className="flex flex-col border rounded p-1 mr-5 my-5 bg-testi">
+            <div className="flex flex-col border rounded p-1 mr-5 my-5 bg-base-200">
                      
                     <LandingPageEvents events={currentEvents}/>
                     <LandingPageEventsButton
