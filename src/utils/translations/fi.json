@@ -8,6 +8,13 @@
     "worksite": "Työmaa",
     "duehours": "Työhön varattu aika",
     "add": "Lisää",
+    "hours": "Tuntia",
+    "addImg": "Lisää kuva",
+    "selectImg": "Valitse kuva",
+    "exit": "Paina ESC-näppäintä tai napsauta alla olevaa painiketta sulkeaksesi.",
+    "save": "Tallenna",
+    "close": "Sulje",
+    "title": "Otsikko",
 
 
     "landingpageworkon" : "Päällä olevat nauhoitukset",
@@ -33,7 +40,24 @@
     "worksiteCompToastError": "Virhe työmaan poistossa",
 
     "addWorksiteToastSuccess": "Työmaan lisäys onnistui",
-    "addWorksiteToastError": "Työmaan lisäys epäonnistui"
+    "addWorksiteToastError": "Työmaan lisäys epäonnistui",
+
+    "singleWorksiteLandingEstimated": "Työhön laskettu aika",
+    "singleWorksiteLandingSpent": "Työhön käytetty aika",
+
+    "sidenavbarFloorPlan": "Pohjakuva",
+    "sidenavbarEntries": "Kirjaukset",
+    "sidenavbarCalendar": "Kalenteri",
+    "sidenavbarWorkers": "Työntekijät",
+
+    "worksiteWorkersSelectEmp": "Valitse työntekijä",
+    "worksiteWorkersPeopleAdded": "Työmaalle lisätyt henkilöt",
+
+    "worksiteCalendarAddedSucc": "Merkinnän lisäys onnistui",
+    "worksiteCalendarError": "Jotain meni vikaan",
+    "worksiteCalendarConfirmDel": "Vahvista poisto",
+    "worksiteCalendarSure": "Oletko varma että haluat poistaa tämän",
+    "worksiteCalendarDeleteSucc": "Poisto onnistui"
 
     
   

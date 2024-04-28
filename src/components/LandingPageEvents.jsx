@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { changeEventsTimestamp } from "../utils/eventsTimeStamp";
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const LandingPageEvents = ({ events }) => {
     const {t} = useTranslation();
     const [filter, setFilter] = useState('');
+    const theme = useSelector(state => state.userState.theme)
+    
+    const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
 
     
-
-    console.log("events", events)
     const eventTypeToText = {
         "work-start": t('work-start'),
         "work-end": t('work-end'),
@@ -39,11 +41,12 @@ const LandingPageEvents = ({ events }) => {
         });
     
         return filteredEvents.map((event, index) => {
+            
             const displayText = eventTypeToText[event.type] || event.type;
             const userEmail = event.user && event.user.email ? event.user.email : "Ei sähköpostia";
             const workSite = event.worksite && event.worksite.address ? event.worksite.address : "Ei löydy työmaan tietoja";
             return (
-                <div className="border-b-4 my-0 p-0 rounded-lg" style={{width: '300px'}} key={index}>
+                <div className="mx-auto border-b-4 my-0 p-0 rounded-lg" style={{width: '300px'}} key={index}>
                     <div className="p-1 flex flex-col items-center">
                         <h1 className="text-lg text-center">{workSite}</h1>
                         {event.timestamp && <p>{changeEventsTimestamp(event.timestamp)}</p>}
