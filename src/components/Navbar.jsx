@@ -6,6 +6,7 @@ import NavLinks from "./NavLinks";
 import { useDispatch } from "react-redux";
 import { toggleTheme,logoutUser } from "../features/auth/authSlice";
 import logoImage from '../assets/logo-no-background.png'
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -14,7 +15,7 @@ import logoImage from '../assets/logo-no-background.png'
 
 const Navbar = () => {
 
-    
+    const { i18n } = useTranslation();
     const dispatch = useDispatch()
 
     const handleTheme = () => {
@@ -24,6 +25,12 @@ const Navbar = () => {
         
     }
 
+        // Kielenvaihtofunktio, joka tarkistaa nykyisen kielen ja vaihtaa sen
+    const toggleLanguage = () => {
+        const currentLanguage = i18n.language;
+        const newLanguage = currentLanguage === 'en' ? 'fi' : 'en';
+        i18n.changeLanguage(newLanguage);
+    }
     
 
     return (
@@ -59,6 +66,7 @@ const Navbar = () => {
                         {/* moon icon */}
                         <BsMoonFill className="swap-off h-4 w-4" />
                     </label>
+                    <button onClick={toggleLanguage}>Switch to English</button>
                 </div>
             </div>
         </nav>

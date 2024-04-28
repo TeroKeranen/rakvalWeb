@@ -4,6 +4,7 @@ import { customFetch } from "../../utils";
 
 import { handleTokenExpiry } from "../../utils/calculateTokenExp";
 import apiMiddleware from "../middleWare/refresMiddleWare";
+import { addCalendarEntry, deleteCalendarEntry } from "../worksite/worksiteSlice";
 
 
 export const addNewWorksite = createAsyncThunk(
@@ -426,7 +427,17 @@ const companySlice = createSlice({
       .addCase(fetchEvents.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+
+      // Päivitetään worksiteDetailit kun tehdään uusi kalenteri merkintä
+      .addCase(addCalendarEntry.fulfilled, (state, action) => {
+        state.worksiteDetails = action.payload;
+      })
+
+      // Päivitetään worksitedetailit kun poistetaan kalenteri merkintä
+      .addCase(deleteCalendarEntry.fulfilled, (state,action) => {
+        state.worksiteDetails = action.payload;
+      })
     }
 })
 

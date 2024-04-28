@@ -5,8 +5,10 @@ import {fetchUser, clearWorksiteWorkersNames} from '../features/auth/authSlice'
 import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import { MdDeleteOutline } from "react-icons/md";
+import { useTranslation } from 'react-i18next';
 
 const WorksiteWorkers = () => {
+    const {t} = useTranslation();
     const dispatch = useDispatch();
     const worksiteId = useSelector(state => state.companyState.worksiteDetails._id); // haetan työmaan id
     const company = useSelector(state => state.companyState.company); // haetaan yritys
@@ -120,7 +122,7 @@ const WorksiteWorkers = () => {
                 
                     <div className='mx-auto'>
                         <select className='p-2 rounded-md' value={selectedWorker} onChange={handleSelectChange}>
-                            <option value="">Valitse työntekijä</option>
+                            <option value="">{t('worksiteWorkersSelectEmp')}</option>
                             {workers && workers.map((worker, index) => (
                                 <option key={index} value={worker._id}>
                                     {worker.email}
@@ -129,13 +131,13 @@ const WorksiteWorkers = () => {
                         </select>
                     </div>
                     <div className='mx-auto my-3'>
-                        <button className='btn bg-base-300' onClick={handleSendWorker}>Lisää</button>
+                        <button className='btn bg-base-300' onClick={handleSendWorker}>{t('add')}</button>
                     </div>
                 
                 
             </div>
             <div className='mx-auto w-3/4 p-4'>
-                <h1 className='flex justify-center text-2xl font-bold'>Työmaalle lisätyt henkilöt</h1>
+                <h1 className='flex justify-center text-2xl font-bold'>{t('worksiteWorkersPeopleAdded')}</h1>
                 {isLoading ? (
                     <section className="text-center">
                         <span className="loading loading-spinner loading-xs bg-green-900"></span>

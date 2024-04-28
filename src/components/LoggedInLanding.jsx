@@ -4,6 +4,7 @@ import LandingPageEventsButton from "./LandingPageEventsButton";
 import LandingPageWorkOn from "./LandingPageWorkOn";
 import LandingpageWorksiteProgress from "./LandingpageWorksiteProgress";
 import logoImage from '../assets/logo-no-background.png'
+import { useSelector } from "react-redux";
 
 const LoggedInLanding = ({events, worksites}) => {
 
@@ -15,19 +16,21 @@ const LoggedInLanding = ({events, worksites}) => {
     const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
     const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 
+    const theme = useSelector(state => state.userState.theme)
+    const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
     
 
     return (
-        <div className="flex flex-row justify-between" >
-            <div className=" w-4/5 mx-auto " style={{backgroundImage: `url(${logoImage})`, backgroundSize: '50%', backgroundRepeat: 'no-repeat',backgroundPosition: "center", }}>
+        <div className="flex flex-col md:flex-row justify-between" >
+            <div className="w-full md:w-4/5 mx-auto " style={{backgroundImage: `url(${logoImage})`, backgroundSize: '50%', backgroundRepeat: 'no-repeat',backgroundPosition: "center", }}>
                 
 
-                    <div className="flex justify-around min-h-100" >
+                    <div className="flex flex-col md:flex-row justify-around min-h-100" >
 
-                        <div className="my-5 w-1/4">
+                        <div className="my-5 w-full md:w-1/4">
                             <LandingPageWorkOn worksites={worksites}/>
                         </div>
-                        <div className="my-5 w-1/3 ">
+                        <div className="my-5 w-full md:w-1/4">
                             
                             <LandingpageWorksiteProgress worksites={worksites}/>
                         </div>
@@ -38,7 +41,7 @@ const LoggedInLanding = ({events, worksites}) => {
 
             </div>
 
-            <div className="flex flex-col border rounded p-1 mr-5 my-5 bg-base-200">
+            <div className={`flex flex-col w-full md:w-auto rounded p-1 mr-5 my-5 bg-base-200 ${boxShadowClass}`}>
                      
                     <LandingPageEvents events={currentEvents}/>
                     <LandingPageEventsButton

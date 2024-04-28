@@ -1,12 +1,14 @@
+import { useSelector } from "react-redux";
 import { calculateTotaWorkTime, convertToMinutes } from "../utils/calculateWorkhours";
 
 const LandingpageWorksiteProgress = ({worksites}) => {
 
 
-
+    const theme = useSelector(state => state.userState.theme)
+    const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
 
     return (
-        <div className="bg-base-200 max-h-100 grid grid-cols-3 gap-1 rounded-lg">
+        <div className={`bg-base-200 max-h-100 grid grid-cols-3 gap-1 rounded-lg ${boxShadowClass}`}>
             
             {worksites.map((item, index) => {
             
