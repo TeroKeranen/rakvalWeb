@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser, fetchUserDetails } from "../features/auth/authSlice";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +9,8 @@ const LandingPageWorkOn = ({worksites}) => {
     const dispatch = useDispatch();
     const [userDetails, setUserDetails] = useState({})
    
-
+    const theme = useSelector(state => state.userState.theme)
+    const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
     
     if (!worksites) {
         return (
@@ -54,7 +55,7 @@ const LandingPageWorkOn = ({worksites}) => {
     
     
     return (
-        <div className="bg-base-200 rounded-lg p-6 h-3/5">
+        <section className={`bg-base-200 rounded-lg p-6 h-3/5 ${boxShadowClass}`}>
             <div className="text-center">
                 <h1 className="text-xl font-bold ">{t('landingpageworkon')}</h1>
             </div>
@@ -72,7 +73,7 @@ const LandingPageWorkOn = ({worksites}) => {
                     </ul>
                 </div>
             ))}
-        </div>
+        </section>
     )
 
 }

@@ -69,7 +69,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
  
 
     return (
-        <section className="w-9/12 mx-auto mt-10" >
+        <section className="w-full md:w-9/12 mx-auto mt-10" >
             <div className="flex justify-center py-3">
                 {role === 'admin' && 
                 

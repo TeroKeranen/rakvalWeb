@@ -1,10 +1,11 @@
 import mapImage from '../assets/map.jpg'
 import { calculateTotaWorkTime, convertDate, convertToMinutes } from '../utils/calculateWorkhours';
+import { useTranslation } from 'react-i18next';
 
 const SingleWorksiteLanding = ({worksiteDetails}) => {
 
     
-    
+    const {t} = useTranslation(); 
     const duehours = worksiteDetails?.duehours // otetaan talteen varatut työtunnit
     
     console.log("WORKdAYS", worksiteDetails.workDays)
@@ -31,8 +32,8 @@ const SingleWorksiteLanding = ({worksiteDetails}) => {
                         <div className='flex flex-col justify-between h-full '>
 
                         <div>
-                            <p>Työhön laskettu aika: {duehours} tuntia</p>
-                            <p>Työhön käytetty aika: {(workedMinutes / 60).toFixed(2)} tuntia</p>
+                            <p>{t('singleWorksiteLandingEstimated')}: {duehours} {t('hours')}</p>
+                            <p>{t('singleWorksiteLandingSpent')}: {(workedMinutes / 60).toFixed(2)} {t('hours')}</p>
                         </div>
 
                         <div>
@@ -40,7 +41,7 @@ const SingleWorksiteLanding = ({worksiteDetails}) => {
                         {duehours &&
                         
                         
-                        <div className="bg-primary-content skeleton w-32 h-32 flex justify-center items-center">
+                        <div className="bg-primary-content skeleton mt-20 w-24 h-24 md:w-32 md:h-32 flex justify-center items-center">
                                 
                                 <div className=''>
                                     <div className="radial-progress" style={{"--value":usedPercentage.toFixed(0)}} role="progressbar">{usedPercentage.toFixed(2)}%</div>

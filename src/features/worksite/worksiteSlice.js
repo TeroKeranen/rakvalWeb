@@ -82,6 +82,44 @@ export const worksiteReady = createAsyncThunk(
     }
 )
 
+export const addCalendarEntry = createAsyncThunk(
+    'worksite/addCalendarEntry',
+    async({worksiteId, entryData}, thunkAPI) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = thunkAPI.getState().userState.user.token;
+                const response = await customFetch.post(`/worksites/${worksiteId}/calendar-entry`, entryData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                
+            } catch (error) {
+                return thunkAPI.rejectWithValue(error.response ? error.response.data : 'An unknown error occurred');
+            }
+        })
+    }
+)
+
+export const deleteCalendarEntry = createAsyncThunk(
+    'worksite/deleteCalendarEntry',
+    async({worksiteId, entryId}, thunkAPI) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = thunkAPI.getState().userState.user.token;
+                const response = await customFetch.delete(`/worksites/${worksiteId}/calendar-entry/${entryId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+            } catch (error) {
+                return thunkAPI.rejectWithValue(error.response.data);
+            }
+        })
+    }
+)
+
+
 
 
 
@@ -143,6 +181,20 @@ const worksiteSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             })
+
+            // Kalenteri merkintä
+            .addCase(addCalendarEntry.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(addCalendarEntry.fulfilled, (state, action) => {
+                state.loading = false;
+                // Jos tarpeen, käsittele vastausta lisäämällä stateen
+            })
+            .addCase(addCalendarEntry.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            });
             
     }
 
