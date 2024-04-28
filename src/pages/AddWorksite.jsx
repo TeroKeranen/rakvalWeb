@@ -6,15 +6,19 @@ import { toast } from "react-toastify";
 import {addNewWorksite} from '../features/company/companySlice'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 
 
 
 const AddWorksite = () => {
+    const {t, i18n} = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const company = useSelector(state => state.companyState);
+
+    
     
     const [workType, setWorkType] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -34,13 +38,15 @@ const AddWorksite = () => {
         const data = Object.fromEntries(formData);
         const newData = {...data, worktype:workType}
         
+        
+        
         try {
             
             await dispatch(addNewWorksite(newData)).unwrap()
-            toast.success("Työmaan lisäys onnistui")
+            toast.success(t('addWorksiteToastSuccess'))
             navigate(-1); // Palaa takaisin edelliselle sivulle
         } catch (error) {
-            toast.error('työmaan lisäys epäonnistui')
+            toast.error(t('addWorksiteToastError'))
         } finally {
             setIsLoading(false)
         }
@@ -69,32 +75,32 @@ const AddWorksite = () => {
 
                     <FormInput 
                         type="text" 
-                        label="address" 
+                        label={t('address')}
                         name="address" 
                         defaultValue=""
                         />
                     <FormInput 
                         type="text"
-                        label="city"
+                        label={t('city')}
                         name="city"
                         defaultValue=""
                         />
                     <FormInput 
                         type="text"
-                        label="starting date"
+                        label={t('startingDate')}
                         name="startTime"
                         defaultValue=""
                         />
                     
                     <select className="select select-bordered w-full max-w-xs" value={workType} onChange={workTypeHandler}>
-                        <option value="">Type</option>
-                        <option>Private client</option>
-                        <option>Construction site</option>
+                        <option value="">{t('type')}</option>
+                        <option>{t('privateClient')}</option>
+                        <option>{t('worksite')}</option>
                     </select>
 
                     <FormInput 
                         type="number"
-                        label="due Hours"
+                        label={t('duehours')}
                         name="duehours"
                         defaultValue=""
                     />
@@ -103,7 +109,7 @@ const AddWorksite = () => {
                         {/* <SubmitBtn text="lisää" />
                          */}
                          <button type="submit" className="btn btn-primary btn-block">
-                            Lisää työmaa
+                            {t('add')}
                          </button>
                     </div>
                     

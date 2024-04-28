@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "react-toastify";
 import logoImage from '../assets/logo-no-background.png'
+import { useTranslation } from "react-i18next";
 
 
 
 const WorksitesComponent = ({worksites, userInfo, userRole}) => {
+    const {t} = useTranslation();
     const dispatch = useDispatch();
     const {email, _id, role} = userInfo;
     const theme = useSelector(state => state.userState.theme);
@@ -22,8 +24,8 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
     
      // Suodata työmaat tyypin perusteella
-     const regularWorksites = worksites.filter(worksite => worksite.worktype === 'Construction site' && (role ==='admin' || worksite.workers.includes(_id)));
-     const smallWorksites = worksites.filter(worksite => worksite.worktype === 'Private client' &&( role ==='admin' || worksite.workers.includes(_id)));
+     const regularWorksites = worksites.filter(worksite => worksite.worktype === 'Construction site' || worksite.worktype === "Työmaa" && (role ==='admin' || worksite.workers.includes(_id)));
+     const smallWorksites = worksites.filter(worksite => worksite.worktype === 'Private client' || worksite.worktype === "Yksityisasiakas" &&( role ==='admin' || worksite.workers.includes(_id)));
 
 
      useEffect(() => {
@@ -35,10 +37,10 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
         try {
             
             await dispatch(deleteWorksite(worksiteId)).unwrap();
-            toast.success('työmaa poistettu onnistuneesti')
+            toast.success(t('worksiteCompToastSuccess'))
 
         } catch (error) {
-            toast.error('Virhe työmaan poistossa: ', + error.message)
+            toast.error(t('worksiteCompToastError'), + error.message)
         }
             
     }
@@ -67,19 +69,19 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
  
 
     return (
-        <section className="w-9/12 mx-auto mt-10" >
+        <section className="w-full md:w-9/12 mx-auto mt-10" >
             <div className="flex justify-center py-3">
                 {role === 'admin' && 
                 
                     <Link to="/addworksite">
-                        <button className="btn border-blue-100">add worksite</button>
+                        <button className="btn border-blue-100">{t('worksiteCompAddWorksitebtn')}</button>
                     </Link>
                 }
             </div>
             <div className="collapse bg-base-200">
                 <input type="checkbox" className="peer" /> 
                 <div className="text-slate-950 text-center text-lg font-semibold lg:text-xl lg:font-bold text- collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content">
-                    Työmaat
+                    {t('worksiteCompConstructionsites')}
                 </div>
                 <div className="collapse-content bg-slate-100 text-primary-content peer-checked:bg-slate-800 peer-checked:text-secondary-content"> 
                     {renderWorksites(regularWorksites)}
@@ -89,7 +91,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
             <div className="collapse bg-base-200 mt-4 ">
                 <input type="checkbox" className="peer" /> 
                 <div className="text-slate-950 text-center text-lg font-semibold lg:text-xl lg:font-bold collapse-title bg-slate-100 text-primary-content peer-checked:bg-slate-100 peer-checked:text-secondary-content ">
-                    Pikkukeikat
+                    {t('worksiteCompPrivateClients')}
                 </div>
                 <div className="collapse-content bg-slate-100 text-primary-content peer-checked:bg-slate-800 peer-checked:text-secondary-content"> 
                     {renderWorksites(smallWorksites)}

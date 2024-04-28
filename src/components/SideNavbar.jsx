@@ -1,27 +1,24 @@
 
 
-import { NavLink } from "react-router-dom"
-import Floorplan from "./Floorplan";
-import WorkEntries from "./WorkEntries";
 import { useState } from "react";
-import { FaHandPointer } from "react-icons/fa6";
-import WorksiteCalendar from "./WorksiteCalendar";
-import WorksiteWorkers from "./WorksiteWorkers";
+import { useTranslation } from "react-i18next";
+
 
 
 
 
 const SideNavbar = ({userRole,onLinkClick, address}) => {
     const [selectedId, setSelectedId] = useState(null);
+    const {t} = useTranslation();
     const links = [
         // {id: 1, component: Floorplan, text: "Pohjakuva"},
         // {id: 2, component: WorkEntries, text: "Kirjaukset"},
         // {id: 3, component: WorksiteCalendar, text: "Kalenteri"},
         // {id: 4, component: WorksiteWorkers, text: "Työntekijät"}
-        {id: 1, componentType: 'floorplan', text: "Pohjakuva"},
-        {id: 2, componentType: 'workEntries', text: "Kirjaukset"},
-        {id: 3, componentType: 'worksiteCalendar', text: "Kalenteri"},
-        {id: 4, componentType: 'worksiteWorkers', text: "Työntekijät"}
+        {id: 1, componentType: 'floorplan', text: t('sidenavbarFloorPlan')},
+        {id: 2, componentType: 'workEntries', text: t('sidenavbarEntries')},
+        {id: 3, componentType: 'worksiteCalendar', text: t('sidenavbarCalendar')},
+        {id: 4, componentType: 'worksiteWorkers', text: t('sidenavbarWorkers')}
     ]
 
     return (
@@ -44,7 +41,7 @@ const SideNavbar = ({userRole,onLinkClick, address}) => {
                             onLinkClick(link.componentType);
                             setSelectedId(link.id);
                         }}>
-                            {link.text}
+                            <p className="text-sm md:text-base">{link.text}</p>
                         </li>
                         )
                     })}
