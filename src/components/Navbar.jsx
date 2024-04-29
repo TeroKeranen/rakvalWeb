@@ -8,6 +8,9 @@ import { toggleTheme,logoutUser } from "../features/auth/authSlice";
 import logoImage from '../assets/logo-no-background.png'
 import { useTranslation } from 'react-i18next';
 
+import finlandFlag from '../assets/suomi.jpg'
+import ukFlag from '../assets/eng.jpg'
+
 
 
 
@@ -31,6 +34,9 @@ const Navbar = () => {
         const newLanguage = currentLanguage === 'en' ? 'fi' : 'en';
         i18n.changeLanguage(newLanguage);
     }
+
+    const languageFlag = i18n.language === 'en' ? finlandFlag : ukFlag;
+    const languageAlt = i18n.language === 'en' ? "Switch to Finnish" : "Switch to English";
     
 
     return (
@@ -59,14 +65,16 @@ const Navbar = () => {
                 <div className="navbard-end">
                     {/* theme setup */}
 
-                    <label className="swap swap-rotate">
+                    {/* <label className="swap swap-rotate">
                         <input type="checkbox" onChange={handleTheme} />
-                        {/* sun icon */}
+                        
                         <BsSunFill className="swap-on h-4 w-4" />
-                        {/* moon icon */}
+                        
                         <BsMoonFill className="swap-off h-4 w-4" />
-                    </label>
-                    <button onClick={toggleLanguage}>Switch to English</button>
+                    </label> */}
+                    <button onClick={toggleLanguage}>
+                        <img src={languageFlag} alt={languageAlt} style={{ width: '30px', height: '20px' }}/>
+                    </button>
                 </div>
             </div>
         </nav>
