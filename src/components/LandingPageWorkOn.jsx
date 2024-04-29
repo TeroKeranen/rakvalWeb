@@ -4,10 +4,12 @@ import { fetchUser, fetchUserDetails } from "../features/auth/authSlice";
 import { useTranslation } from "react-i18next";
 
 
-const LandingPageWorkOn = ({worksites}) => {
+const LandingPageWorkOn = ({worksites, userInfo}) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [userDetails, setUserDetails] = useState({})
+    const userRole = userInfo.user.role;
+    const userId = userInfo.user._id;
    
     const theme = useSelector(state => state.userState.theme)
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
@@ -35,6 +37,14 @@ const LandingPageWorkOn = ({worksites}) => {
         return acc;
     }, []);
 
+    const filteredRunningWorksites = runningWorkSites.filter(site => {
+        if (userRole === 'admin') {
+            return true;
+        } else {
+            return site.activeWorkerIds.includes(userId);
+        }
+    })
+
     useEffect(() => {
         runningWorkSites.forEach(site => {
             site.activeWorkerIds.forEach(id => {
@@ -59,7 +69,7 @@ const LandingPageWorkOn = ({worksites}) => {
             <div className="text-center">
                 <h1 className="text-xl font-bold ">{t('landingpageworkon')}</h1>
             </div>
-            {runningWorkSites.map((worksite, index) => (
+            {filteredRunningWorksites.map((worksite, index) => (
                 <div className="" key={index}>
                     <h2 className="text-lg font-semibold">{worksite.worksiteInfo.address}</h2>
                     <ul>

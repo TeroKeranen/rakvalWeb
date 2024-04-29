@@ -17,6 +17,8 @@ const Landing = () => {
     const userState = useSelector(state => state.userState);
     const userId = userState?.user?._id
 
+    
+
     const worksites = companyState.worksites || [];
 
     const [events, setEvents] = useState([])
@@ -37,6 +39,8 @@ const Landing = () => {
     
     }, [dispatch]);
 
+
+    
     // Etsitään tapahtumat ja käännetään ne siten että uusimmat tulee listan ekaksi...
     useEffect(() => {
         if (companyState.events) {
@@ -55,7 +59,7 @@ const Landing = () => {
         )
     }
     return (
-        <LoggedInLanding events={events} worksites={worksites}/>
+        <LoggedInLanding events={events} worksites={worksites} userInfo={userState}/>
     )
 }
 

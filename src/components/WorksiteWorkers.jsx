@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import { MdDeleteOutline } from "react-icons/md";
 import { useTranslation } from 'react-i18next';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Default styles
 
 const WorksiteWorkers = () => {
     const {t} = useTranslation();
@@ -91,22 +93,45 @@ const WorksiteWorkers = () => {
     
     // Työntekijän poistamiseen
     const handleDelete = (userId) => {
-        setIsLoading(true);
-        dispatch(deleteWorkerfromWorksite({worksiteId, workerId:userId}))
-            .unwrap()
-            .then (updateWorksite => {
-                setIsLoading(false);
-                if (updateWorksite.message) {
-                    toast.success(updateWorksite.message)
-                } else {
-                    toast.error("jotain meni pieleen");
+
+        confirmAlert({
+            title: t('worksiteWorkerDelTitle'),
+            message: t('worksiteWorkerDelSur'),
+            buttons: [
+                {
+                    label: 'Ok',
+                    onClick: () => {
+                        setIsLoading(true);
+                        dispatch(deleteWorkerfromWorksite({worksiteId, workerId:userId}))
+                            .then(response => {
+                                toast.success(t('succeeded'))
+                            })
+                            .catch(error => {
+                                toast.error(t('fail'))
+                            })
+                    }
                 }
-            })
-            .catch(error => {
-                toast.error("Jotain meni vikaan")
-                console.log("error työntekijän poistamisessa");
+            ]
+        })
+
+
+
+        // setIsLoading(true);
+        // dispatch(deleteWorkerfromWorksite({worksiteId, workerId:userId}))
+        //     .unwrap()
+        //     .then (updateWorksite => {
+        //         setIsLoading(false);
+        //         if (updateWorksite.message) {
+        //             toast.success(updateWorksite.message)
+        //         } else {
+        //             toast.error("jotain meni pieleen");
+        //         }
+        //     })
+        //     .catch(error => {
+        //         toast.error("Jotain meni vikaan")
+        //         console.log("error työntekijän poistamisessa");
                 
-            })
+        //     })
         
     }
 
