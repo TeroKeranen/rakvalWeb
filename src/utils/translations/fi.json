@@ -15,6 +15,8 @@
     "save": "Tallenna",
     "close": "Sulje",
     "title": "Otsikko",
+    "succeeded": "Onnistui",
+    "fail": "Jotain meni vikaan",
 
 
     "landingpageworkon" : "Päällä olevat nauhoitukset",
@@ -30,6 +32,8 @@
     "search" : "Haku",
 
     "companyComponentCompanyCode": "Yrityskoodi",
+    "companyComponentCompanyDelete": "Poista yritys itseltäsi",
+    "companyComponentCompanySure": "Oletko varma että haluat poistua yrityksestä",
 
     "companyPageNoCompany" : "Ei yritystä",
 
@@ -38,7 +42,9 @@
     "worksiteCompPrivateClients": "Yksityisasiakkaat",
     "worksiteCompToastSuccess": "Työmaa poistettu onnistuneesti",
     "worksiteCompToastError": "Virhe työmaan poistossa",
-
+    "worksiteCompToastDelTitle": "Työmaan poisto",
+    "worksiteCompToastDelSur": "Oletko varma että haluat poistaa työmaan?",
+    
     "addWorksiteToastSuccess": "Työmaan lisäys onnistui",
     "addWorksiteToastError": "Työmaan lisäys epäonnistui",
 
@@ -52,6 +58,8 @@
 
     "worksiteWorkersSelectEmp": "Valitse työntekijä",
     "worksiteWorkersPeopleAdded": "Työmaalle lisätyt henkilöt",
+    "worksiteWorkerDelTitle": "Poista työntekijä",
+    "worksiteWorkerDelSur": "Oletko varma että haluat poistaa työntekijän työmaalta?",
 
     "worksiteCalendarAddedSucc": "Merkinnän lisäys onnistui",
     "worksiteCalendarError": "Jotain meni vikaan",

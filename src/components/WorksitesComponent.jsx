@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "react-toastify";
 import logoImage from '../assets/logo-no-background.png'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Default styles
 import { useTranslation } from "react-i18next";
 
 
@@ -24,8 +26,13 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
     
      // Suodata työmaat tyypin perusteella
-     const regularWorksites = worksites.filter(worksite => worksite.worktype === 'Construction site' || worksite.worktype === "Työmaa" && (role ==='admin' || worksite.workers.includes(_id)));
-     const smallWorksites = worksites.filter(worksite => worksite.worktype === 'Private client' || worksite.worktype === "Yksityisasiakas" &&( role ==='admin' || worksite.workers.includes(_id)));
+     const regularWorksites = worksites.filter(worksite =>
+        (worksite.worktype === 'Construction site' || worksite.worktype === "Työmaa") && 
+        (role ==='admin' || worksite.workers.includes(_id)));
+
+     const smallWorksites = worksites.filter(worksite =>
+        (worksite.worktype === 'Private client' || worksite.worktype === "Yksityisasiakas") &&
+        ( role ==='admin' || worksite.workers.includes(_id)));
 
 
      useEffect(() => {
@@ -34,14 +41,39 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
      
     const handleDelete = async (worksiteId) => {
 
-        try {
-            
-            await dispatch(deleteWorksite(worksiteId)).unwrap();
-            toast.success(t('worksiteCompToastSuccess'))
+        confirmAlert({
+            title: t('worksiteCompToastDelTitle'),
+            message: t('worksiteCompToastDelSur'),
+            buttons: [
+                {
+                    label: 'Ok',
+                    onClick: () => {
+                        
+                        dispatch(deleteWorksite(worksiteId))
+                            .then(response => {
+                                toast.success(t('succeeded'))
+                            })
+                            .catch(error => {
+                                toast.error(t('fail'))
+                            })     
+                        
+                    }
+                },
+                {
+                    label: "No",
+                    onClick: () => {}
+                }
+            ]
+        })
 
-        } catch (error) {
-            toast.error(t('worksiteCompToastError'), + error.message)
-        }
+        // try {
+            
+        //     await dispatch(deleteWorksite(worksiteId)).unwrap();
+        //     toast.success(t('worksiteCompToastSuccess'))
+
+        // } catch (error) {
+        //     toast.error(t('worksiteCompToastError'), + error.message)
+        // }
             
     }
 

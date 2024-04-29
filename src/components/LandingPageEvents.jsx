@@ -10,7 +10,7 @@ const LandingPageEvents = ({ events }) => {
     
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
 
-    
+    // console.log("events", events)
     const eventTypeToText = {
         "work-start": t('work-start'),
         "work-end": t('work-end'),

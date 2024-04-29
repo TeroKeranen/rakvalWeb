@@ -1,22 +1,34 @@
 import { useSelector } from "react-redux";
 import { calculateTotaWorkTime, convertToMinutes } from "../utils/calculateWorkhours";
 
-const LandingpageWorksiteProgress = ({worksites}) => {
+const LandingpageWorksiteProgress = ({worksites,  userInfo}) => {
 
 
     const theme = useSelector(state => state.userState.theme)
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
+    const userRole = userInfo.user.role;
+    const userId = userInfo.user._id;
 
+    
+    // filteröidään työmaat ja näytetään peruskäyttäjälle vain ne johon hänet on liitetty
+    const filteredWorksites = worksites.filter(worksite => {
+        if (userRole === 'admin') {
+            return true;
+        } else {
+            return worksite.workers.includes(userId);
+        }
+    })
+    
     return (
         <div className={`bg-base-200 max-h-100 grid grid-cols-3 gap-1 rounded-lg ${boxShadowClass}`}>
             
-            {worksites.map((item, index) => {
+            {filteredWorksites.map((item, index) => {
             
-            const duehours = item?.duehours // otetaan talteen varatut työtunnit
-            
-            // Kutsutaan calculateTotaWorkTime saadaksemme tehdyt työtunnit
-            
-
+                
+                // Kutsutaan calculateTotaWorkTime saadaksemme tehdyt työtunnit
+                
+                
+                const duehours = item?.duehours // otetaan talteen varatut työtunnit
                 const workTimeString = calculateTotaWorkTime(item.workDays);  // "0h 34min"
                 const workedMinutes = convertToMinutes(workTimeString);
                 // Lasketaan käytetty aika prosentteina
