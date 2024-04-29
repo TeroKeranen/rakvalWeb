@@ -4,39 +4,39 @@ import { customFetch } from "../utils";
 import { useEffect } from "react";
 import { fetchUserDetails } from "../features/auth/authSlice";
 import {fetchCompanyDetails, fetchCompanyWorksites} from '../features/company/companySlice'
-import { CompanyComponent } from "../components";
+import { CompanyComponent, JoinCompany } from "../components";
 import logoImage from '../assets/logo-no-background.png'
 import { useTranslation } from "react-i18next";
+
 
 
 const Company = () => {
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const user = useSelector(state=> state.userState)
-    const company = useSelector(state => state.companyState)
+    const companyLoading = useSelector(state => state.companyState)
+    const company = useSelector(state => state.companyState.company);
     const id = user.user._id;
-    console.log("company", company)
-    
-    
+    const role = user.user.role;    
 
+    
+    
 
     useEffect(() => {
-        console.log("Company useEffect called");
-
-            
-                dispatch(fetchCompanyDetails())
-                
-            
-        
-        
-        
+        if (!company) {
+            console.log("ei companyä")
+            dispatch(fetchCompanyDetails());
+        }
     }, [dispatch]);
     
     
-    const companyExists = company?.company;
+    const companyExists = company;
+    
+    console.log("companyExist", companyExists)
+    
     
 
-    if (company.loading ) {
+    if (companyLoading.loading ) {
         return (
             <section className="text-center">
                 <span className="loading loading-spinner loading-xs bg-green-900"></span>
@@ -51,8 +51,9 @@ const Company = () => {
     return (
         <section className="h-screen" style={{backgroundImage: `url(${logoImage})`, backgroundSize: '50%', backgroundRepeat: 'no-repeat',backgroundPosition: "center", }}>
             <div className="mt-10">
-            {companyExists ? <CompanyComponent companyData={companyExists}/> : <h1 className="text-center text-xl">{t('companyPageNoCompany')}</h1>}
+            {companyExists ? <CompanyComponent companyData={companyExists} role={role}/> : <JoinCompany userInfo={user}/>}
             </div>
+            
         </section>
     )
 }
