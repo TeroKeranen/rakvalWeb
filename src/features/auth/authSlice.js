@@ -56,6 +56,8 @@ export const logout = createAsyncThunk(
     }
 )
 
+
+
 // Käytetään tätä kun haetaan kirjautuneen käyttäjän tiedot ja laitetaan ne storageen
 export const fetchUserDetails = createAsyncThunk(
     'company/fetchUserDetails',
@@ -129,6 +131,8 @@ export const fetchUser = createAsyncThunk(
 
 
 
+
+
 /// EI OLE OLLUT KÄYTÖSSÄ
 // export const fetchUserCompany = createAsyncThunk(
 //     'company',
@@ -195,6 +199,9 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+        
+
+      
       .addCase(fetchUserDetails.pending, (state) => {
         // Voit asettaa tilaan esimerkiksi lataustilan
         console.log("fetchUserDetails pending");

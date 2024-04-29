@@ -260,6 +260,68 @@ export const fetchEvents = createAsyncThunk(
 
 )
 
+export const addCompany = createAsyncThunk(
+  'company/addCompany',
+  async(data, {getState, rejectWithValue}) => {
+      return apiMiddleware(async () => {
+          try {
+              const token = getState().userState.user.token;
+              const response = await customFetch.post(`/createCompany`, data, {
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }
+              })
+
+              return response.data;
+          } catch (error) {
+              return rejectWithValue(error.message);
+          }
+      })
+  }
+)
+
+export const joinCompany = createAsyncThunk(
+  'user/joinCompany',
+  async({userId, companyCode}, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+          const token = getState().userState.user.token;
+          const response = await customFetch.post(`/join-company`,{
+            userId,
+            companyCode
+          }, {
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          })
+          return response.data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
+  }
+  
+)
+export const leaveCompany = createAsyncThunk(
+  'user/leaveCompany',
+  async(userId, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+          const token = getState().userState.user.token;
+          const response = await customFetch.post(`/leave-company`,{userId}, {
+              headers: {
+                  'Authorization': `Bearer ${token}`
+              }
+          })
+          return response.data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    })
+  }
+  
+)
+
 
 
 const initialState = {
@@ -300,6 +362,7 @@ const companySlice = createSlice({
       })
       .addCase(fetchCompanyDetails.fulfilled, (state, action) => {
         
+        console.log("KSKSKSK", action.payload)
         state.company = action.payload;
         state.loading = false;
       })
@@ -307,7 +370,52 @@ const companySlice = createSlice({
         state.error = action.error.message;
         state.loading = false;
       })
-
+      // Yrityksen lisäys
+      .addCase(addCompany.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })  
+      .addCase(addCompany.fulfilled, (state,action) => {
+        
+        state.company = action.payload;
+        state.loading = false;
+      })
+      .addCase(addCompany.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
+      // Liity yhtiöön
+      .addCase(joinCompany.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })  
+      .addCase(joinCompany.fulfilled, (state,action) => {
+        // console.log("JOINCOMPANY", action.payload.company)
+        state.company = action.payload.company;
+        // console.log("joincompany", action.payload)
+        state.loading = false;
+      })
+      .addCase(joinCompany.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
+      .addCase(leaveCompany.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(leaveCompany.fulfilled, (state) => {
+        state.company = null;
+        state.worksiteDetails = null,
+        state.company = null,
+        state.worksites = null,
+        state.events = null  // Poista yritys, koska käyttäjä on poistunut yrityksestä
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(leaveCompany.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
       // Käsittely fetchcompanyWorksites-toiminnolle
       .addCase(fetchCompanyWorksites.pending, (state) => {
         // Voit halutessasi käyttää erillistä lataustilaa työmaiden tiedoille

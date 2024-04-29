@@ -6,8 +6,8 @@ import LandingpageWorksiteProgress from "./LandingpageWorksiteProgress";
 import logoImage from '../assets/logo-no-background.png'
 import { useSelector } from "react-redux";
 
-const LoggedInLanding = ({events, worksites}) => {
-
+const LoggedInLanding = ({events, worksites, userInfo}) => {
+    
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 5;
     const totalPages = Math.ceil(events.length / eventsPerPage);
@@ -28,11 +28,11 @@ const LoggedInLanding = ({events, worksites}) => {
                     <div className="flex flex-col md:flex-row justify-around min-h-100" >
 
                         <div className="my-5 w-full md:w-1/4">
-                            <LandingPageWorkOn worksites={worksites}/>
+                            <LandingPageWorkOn worksites={worksites} userInfo={userInfo}/>
                         </div>
                         <div className="my-5 w-full md:w-1/4">
                             
-                            <LandingpageWorksiteProgress worksites={worksites}/>
+                            <LandingpageWorksiteProgress worksites={worksites} userInfo={userInfo}/>
                         </div>
                     </div>
 
