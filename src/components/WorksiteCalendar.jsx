@@ -23,8 +23,9 @@ const WorksiteCalendar = () => {
     
 
     const [activeDates, setActiveDates] = useState([]);
-    const [selectedEntry, setSelectedEntry] = useState(null); // Jos kalenterissa on merkintöjä, käytetään tätä apuna
+    const [selectedEntry, setSelectedEntry] = useState([]); // Jos kalenterissa on merkintöjä, käytetään tätä apuna
     const [selectedDay, setSelectedDay] = useState(null); // Käytetään tätä ottamaan päivämäärä ylös kun lisätään merkintä
+    
 
     const [formData, setFormData] = useState({
         title: "",
@@ -66,9 +67,10 @@ const WorksiteCalendar = () => {
     const handleDayClick = (value, event) => {
         const clickedDate = formatDate(value);
         
-        const entry = activeDates.find(d => formatDate(d.date) === clickedDate);
+        // const entry = activeDates.find(d => formatDate(d.date) === clickedDate);
+        const entries = activeDates.filter(d => formatDate(d.date) === clickedDate)
         
-        setSelectedEntry(entry);
+        setSelectedEntry(entries);
         setSelectedDay(clickedDate);
     };
 
@@ -109,17 +111,8 @@ const WorksiteCalendar = () => {
        
     };
     
-    // const handleDelete = () => {
-    //     dispatch(deleteCalendarEntry({ worksiteId, entryId: selectedEntry._id }))
-    //     .then(unwrapResult)
-    //     .then((result) => {
-    //         toast.success("Merkinnän poisto onnistui");
-    //     })
-    //     .catch((error) => {
-    //         toast.error("Jotain meni vikaan", error);
-    //     })
-    // };
-    const handleDelete = () => {
+   
+    const handleDelete = (id) => {
         confirmAlert({
             title: t('worksiteCalendarConfirmDel'),
             message: t('worksiteCalendarSure'),
@@ -127,7 +120,7 @@ const WorksiteCalendar = () => {
                 {
                     label: "Ok",
                     onClick: () => {
-                        dispatch(deleteCalendarEntry({worksiteId, entryId: selectedEntry._id}))
+                        dispatch(deleteCalendarEntry({worksiteId, entryId: id}))
                             .then(response => {
                                 toast.success(t('worksiteCalendarDeleteSucc'))
                             })
@@ -162,16 +155,23 @@ const WorksiteCalendar = () => {
                 locale="en-GB"
                 
             />
-            {selectedEntry && (
+            {selectedEntry.length > 0 && (
                 <div className="my-3 p-3  bg-stone-200">
-
-                    <div className='flex flex-row justify-between rounded-lg p-2 my-2 bg-base-200'>
-                            <MdDeleteOutline onClick={handleDelete} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
-                    </div>
-
+                    {selectedEntry.map((entry, index) => (
                     
-                    <h2 className="text-neutral-800 font-bold">{selectedEntry.title}</h2>
-                    <h2 className="text-neutral-800 font-bold">{selectedEntry.text}</h2>
+                    <div key={index} className='flex flex-col rounded-lg p-2 my-2 bg-base-200'>
+
+                        <div className='flex flex-row justify-between rounded-lg p-2 my-2 bg-base-200'>
+                                <MdDeleteOutline onClick={() => handleDelete(entry._id)} className="w-6 h-6 cursor-pointer active:bg-violet-600 "/>
+                        </div>
+
+                        
+                        
+                        <h2 className=" font-bold">{entry.title}</h2>
+                        <h2 className=" font-bold">{entry.text}</h2>
+                    </div>
+                    ))}
+
                     
                    
                 </div>
