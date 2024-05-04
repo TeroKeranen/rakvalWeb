@@ -17,6 +17,14 @@ const Landing = () => {
     const userState = useSelector(state => state.userState);
     const userId = userState?.user?._id
 
+    // const company = useSelector(state => state.companyState.company);
+
+    // useEffect(() => {
+    //     if (!company) {
+    //         console.log("ei companyä")
+    //         dispatch(fetchCompanyDetails());
+    //     }
+    // }, [dispatch]);
     
 
     const worksites = companyState.worksites || [];

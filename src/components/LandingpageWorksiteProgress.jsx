@@ -28,15 +28,15 @@ const LandingpageWorksiteProgress = ({worksites,  userInfo}) => {
                 // Kutsutaan calculateTotaWorkTime saadaksemme tehdyt työtunnit
                 
                 
-                const duehours = item?.duehours // otetaan talteen varatut työtunnit
-                const workTimeString = calculateTotaWorkTime(item.workDays);  // "0h 34min"
+                const duehours = item?.duehours || 0; // otetaan talteen varatut työtunnit
+                const workTimeString = calculateTotaWorkTime(item.workDays || []);  // "0h 34min"
                 const workedMinutes = convertToMinutes(workTimeString);
                 // Lasketaan käytetty aika prosentteina
                 const totalDueMinutes = duehours * 60;  // Muunna duehours minuuteiksi
-                const usedPercentage = (workedMinutes / totalDueMinutes) * 100;
+                const usedPercentage = totalDueMinutes > 0 ? (workedMinutes / totalDueMinutes) * 100 : 0;
             
                 
-                if (item.workDays.length > 0) {
+                if (item.workDays?.length > 0 && duehours > 0) {
                     
                     return (
 

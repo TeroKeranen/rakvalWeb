@@ -37,7 +37,7 @@ const Worksites = () => {
 
     return (
         
-        <div >
+        <div className="">
             {worksite ? <WorksitesComponent worksites={worksite} userInfo={userInfo} userRole={userRole}/> : renderNoCompany()}
         </div>
     )

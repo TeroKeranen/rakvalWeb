@@ -1,0 +1,37 @@
+.hero {
+    position: relative;
+    background-image: url('../assets/kuva.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 190px; /* Säädä korkeutta sopivaksi */
+    
+    background: linear-gradient(to top, rgb(40, 42, 54), rgba(5, 5, 5, 0));
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    /* tai käytä 'multiply', 'overlay', jne. kokeillaksesi eri tehosteita */
+  }
+
+  /* Tyyli kuvaa varten, joka on osa layoutia */
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;  /* Estää kuvan "vuotamisen" yli reunojen */
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Tämä varmistaa, että kuva peittää alueen ilman, että se venyy epäsuhtaisesti */
+}
