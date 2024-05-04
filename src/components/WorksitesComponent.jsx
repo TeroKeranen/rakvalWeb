@@ -66,14 +66,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
             ]
         })
 
-        // try {
-            
-        //     await dispatch(deleteWorksite(worksiteId)).unwrap();
-        //     toast.success(t('worksiteCompToastSuccess'))
-
-        // } catch (error) {
-        //     toast.error(t('worksiteCompToastError'), + error.message)
-        // }
+       
             
     }
 
@@ -101,11 +94,13 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
  
 
     return (
-        <section className="w-full md:w-9/12 mx-auto mt-10" >
+        <section className="w-full flex flex-col min-h-screen md:w-9/12 mx-auto mt-10" >
+            
+
             <div className="flex justify-center py-3">
                 {role === 'admin' && 
                 
-                    <Link to="/addworksite">
+                <Link to="/addworksite">
                         <button className="btn border-blue-100">{t('worksiteCompAddWorksitebtn')}</button>
                     </Link>
                 }

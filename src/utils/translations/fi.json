@@ -65,7 +65,13 @@
     "worksiteCalendarError": "Jotain meni vikaan",
     "worksiteCalendarConfirmDel": "Vahvista poisto",
     "worksiteCalendarSure": "Oletko varma että haluat poistaa tämän",
-    "worksiteCalendarDeleteSucc": "Poisto onnistui"
+    "worksiteCalendarDeleteSucc": "Poisto onnistui",
+
+    "home": "Etusivu",
+    "company": "Yritys",
+    "worksites": "Työmaat",
+    "about": "Tietoa"
+
 
     
   

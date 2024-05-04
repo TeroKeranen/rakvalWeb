@@ -90,9 +90,9 @@ const JoinCompany = ({userInfo}) => {
     const renderUserForm = () => {
         return (
             <section>
-
+                
                 <Form onSubmit={handleUserSubmit} method="post" className={`card w-full md:w-96 mx-auto  p-8 bg-base-100 flex flex-col gap-y-4 ${boxShadowClass}`}>
-
+                    <p>Tarvitset yrityskoodin admin tason käyttäjältä</p>
                     <FormInput 
                         type="text"
                         label="company code"

@@ -34,7 +34,7 @@ const Register = () => {
                     <SubmitBtn text="register" />
                 </div>
               
-                <p className="text-center">Ei tunnuksia? Rekisteröidy tästä linkistä <Link to="/register" className="ml-2 link-hover link-primary capitalize" >rekisteröidy</Link> </p>
+                <p className="text-center">Ei tunnuksia? Rekisteröidy tästä linkistä <Link to="/login" className="ml-2 link-hover link-primary capitalize" >Kirjaudu sisään</Link> </p>
               
               </Form>
             

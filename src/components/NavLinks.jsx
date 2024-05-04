@@ -1,17 +1,21 @@
 
-const Links = [
-    {id: 1, url: '/', text: 'Etusivu'},
-    {id: 2, url: 'company', text: 'Yritys'},
-    {id: 3, url: 'worksites', text: 'Työmaat'},
-    {id: 4, url: 'about', text: 'Tietoa'}
-]
 
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const NavLinks = () => {
-
+    const {t,i18n} = useTranslation();
     const user = useSelector((state) => state.userState.user)
+
+    const Links = [
+        {id: 1, url: '/', text: 'home'},
+        {id: 2, url: 'company', text: 'company'},
+        {id: 3, url: 'worksites', text: 'worksites'},
+        {id: 4, url: 'about', text: 'about'}
+    ]
+
+
     
     return (
         <>
@@ -21,7 +25,7 @@ const NavLinks = () => {
             return (
                 <li key={id}>
                     <NavLink className="capitalize" to={url}>
-                        {text}
+                        {t(text)}
                     </NavLink>
                 </li>
             )

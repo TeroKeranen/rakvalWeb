@@ -21,7 +21,7 @@ const LoggedInLanding = ({events, worksites, userInfo}) => {
     
 
     return (
-        <div className="flex flex-col md:flex-row justify-between" >
+        <div className="flex flex-col md:flex-row justify-between h-screen" >
             <div className="w-full md:w-4/5 mx-auto " style={{backgroundImage: `url(${logoImage})`, backgroundSize: '50%', backgroundRepeat: 'no-repeat',backgroundPosition: "center", }}>
                 
 
@@ -30,7 +30,7 @@ const LoggedInLanding = ({events, worksites, userInfo}) => {
                         <div className="my-5 w-full md:w-1/4">
                             <LandingPageWorkOn worksites={worksites} userInfo={userInfo}/>
                         </div>
-                        <div className="my-5 w-full md:w-1/4">
+                        <div className="my-5 w-full md:w-2/4">
                             
                             <LandingpageWorksiteProgress worksites={worksites} userInfo={userInfo}/>
                         </div>

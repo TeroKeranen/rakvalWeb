@@ -40,7 +40,7 @@ const SingleWorksite = () => {
 
     if (company.loading || !worksiteDetails) {
         return (
-            <section className="text-center">
+            <section className="text-center h-screen">
                 <span className="loading loading-spinner loading-xs bg-green-900"></span>
                 <span className="loading loading-spinner loading-sm bg-green-800"></span>
                 <span className="loading loading-spinner loading-md bg-green-700"></span>

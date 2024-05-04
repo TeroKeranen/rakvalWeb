@@ -19,7 +19,7 @@ import { ErrorElement } from './components'
 
 
 //loaders
-import {loader as landingLoader} from './pages/Landing'
+
 
 
 
@@ -36,17 +36,20 @@ import Verification from './pages/Verification'
 
 
 
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomeLayout />,
+    element: (
+    <HomeLayout />
+    ),
     errorElement:<Error />,
     children: [
       {
         index:true,
         element: <Landing />,
         errorElement: <ErrorElement />,
-        loader: landingLoader
+        
       },
       {
         path:'worksites',
