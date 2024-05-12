@@ -8,7 +8,7 @@ const SingleWorksiteLanding = ({worksiteDetails}) => {
     const {t} = useTranslation(); 
     const duehours = worksiteDetails?.duehours // otetaan talteen varatut työtunnit
     
-    console.log("WORKdAYS", worksiteDetails.workDays)
+   
 
 
 
@@ -19,10 +19,11 @@ const SingleWorksiteLanding = ({worksiteDetails}) => {
     const totalDueMinutes = duehours * 60;  // Muunna duehours minuuteiksi
     const usedPercentage = (workedMinutes / totalDueMinutes) * 100;
 
-    console.log("used", usedPercentage)
+    
     return (
         
             <div className="bg-base-200 h-full w-full">
+                
                 <div className="card w-96 bg-base-100 shadow-xl image-full mx-auto w-full">
                     <figure><img src={mapImage} alt="Shoes" style={{opacity: 0.7}}/></figure>
                     <div className="card-body">

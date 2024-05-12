@@ -5,6 +5,9 @@ import { loginUser } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { getTokenExpiry } from "../utils/calculateTokenExp";
+import { useTranslation } from "react-i18next";
+import i18n from '../utils/i18n'
+
 
 export const action = (store) => async ({request}) => {
     const formData = await request.formData();
@@ -13,28 +16,32 @@ export const action = (store) => async ({request}) => {
 
     try {
         const response = await customFetch.post('/signin', data)
-        const tokenExpiry = getTokenExpiry(response.data.accessToken);
         
-        console.log("response", response);
-        const userData = {
-            ...response.data,
-            tokenExpiry
+        if (response.status === 200) {
+            const tokenExpiry = getTokenExpiry(response.data.accessToken);
+
+            const userData = {
+                ...response.data,
+                tokenExpiry
+            }
+            
+            store.dispatch(loginUser(userData))
+                
+            
+            // console.log(response);
+            return redirect('/');
         }
-        
-        store.dispatch(loginUser(userData))
-        
-        // console.log(response);
-        return redirect('/');
         // return null;
     } catch (error) {
         
-        console.log("errormessage", error);
+        toast.error(i18n.t('fail'));
         
         return null;
     }
 }
 
 const Login = () => {
+    const {t} = useTranslation();
     
     return (
         <section className="h-screen grid place-items-center">
@@ -42,24 +49,24 @@ const Login = () => {
 
                 <Form method="post" className="card w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4">
 
-                    <h4 className="text-center text-3xl font-bold">Login</h4>
+                    <h4 className="text-center text-3xl font-bold">{t('loginbtn')}</h4>
 
                     <FormInput 
                         type="email" 
-                        label="email" 
+                        label={t('loginLabelEmail')} 
                         name="email" 
                         defaultValue=""
                         />
                     <FormInput 
                         type="password"
-                        label="password"
+                        label={t('loginLabelPass')}
                         name="password"
                         defaultValue=""
                         />
                     <div className="mt-4">
-                        <SubmitBtn text="login" />
+                        <SubmitBtn text={t('loginbtn')} />
                     </div>
-                    <p className="text-center">Ei tunnuksia? Rekisteröidy tästä linkistä <Link to="/register" className="ml-2 link link-hover link-primary capitalize">rekisteröidy</Link> </p>
+                    <p className="text-center">{t('loginText')} <Link to="/register" className="ml-2 link link-hover link-primary capitalize">{t('register')}</Link> </p>
                 </Form>
             
         </section>

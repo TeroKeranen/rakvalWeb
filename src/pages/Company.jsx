@@ -24,7 +24,7 @@ const Company = () => {
 
     useEffect(() => {
         if (!company) {
-            console.log("ei companyä")
+            
             dispatch(fetchCompanyDetails());
         }
     }, [dispatch]);
@@ -32,7 +32,7 @@ const Company = () => {
     
     const companyExists = company;
     
-    console.log("companyExist", companyExists)
+    
     
     
 

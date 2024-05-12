@@ -70,6 +70,8 @@ export const worksiteReady = createAsyncThunk(
                         'Authorization': `Bearer ${token}`
                     }
                 })
+
+                console.log("WORKSITEREADY",response);
                 // Päivitä worksiteDetails companySlicessa
                 const updatedWorksiteDetails = response.data; // Oletetaan, että tämä on päivitetty worksite
                 thunkAPI.dispatch(updateWorksiteDetails(updatedWorksiteDetails));

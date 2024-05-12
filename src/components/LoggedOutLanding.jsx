@@ -1,9 +1,12 @@
 import heroImage from '../assets/kuva.jpg'
 import worksiteImage from '../assets/worksiteImg.jpg'
-import mobile from '../assets/app.jpg'
+import mobile from '../assets/mobile.png'
 import './LoggedOutLanding.css'
+import { useTranslation } from 'react-i18next'
 
 const LoggedOutLanding = () => {
+
+    const {t} = useTranslation();
 
     return (
         <div className=''>
@@ -29,7 +32,7 @@ const LoggedOutLanding = () => {
                         <div className='w-3/4 mt-10'>
                             <h1 className='text-4xl font-bold mb-5'>Rakival</h1>
 
-                            <p>Tervetuloa alustallemme, joka on suunniteltu tehokkaaseen ja vaivattomaan rakennustyömaiden hallintaan ja seurantaan. Voit hyödyntää teknologian voimaa ja tehostaa rakennushallinnon tehtäviäsi useilla tavoilla</p>
+                            <p>{t('landingOne')}</p>
                         </div>
                     </div>
                     <div className="divider divider-horizontal"></div>
@@ -46,27 +49,27 @@ const LoggedOutLanding = () => {
                 <div className='my-5'>
                     <div className='w-11/12 mx-auto bg-base-200'>
 
-                        <h1 className='p-3 mb-10 text-4xl font-bold'>Miten voit hyödyntää Rakival alustaa </h1>
+                        <h1 className='p-3 mb-10 text-4xl font-bold'>{t('landingTwo')}</h1>
 
                         <div className='flex md:flex-row flex-col justify-between'>
                             <div className='md:w-4/12 p-4'>
-                                <h2 className='text-xl font-medium p-2'>Luo Oma Yrityksesi</h2>
-                                <p>Perusta oma yritysprofiilisi, jonka kautta voit hallita kaikkia rakennusprojektejasi yhdestä keskitetystä paikasta.</p>
+                                <h2 className='text-xl font-medium p-2'>{t('landingTitleOne')}</h2>
+                                <p>{t('landingTextOne')}</p>
                             </div>
                             <div className="divider lg:divider-horizontal"></div>
                             <div className='md:w-4/12 p-4'>
-                                <h2 className='text-xl font-medium p-2'>Lisää Työmaita</h2>
-                                <p>Lisää helposti uusia työmaita yrityksesi profiiliin. Järjestele ja valvo kaikkia sivustoja varmistaen, että kaikki tarvittavat tiedot ovat helposti saatavillasi.</p>
+                                <h2 className='text-xl font-medium p-2'>{t('landingTitleTwo')}</h2>
+                                <p>{t('landingTextTwo')}</p>
                             </div>
                             <div className="divider lg:divider-horizontal"></div>
                             <div className='md:w-4/12 p-4'>
-                                <h2 className='text-xl font-medium p-2'>Lisää Työntekijöitä</h2>
-                                <p> Laajenna tiimiäsi lisäämällä uusia työntekijöitä yritykseesi. Jokainen jäsen voi käyttää niitä sivustoja, joihin heidät on määrätty, mikä edistää parempaa koordinointia ja viestintää.</p>
+                                <h2 className='text-xl font-medium p-2'>{t('landingTitleThree')}</h2>
+                                <p>{t('landingTextThree')}</p>
                             </div>
                             <div className="divider lg:divider-horizontal"></div>
                             <div className='md:w-4/12 p-4'>
-                                <h2 className='text-xl font-medium p-2'>Työmaiden Seuranta</h2>
-                                <p>Alustamme tarjoaa työkaluja reaaliaikaiseen työmaiden hallintaan ja seurantaan, mikä helpottaa edistymisen seurantaa, tehtävien hallintaa ja varmistaa, että kaikki sujuu suunnitelmien mukaan.</p>
+                                <h2 className='text-xl font-medium p-2'>{t('landingTitleFour')}</h2>
+                                <p>{t('landingTextFour')}</p>
                             </div>
                         </div>
                     </div>
@@ -85,8 +88,8 @@ const LoggedOutLanding = () => {
                     <div className='w-3/5 mt-10'>
                         <div className='bg-base-100 rounded-box p-10'>
 
-                        <h1>Käytä mobiilisovellusta </h1>
-                        <p>Käytössäsi on myös mobiilisovellus, jolla työntekijät voivat työskennellä helposti työmailla, lisäillä kuvia, sekä nauhoittaa työt</p>
+                        <h2 className='text-xl font-medium p-2'>{t('landingTitleFive')}</h2>
+                        <p className='p-2'>{t('landingTextFive')}</p>
                         </div>
                     </div>
                     

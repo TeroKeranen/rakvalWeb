@@ -56,6 +56,32 @@ export const logout = createAsyncThunk(
     }
 )
 
+export const changePassword = createAsyncThunk(
+    'user/changepassword',
+    async ({oldPassword, newPassword}, {getState, rejectWithValue}) => {
+        return apiMiddleware(async () => {
+            try {
+                
+                
+                const token = getState().userState.user.token;
+                const response = await customFetch.post(`/change-password`, {oldPassword, newPassword}, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+
+                if (response.status === 200) {
+                    return response.data
+                } else {
+                    return rejectWithValue(response.data.error || "Password change failed");
+                }
+            } catch (error) {
+                return rejectWithValue(error.message);
+            }
+        })
+    }
+)
+
 
 
 // Käytetään tätä kun haetaan kirjautuneen käyttäjän tiedot ja laitetaan ne storageen
@@ -169,7 +195,7 @@ const authSlice = createSlice({
             }
         },
         loginUser: (state, action) => {
-            console.log("logintoken", action.payload);
+            
             const user = {...action.payload.user, token: action.payload.accessToken, refreshToken: action.payload.refreshToken, tokenExpiry: action.payload.tokenExpiry}
             
             state.user = user;
@@ -204,22 +230,22 @@ const authSlice = createSlice({
       
       .addCase(fetchUserDetails.pending, (state) => {
         // Voit asettaa tilaan esimerkiksi lataustilan
-        console.log("fetchUserDetails pending");
+        
       })
       .addCase(fetchUserDetails.fulfilled, (state, action) => {
         // Tallenna käyttäjän tiedot, kun pyyntö onnistuu
-        console.log("fetchUserDetails", action.payload);
+        
         state.user = { ...state.user, ...action.payload };
         
       })
       .addCase(fetchUserDetails.rejected, (state, action) => {
         // Käsittele virhetilanne, jos pyyntö epäonnistuu
-        console.log("fetchUserDetails rejected", action.error.message);
+        
         state.error = action.error.message;
         
       })
       .addCase(fetchAwsUrl.fulfilled, (state, action) => {
-        console.log("fetchawsurl", action.payload);
+        
         state.urls = action.payload
       })
       .addCase(fetchUser.fulfilled, (state,action ) => {

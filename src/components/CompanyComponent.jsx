@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 
 const CompanyComponent = ({companyData,role}) => {
-    console.log(companyData)
+    
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const theme = useSelector(state => state.userState.theme)

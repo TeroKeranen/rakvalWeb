@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCompanyWorksites } from "../features/company/companySlice";
+import { fetchCompanyWorksites,fetchCompanyDetails } from "../features/company/companySlice";
+import {fetchUserDetails} from "../features/auth/authSlice"
 import { WorksitesComponent } from "../components";
 
 import { useTranslation } from "react-i18next";
@@ -14,9 +15,18 @@ const Worksites = () => {
     const userInfo = user.user;
     const userRole = userInfo.role
     const isCompany = user.user?.company;
-  
     
+ 
 
+
+    useEffect(() => {
+        if (userInfo) {
+            
+            dispatch(fetchUserDetails(user.user._id));
+        }
+       
+    },[])
+    
     useEffect(() => {
         if (isCompany) {
 
@@ -26,7 +36,7 @@ const Worksites = () => {
 
     const renderNoCompany = () => {
         return(
-            <div className="mt-10">
+            <div className="mt-10 h-screen">
 
                 <h1 className="text-center text-lg">{t('nodata')}</h1>
             </div>

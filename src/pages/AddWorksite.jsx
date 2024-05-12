@@ -42,11 +42,20 @@ const AddWorksite = () => {
         
         try {
             
-            await dispatch(addNewWorksite(newData)).unwrap()
-            toast.success(t('addWorksiteToastSuccess'))
-            navigate(-1); // Palaa takaisin edelliselle sivulle
+            const response = await dispatch(addNewWorksite(newData)).unwrap()
+            if (response.success) {
+                
+                toast.success(t('addWorksiteToastSuccess'))
+                navigate(-1); // Palaa takaisin edelliselle sivulle
+
+            }
+            
         } catch (error) {
-            toast.error(t('addWorksiteToastError'))
+            
+            if (error.paidUser === false ) {
+
+                toast.error(t('addWorksite-notpaid'))
+            }
         } finally {
             setIsLoading(false)
         }
@@ -69,7 +78,7 @@ const AddWorksite = () => {
         <section className="h-screen grid place-items-center">
             
 
-                <Form method="post" onSubmit={handleSubmit} className="card w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4">
+                <Form method="post" onSubmit={handleSubmit} className="card lg:w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4">
 
                     <h4 className="text-center text-3xl font-bold">Login</h4>
 
