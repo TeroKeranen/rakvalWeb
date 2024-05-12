@@ -34,7 +34,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
         (worksite.worktype === 'Private client' || worksite.worktype === "Yksityisasiakas") &&
         ( role ==='admin' || worksite.workers.includes(_id)));
 
-
+    
      useEffect(() => {
         
      },[worksites])
@@ -51,6 +51,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
                         
                         dispatch(deleteWorksite(worksiteId))
                             .then(response => {
+                                console.log("DELETE2", response);
                                 toast.success(t('succeeded'))
                             })
                             .catch(error => {
@@ -102,7 +103,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
                 
                 <Link to="/addworksite">
                         <button className="btn border-blue-100">{t('worksiteCompAddWorksitebtn')}</button>
-                    </Link>
+                </Link>
                 }
             </div>
             <div className="collapse bg-base-200">

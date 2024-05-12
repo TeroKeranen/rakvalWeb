@@ -20,11 +20,19 @@ export const addNewWorksite = createAsyncThunk(
             'Authorization': `Bearer ${token}`
           }
         })
-        if (response.status !== 200) {
-          throw new Error('Jotain meni vikaan työmaan lisäämisessä')
+        console.log("API response received", response);
+        
+        
+        if (!response.status === 200) {
+          
+          throw new Error(`Jotain meni vikaan työmaan lisäämisessä`);
         }
+        
+        return response.data;
       } catch (error) {
-        return rejectWithValue(error.message);
+        if (error.response.data.success === false && error.response.status === 403);
+        
+        return rejectWithValue({paidUser: false}); // TÄMÄ PALAUETTEAAN SIVULLE
       }
     })
   }
@@ -42,7 +50,8 @@ export const deleteWorksite = createAsyncThunk(
             'Authorization': `Bearer ${token}`
           }
         })
-
+        
+        console.log("DELETE",response);
         if (response.status !== 200) {
           throw new Error('Jotain meni vikaan työmaan poistossa')
         }
@@ -200,6 +209,8 @@ export const addWorksiteFloorplanKey = createAsyncThunk(
             'Authorization': `Bearer ${token}`
           }
         })
+
+        
         if (response.status !== 200) {
           throw new Error("virhe lähettäessä floorplankey")
         }
@@ -272,7 +283,7 @@ export const addCompany = createAsyncThunk(
                   }
               })
 
-              return response.data;
+              return {success: true, data:response.data};
           } catch (error) {
               return rejectWithValue(error.message);
           }
@@ -294,9 +305,10 @@ export const joinCompany = createAsyncThunk(
                   'Authorization': `Bearer ${token}`
               }
           })
+          
           return response.data;
       } catch (error) {
-        return rejectWithValue(error.message);
+        return rejectWithValue({success:false})
       }
     })
   }
@@ -356,6 +368,13 @@ const companySlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+      
+        .addCase(addNewWorksite.fulfilled, (state, action) => {
+
+          console.log("AADCASE", action.payload);
+          // state.worksites.push(action.payload);  // Olettaen, että palautat uuden työmaan datan
+          // state.loading = false;
+        })
       .addCase(fetchCompanyDetails.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -377,7 +396,7 @@ const companySlice = createSlice({
       })  
       .addCase(addCompany.fulfilled, (state,action) => {
         
-        state.company = action.payload;
+        state.company = action.payload.data;
         state.loading = false;
       })
       .addCase(addCompany.rejected, (state, action) => {
@@ -391,7 +410,8 @@ const companySlice = createSlice({
       })  
       .addCase(joinCompany.fulfilled, (state,action) => {
         // console.log("JOINCOMPANY", action.payload.company)
-        state.company = action.payload.company;
+        
+        state.company = action.payload.data.company;
         // console.log("joincompany", action.payload)
         state.loading = false;
       })
@@ -479,8 +499,8 @@ const companySlice = createSlice({
         if (action.payload.message) {
           state.message = action.payload.message;
         } else {
-          const updatedWorksite = action.payload;
-
+          const updatedWorksite = action.payload.data;
+          console.log("updatedworksite", updatedWorksite)
           if (state.worksiteDetails && state.worksiteDetails._id === updatedWorksite._id) {
             state.worksiteDetails = updatedWorksite;
           }

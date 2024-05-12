@@ -1,6 +1,6 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import {companyWorkers, addWorkerToWorksite, deleteWorkerfromWorksite} from '../features/company/companySlice'
+import {companyWorkers, addWorkerToWorksite, deleteWorkerfromWorksite, fetchCompanyDetails} from '../features/company/companySlice'
 import {fetchUser, clearWorksiteWorkersNames} from '../features/auth/authSlice'
 import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
@@ -24,8 +24,12 @@ const WorksiteWorkers = () => {
     const [isLoading, setIsLoading] = useState(false);
     
 
+    useEffect(() => {
+        if (!companyId) {
+            dispatch(fetchCompanyDetails())
+        }
+    }, [companyId])
     
-
     
     const handleSelectChange = (event) => {
         setSelectedWorker(event.target.value);
@@ -79,9 +83,9 @@ const WorksiteWorkers = () => {
                     setIsLoading(false);
                     
                     if (updatedWorksite.message) {
-                        toast.error(updatedWorksite.message);
+                        toast.error("joo",updatedWorksite.message);
                     } else {
-                        toast.success("Työntekijä lisätty työmaalle")
+                        toast.success("Työntekijä lisätty työmaalle2")
                     }
                 })
                 

@@ -3,12 +3,14 @@ import { uploadData } from 'aws-amplify/storage';
 import { useDispatch } from "react-redux";
 import { addWorksiteFloorplanKey } from "../features/company/companySlice";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const AddFloorplanImg = ({worksiteId}) => {
     const {t} = useTranslation();
     const dispatch = useDispatch();
     const [selectedImage, setSelectedImage] = useState(null); // Käytetään tätä näytttämään kuvan preview
     const [selectedFile, setSelectedFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [title, setTitle] = useState('');
     
     const handleImageChange = (e) => {
@@ -23,8 +25,14 @@ const AddFloorplanImg = ({worksiteId}) => {
         setTitle(e.target.value);
     }
 
-    const uploadImageToS3 = async () => {
+    const closeModal = () => {
+        setSelectedFile(null);
+        setSelectedImage(null);
+        setTitle("")
+    }
 
+    const uploadImageToS3 = async () => {
+        setIsLoading(true);
         if (selectedFile && title) {
             
             try {
@@ -38,15 +46,43 @@ const AddFloorplanImg = ({worksiteId}) => {
                     
                 }).result;
                 dispatch(addWorksiteFloorplanKey({worksiteId, key, title}))
-                setSelectedFile(null);
-                setTitle('');
-                console.log("onnistui", result);
+                    .then(result => {
+                        toast.success(t('addfloorplanimg-succes'))
+                        setIsLoading(false);
+                        setSelectedFile(null);
+                        setSelectedImage(null);
+                        setTitle('');
+                    })
+                    .catch(error => {
+                        
+                        setIsLoading(false);
+                        toast.error(t('addfloorplanimg-error'))
+                    })
+                
             } catch (error) {
-                console.log("errore", error);
+                
+                setIsLoading(false);
+                toast.error(t('addfloorplanimg-error'))
             }
+        } if (!selectedFile || !title) {
+
+            setIsLoading(false);
+            toast.error(t('addfloorplanimg-errorNoTitle'))
         }
        
     };
+
+    if (isLoading) {
+        return (
+
+    <section className="text-center">
+                        <span className="loading loading-spinner loading-xs bg-green-900"></span>
+                        <span className="loading loading-spinner loading-sm bg-green-800"></span>
+                        <span className="loading loading-spinner loading-md bg-green-700"></span>
+                        <span className="loading loading-spinner loading-lg bg-green-600"></span>
+                    </section>
+        )
+    }
     return (
         <section>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
@@ -62,7 +98,7 @@ const AddFloorplanImg = ({worksiteId}) => {
                 {selectedFile && <button onClick={uploadImageToS3}>{t('save')}</button>}
                 <form method="dialog">
                     {/* if there is a button in form, it will close the modal */}
-                    <button className="btn">{t('close')}</button>
+                    <button onClick={closeModal} className="btn">{t('close')}</button>
                 </form>
                 </div>
             </div>

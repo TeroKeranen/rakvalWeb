@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {startWorkDay, endWorkDay,worksiteReady} from '../features/worksite/worksiteSlice'
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { confirmAlert } from "react-confirm-alert";
 
 
 const WorkEntriesButton = ({companyWorksites}) => {
-
+    const {t} = useTranslation();
     const dispatch = useDispatch();
     const details = useSelector(state => state.companyState.worksiteDetails); // Valitun työmaan tiedot
     const worksiteIsReady = useSelector(state => state.companyState.worksiteDetails.isReady); // Valitun työmaan tiedot
@@ -85,13 +87,43 @@ const WorkEntriesButton = ({companyWorksites}) => {
         const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
 
         if (onGoingWorkDay) {
-            toast.error('Nauhoitus päällä jossain')
+            toast.error(t('workEntries-btn-recordOn'))
         } else {
+
+            confirmAlert({
+                title: t('confirmTitle'),
+                message: t('confirmText'),
+                buttons: [
+                    {
+                        label: 'Ok',
+                        onClick: () => {
+                            
+                            dispatch(worksiteReady({ worksiteId }))
+                                .then(response => {
+                                    
+                                        toast.success(t('workEntries-btn-worksiteReady-success'))
+                                    })
+                                .catch(error => {
+                                    toast.error(t('fail'))
+                                })     
+                            
+                        }
+                    },
+                    {
+                        label: "No",
+                        onClick: () => {}
+                    }
+                ]
+            })
             
-            toast.success('Työmaa merkitty valmiiski')
-            dispatch(worksiteReady({ worksiteId }));
+
+
+
+
+
+            
         }
-        console.log("jatketaan");
+        
     }
 
     return (
@@ -99,12 +131,12 @@ const WorkEntriesButton = ({companyWorksites}) => {
             <div className="flex justify-around">
 
             {!worksiteIsReady && (dayIsOn ?
-                <button className="btn border-blue-100 bg-base-300" onClick={handleEndDay}>Lopeta työpäivä</button> :
-                <button className="btn border-blue-100 bg-base-300" onClick={handleStartDay}>Aloita työpäivä</button>
+                <button className="btn border-blue-100 bg-base-300" onClick={handleEndDay}>{t('workEntries-btn-worksiteReady-endDay')}</button> :
+                <button className="btn border-blue-100 bg-base-300" onClick={handleStartDay}>{t('workEntries-btn-worksiteReady-startDay')}</button>
                 
                 )}
             {!worksiteIsReady && !dayIsOn ? 
-                <button className="btn border-blue-100 bg-base-300" onClick={handleWorksiteReady}>Merkitse työmaa valmiiksi</button> : null
+                <button className="btn border-blue-100 bg-base-300" onClick={handleWorksiteReady}>{t('workEntries-btn-worksiteReady')}</button> : null
             }
             </div>
 

@@ -17,6 +17,31 @@
   "title": "Title",
   "succeeded": "Succeeded",
   "fail": "Failed",
+  "role": "Role",
+  "profile": "Profile",
+  "welcome": "Welcome",
+  "login": "Login",
+  "verificationCode": "Verification code",
+  "verify": "Verify",
+  "name": "Name of the company",
+
+  "RegisterText": "Sign in with your credentials",
+  "loginText": "No account? Register from this link.",
+  "loginbtn": "Login",
+  "loginLabelPass": "Password",
+  "loginLabelEmail": "Email",
+  
+  "register": "Register",
+  "register-success": "User created successfully.",
+  "register-userExist": "Username is already in use.",
+
+  "verification-Success": "verification successful",
+  "verification-error": "verification failed",
+
+  "changePassword": "Change password",
+  "changePasswordOld" : "Current password",
+  "changePasswordNew" : "New password",
+  "changePasswordNewRepeat" : "Confirm new password",
 
   "landingpageworkon" : "Current recordings",
 
@@ -46,6 +71,7 @@
 
   "addWorksiteToastSuccess": "Worksite addition was successful",
   "addWorksiteToastError": "Worksite addition failed",
+  "addWorksite-notpaid": "You have reached the limit for creating worksites.",
 
   "singleWorksiteLandingEstimated": "Estimated time for work",
   "singleWorksiteLandingSpent": "Time spent on work",
@@ -59,6 +85,7 @@
   "worksiteWorkersPeopleAdded": "People added to the construction site",
   "worksiteWorkerDelTitle": "Remove employee",
   "worksiteWorkerDelSur": "Are you sure you want to remove the employee from the construction site?",
+  "worksiteWorkers-addworker-error": "The worker has already been added to the worksite",
 
   "worksiteCalendarAddedSucc": "Entry was added successfully",
   "worksiteCalendarError": "Something went wrong",
@@ -69,7 +96,37 @@
   "home": "Home",
   "company": "Company",
   "worksites": "Worksites",
-  "about": "About"
+  "about": "About",
+
+  "landingOne": "Welcome to our platform designed for efficient and seamless management and monitoring of construction sites. You can harness the power of technology to streamline your construction management tasks in several ways.",
+  "landingTwo" : "How can you leverage the Rakival platform?",
+  "landingTitleOne": "Create Your Own Company",
+  "landingTitleTwo": "Add Construction Sites",
+  "landingTitleThree": "Add Employees",
+  "landingTitleFour": "Construction Site Monitoring",
+  "landingTextOne": "Establish your own company profile, through which you can manage all your construction projects from one centralized location",
+  "landingTextTwo": "Easily add new construction sites to your company profile. Organize and monitor all sites to ensure that all necessary information is readily available to you.",
+  "landingTextThree": "Expand your team by adding new employees to your company. Each member can access the sites they are assigned to, promoting better coordination and communication.",
+  "landingTextFour": "Our platform provides tools for real-time construction site management and monitoring, facilitating progress tracking, task management, and ensuring that everything goes according to plan.",
+  "landingTitleFive": "Utilize the mobile application",
+  "landingTextFive" : "ou also have access to a mobile application, allowing employees to work seamlessly on construction sites, add photos, and record work.",
+
+  "workEntries-btn-worksiteReady-success": "The worksite has been marked as completed.",
+  "workEntries-btn-recordOn": "Recording is on somewhere",
+  "workEntries-btn-worksiteReady-endDay": "End the workday",
+  "workEntries-btn-worksiteReady-startDay": "Start the workday",
+  "workEntries-btn-worksiteReady" : "Mark the worksite as completed",
+  "confirmTitle": "Confirm action",
+  "confirmText": "Are you sure you want to mark the worksite as completed?",
+
+  "addfloorplanimg-succes": "Adding the image was successful",
+  "addfloorplanimg-error": "Adding the image failed",
+  "addfloorplanimg-errorNoTitle": "You forgot to enter a title or an image",
+
+  "joinCompanyText": "You need a company code from an admin-level user.",
+  "joinCompanyCode": "Company code",
+  "JoinCompany-createCompanySuccess": "You successfully created a company" 
+
     
   }
   

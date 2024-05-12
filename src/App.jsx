@@ -13,6 +13,8 @@ import {
   HomeLayout,
   Error,
   SingleWorksite,
+  Profile,
+  Changepassword
   
   } from './pages'
 import { ErrorElement } from './components'
@@ -91,6 +93,22 @@ const router = createBrowserRouter([
         path:'about',
         element: <About />
       },
+      {
+        path: 'profile',
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+      )
+      },     
+      {
+        path: 'changepassword',
+        element: (
+          <ProtectedRoute>
+            <Changepassword />
+          </ProtectedRoute>
+        )
+      }
     ]
   },
   {

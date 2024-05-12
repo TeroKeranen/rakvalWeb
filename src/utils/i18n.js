@@ -4,6 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import en from '../utils/translations/en.json'
 import fi from '../utils/translations/fi.json'
 
+
+
 i18n
   .use(initReactI18next)
   .init({
@@ -21,3 +23,5 @@ i18n
       escapeValue: false
     }
   });
+
+  export default i18n;
