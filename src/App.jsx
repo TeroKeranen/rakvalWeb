@@ -17,6 +17,7 @@ import {
   Changepassword
   
   } from './pages'
+  import { store } from './store'
 import { ErrorElement } from './components'
 
 
@@ -31,7 +32,6 @@ import {action as loginAction} from './pages/Login'
 import {action as verifyAction} from './pages/Verification'
 // import {action as addworksiteAction} from './pages/AddWorksite'
 
-import { store } from './store'
 import ProtectedRoute from './components/ProtectedRoute'
 import Verification from './pages/Verification'
 
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
       },
       {
         path:'about',
-        element: <About />
+        element: <About/>
       },
       {
         path: 'profile',
