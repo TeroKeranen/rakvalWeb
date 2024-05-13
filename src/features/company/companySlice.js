@@ -223,6 +223,7 @@ export const addWorksiteFloorplanKey = createAsyncThunk(
 )
 
 
+
 //Etsitään työntekijät jotka ovat liittynyt yritykseen
 export const companyWorkers = createAsyncThunk(
   'company/workers',

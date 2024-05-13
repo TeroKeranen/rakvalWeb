@@ -7,7 +7,8 @@ import {addNewWorksite} from '../features/company/companySlice'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
 
 
 
@@ -17,6 +18,7 @@ const AddWorksite = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const company = useSelector(state => state.companyState);
+    const [selectedDate, setSelectedDate] = useState(new Date());  // Alustetaan päivämäärä tälle päivälle
 
     
     
@@ -36,7 +38,15 @@ const AddWorksite = () => {
         setIsLoading(true);
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData);
-        const newData = {...data, worktype:workType}
+
+        const day = selectedDate.getDate().toString().padStart(2, '0');
+        const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0'); // Kuukaudet alkavat 0:sta
+        const year = selectedDate.getFullYear();
+
+        const formattedDate = `${day}.${month}.${year}`;
+        
+
+        const newData = {...data, startTime:formattedDate, worktype:workType}
         
         
         
@@ -94,11 +104,19 @@ const AddWorksite = () => {
                         name="city"
                         defaultValue=""
                         />
-                    <FormInput 
+                    {/* <FormInput 
                         type="text"
                         label={t('startingDate')}
                         name="startTime"
                         defaultValue=""
+                        /> */}
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={date => setSelectedDate(date)}
+                            dateFormat="dd.MM.yyyy"
+                            showYearDropdown
+                            scrollableMonthYearDropdown
+                            className='p-3 w-full rounded-md'
                         />
                     
                     <select className="select select-bordered w-full max-w-xs" value={workType} onChange={workTypeHandler}>

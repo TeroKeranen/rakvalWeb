@@ -61,10 +61,10 @@ const Floorplan = () => {
                     <div id={`item${index}`} className=" w-full flex justify-center my-4 border-2 p-5 rounded-lg" key={floorplan._id}>
                         <div className="w-full max-w-sm lg:max-w-md mx-auto relative">
                             <div className="flex flex-row justify-between my-2">
-                                <h2>{floorplan.title}</h2>
-                                <div>
+                                <h2 className="text-xl font-bold mx-auto">{floorplan.title}</h2>
+                                {/* <div>
                                     <MdDeleteOutline className="w-6 h-6 cursor-pointer"/>
-                                </div>
+                                </div> */}
                             </div>
                             {/* <div style={{width: "500px", height: "600px", overflow: "hidden", position: "relative"}}>
 
