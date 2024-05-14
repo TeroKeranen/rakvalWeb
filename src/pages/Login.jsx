@@ -44,7 +44,7 @@ const Login = () => {
     const {t} = useTranslation();
     
     return (
-        <section className="h-screen grid place-items-center">
+        <section className="h-screen grid place-items-center bg-gradient-to-t from-slate-900">
             
 
                 <Form method="post" className="card w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4">

@@ -12,7 +12,8 @@ const NavLinks = () => {
         {id: 1, url: '/', text: 'home'},
         {id: 2, url: 'company', text: 'company'},
         {id: 3, url: 'worksites', text: 'worksites'},
-        {id: 4, url: 'about', text: 'about'}
+        {id: 4, url: 'about', text: 'about'},
+        {id: 5, url: '/pricing', text: 'pricing'}
     ]
 
 
@@ -21,7 +22,8 @@ const NavLinks = () => {
         <>
         {Links.map((link) => {
             const {id,url,text} = link;
-            if ((url === 'company' || url === 'worksites') && !user) return null;
+            if ((url === 'company' || url === 'worksites' || url == '/pricing') && !user) return null;
+            if (url === "about" && user) return null
             return (
                 <li key={id}>
                     <NavLink className="capitalize" to={url}>
