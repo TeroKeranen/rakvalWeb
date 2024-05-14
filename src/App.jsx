@@ -14,7 +14,8 @@ import {
   Error,
   SingleWorksite,
   Profile,
-  Changepassword
+  Changepassword,
+  Pricing
   
   } from './pages'
   import { store } from './store'
@@ -54,6 +55,13 @@ const router = createBrowserRouter([
         
       },
       {
+        
+        path:'about',
+        element: 
+        
+        <About/>
+      },
+      {
         path:'worksites',
         element: (
           <ProtectedRoute>
@@ -81,6 +89,10 @@ const router = createBrowserRouter([
         
       },
       {
+        path:'/pricing',
+        element: <Pricing />
+      },
+      {
         path:'addworksite',
         element:(
           <ProtectedRoute>
@@ -89,10 +101,7 @@ const router = createBrowserRouter([
         ),
         // action: addworksiteAction
       },
-      {
-        path:'about',
-        element: <About/>
-      },
+     
       {
         path: 'profile',
         element: (
@@ -111,6 +120,7 @@ const router = createBrowserRouter([
       }
     ]
   },
+  
   {
     path: '/login',
     element: <Login />,
@@ -128,7 +138,8 @@ const router = createBrowserRouter([
   element: <Verification />,
   errorElement: <Error />,
   action: verifyAction(store)
-  }
+  },
+ 
 ])
 
 function App() {

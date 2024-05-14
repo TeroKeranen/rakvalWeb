@@ -2,7 +2,7 @@
 
 const PriceComponent = ({price, type, worksiteAmount}) => {
     return (
-        <section className="border w-2/5 m-4 rounded-lg">
+        <section className="border w-2/5 m-4 py-4 rounded-lg">
 
             <div className="border rounded-lg p-4 m-6">
 

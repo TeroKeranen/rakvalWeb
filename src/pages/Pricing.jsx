@@ -1,10 +1,7 @@
-// import { PriceComponent } from "../components";
+import { useSelector } from "react-redux";
+import { PriceComponent } from "../components";
 
-import { useDispatch, useSelector } from "react-redux";
-// import { PriceComponent } from "../components";
-
-
-const About = () => {
+const Pricing = () => {
 
     
     const theme = useSelector(state => state.userState.theme)
@@ -85,11 +82,11 @@ const About = () => {
                 </div>
 
             </section>
-            {/* <PriceComponent price="12" type="pieni" worksiteAmount="10"/> */}
+            <PriceComponent price="12" type="pieni" worksiteAmount="10"/>
             </div>
             </div>
         </div>
     )
 }
 
-export default About;
+export default Pricing;
