@@ -25,3 +25,4 @@ export {default as LandingpageWorksiteProgress} from './LandingpageWorksiteProgr
 export {default as JoinCompany} from './JoinCompany'
 export {default as Footer} from './Footer'
 export {default as PriceComponent} from './PriceComponent'
+export {default as Testi} from './Testi'
