@@ -13,6 +13,8 @@ const SingleWorksite = () => {
     const userRole = useSelector(state => state.userState.user.role);
     const [ActiveComponent, setActiveComponent] = useState(null);
     const worksiteDetails = company?.worksiteDetails
+    const worksiteId = worksiteDetails?._id;
+    console.log("WORKSITEDETAILS", worksiteId)
     
 
     
@@ -60,7 +62,7 @@ const SingleWorksite = () => {
         {/* Sivunavigaatio */}
             <div className="w-full lg:w-1/6 bg-slate-100 p-4 lg:min-h-screen overflow-y-auto">
                     <ul className="flex flex-row justify-around lg:flex-col lg:space-y-0">
-                        <SideNavbar userRole={userRole} onLinkClick={handleLinkClick} address={worksiteDetails.address}/>
+                        <SideNavbar userRole={userRole} onLinkClick={handleLinkClick} address={worksiteDetails.address} setActiveComponent={setActiveComponent}/>
                     </ul>
                 
             </div>

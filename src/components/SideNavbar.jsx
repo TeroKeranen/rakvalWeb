@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 
 
-const SideNavbar = ({userRole,onLinkClick, address}) => {
+const SideNavbar = ({userRole,onLinkClick, address, setActiveComponent}) => {
     const [selectedId, setSelectedId] = useState(null);
     const {t} = useTranslation();
     const links = [
@@ -26,7 +26,11 @@ const SideNavbar = ({userRole,onLinkClick, address}) => {
         <section className="flex flex-col ">
 
             <div className="mx-auto">
-                <h1 className="text-gray-600 text-xl font-bold mb-4">{address}</h1>
+                
+                <h1 className="hover:text-fuchsia-800 cursor-pointer text-gray-600 text-xl font-bold mb-4" onClick={() => {
+                     setActiveComponent(null);
+                     setSelectedId(null);
+                }}>{address}</h1>
             </div>
 
             <div className="flex flex-row justify-center items-center lg:flex-col lg:items-stretch">
