@@ -125,7 +125,22 @@
 
   "joinCompanyText": "You need a company code from an admin-level user.",
   "joinCompanyCode": "Company code",
-  "JoinCompany-createCompanySuccess": "You successfully created a company" 
+  "JoinCompany-createCompanySuccess": "You successfully created a company",
+
+  "about-title1": "Start for free, expand your possibilities",
+  "about-title2": "When you are ready to grow, we are here for you",
+  "about-text1": "Welcome to Rakval work management system, designed to facilitate project management and optimize worksite efficiency. Use our app for free and experience how easy and flexible project management can be. The free version allows you to create and manage up to three worksites, providing an excellent opportunity to explore our app's features without any commitments",
+  "about-text2": "As your business needs grow, Rakval is ready to support your development. By choosing our paid subscription, you can create and manage an unlimited number of worksites, enabling the scalability and flexibility required for larger projects.",
+  "price1": "0$",
+  "price2": "16,90$",
+  "price3": "29,90$",
+  "lightweight": "Lightweight",
+  "small": "Small",
+  "medium": "Medium",
+  "monthlyFee": "Monthly fee",
+  "how": "You can create",
+  "contst": "worksites",
+  "fullorder": "Full membership. You can add an unlimited number of worksites."
 
     
   }

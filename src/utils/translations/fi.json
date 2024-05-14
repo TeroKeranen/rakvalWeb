@@ -127,7 +127,22 @@
 
     "joinCompanyText": "Tarvitset yrityskoodin admin tason käyttäjältä",
     "joinCompanyCode": "Yrityskoodi",
-    "JoinCompany-createCompanySuccess": "Loit yrityksen onnistuneesti" 
+    "JoinCompany-createCompanySuccess": "Loit yrityksen onnistuneesti",
+
+    "about-title1": "Aloita maksutta, laajenna mahdollisuuksiasi",
+    "about-title2": "Kun olet valmis kasvamaan, olemme täällä sinua varten",
+    "about-text1": "Tervetuloa Rakval työnhallintajärjestelmään, joka on suunniteltu helpottamaan projektien hallintaa ja optimoimaan työmaiden tehokkuutta. Käytä sovellustamme ilmaiseksi ja koe, kuinka helppoa ja joustavaa projektinhallinta voi olla. Ilmainen versio antaa sinulle mahdollisuuden luoda ja hallinnoida jopa kolmea työmaata, mikä tarjoaa erinomaisen tilaisuuden tutustua sovelluksemme toiminnallisuuksiin ilman sitoumuksia.",
+    "about-text2": "Kun yrityksesi tarpeet kasvavat, Rakval on valmiina tukemaan kehitystänne. Valitsemalla maksullisen tilauksemme, voit luoda ja hallinnoida rajoittamattoman määrän työmaita, mikä mahdollistaa skaalautuvuuden ja joustavuuden, joita suuremmat projektit vaativat.",
+    "price1": "0€",
+    "price2": "15,60€",
+    "price3": "28,9€",
+    "lightweight": "Kevyt",
+    "small": "Pieni",
+    "medium": "Keskikokoinen",
+    "monthlyFee": "Kuukausittainen maksu",
+    "how": "Voit lisätä",
+    "contst": "työmaata",
+    "fullorder": "Täysi jäsenyys. Voit lisätä työmaita loputtomasti."
 
 
     

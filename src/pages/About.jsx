@@ -1,10 +1,13 @@
 // import { PriceComponent } from "../components";
 
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 // import { PriceComponent } from "../components";
 
 
 const About = () => {
+
+    const {t} = useTranslation();
 
     
     const theme = useSelector(state => state.userState.theme)
@@ -16,21 +19,21 @@ const About = () => {
             {/* Ensimmäinen osio */}
             <div className=" p-5 mt-5 rounded-lg">
                 <div className="mt-10">
-                    <h1 className="text-3xl font-bold">Aloita maksutta, laajenna mahdollisuuksiasi</h1>
+                    <h1 className="text-3xl font-bold">{t('about-title1')}</h1>
                 </div>
 
                 <div className="my-10 text-lg font-semibold w-3/5">
-                    <p>Tervetuloa Rakval työnhallintajärjestelmään, joka on suunniteltu helpottamaan projektien hallintaa ja optimoimaan työmaiden tehokkuutta. Käytä sovellustamme ilmaiseksi ja koe, kuinka helppoa ja joustavaa projektinhallinta voi olla. Ilmainen versio antaa sinulle mahdollisuuden luoda ja hallinnoida jopa kolmea työmaata, mikä tarjoaa erinomaisen tilaisuuden tutustua sovelluksemme toiminnallisuuksiin ilman sitoumuksia.</p>
+                    <p>{t('about-text1')}</p>
                 </div>
             </div>
             {/* Toinen osio */}
             <div className=" p-5 mt-5 rounded-lg">
 
                 <div className="mt-10">
-                    <h2 className="text-3xl font-bold">Kun Olet Valmis Kasvamaan, Olemme Täällä Sinua Varten</h2>
+                    <h2 className="text-3xl font-bold">{t('about-title2')}</h2>
                 </div>
                 <div className="my-10 text-lg font-semibold w-3/5">
-                    <p>Kun yrityksesi tarpeet kasvavat, Rakval on valmiina tukemaan kehitystänne. Valitsemalla maksullisen tilauksemme, voit luoda ja hallinnoida rajoittamattoman määrän työmaita, mikä mahdollistaa skaalautuvuuden ja joustavuuden, joita suuremmat projektit vaativat.</p>
+                    <p>{t('about-text2')}</p>
                 </div>
 
             </div>
@@ -42,14 +45,14 @@ const About = () => {
 
                 <div className="border rounded-lg p-9 m-6 hover:bg-sky-700">
 
-                    <h1 className="text-center text-xl">Pieni</h1>
-                    <h2 className="text-center text-2xl font-semibold">0$</h2>
-                    <p className="text-center">kuukausittais</p>
+                    <h1 className="text-center text-xl">{t('small')}</h1>
+                    <h2 className="text-center text-2xl font-semibold">{t('price1')}</h2>
+                    <p className="text-center">{t('monthlyFee')}</p>
 
                 </div>
 
                 <div className="flex justify-center py-5">   
-                    <p className="text-lg">3 työmaata</p>
+                    <p className="text-lg">{t('how')} 3 {t('contst')}</p>
                 </div>
 
             </section>
@@ -58,14 +61,14 @@ const About = () => {
 
                 <div className="border rounded-lg p-9 m-6 hover:bg-sky-700">
 
-                    <h1 className="text-center text-xl">kevyt</h1>
-                    <h2 className="text-center text-2xl font-semibold">16,90$</h2>
-                    <p className="text-center">kuukausittais</p>
+                    <h1 className="text-center text-xl">{t('lightweight')}</h1>
+                    <h2 className="text-center text-2xl font-semibold">{t('price2')}</h2>
+                    <p className="text-center">{t('monthlyFee')}</p>
 
                 </div>
 
                 <div className="flex justify-center py-5">   
-                    <p className="text-lg">8 työmaata</p>
+                    <p className="text-lg">{t('how')} 8 {t('contst')}</p>
                 </div>
 
             </section>
@@ -74,14 +77,14 @@ const About = () => {
 
                 <div className="border rounded-lg p-9 m-6 hover:bg-sky-700">
 
-                    <h1 className="text-center text-xl">Pieni</h1>
-                    <h2 className="text-center text-2xl font-semibold">29,9$</h2>
-                    <p className="text-center">kuukausittais</p>
+                    <h1 className="text-center text-xl">{t('medium')}</h1>
+                    <h2 className="text-center text-2xl font-semibold">{t('price3')}</h2>
+                    <p className="text-center">{t('monthlyFee')}</p>
 
                 </div>
 
                 <div className="flex justify-center py-5">   
-                    <p className="text-lg">loputtomasti työmaata</p>
+                    <p className="text-lg text-center">{t('fullorder')}</p>
                 </div>
 
             </section>
