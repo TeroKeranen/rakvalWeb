@@ -15,7 +15,8 @@ import {
   SingleWorksite,
   Profile,
   Changepassword,
-  Pricing
+  Pricing,
+  AdminRegister
   
   } from './pages'
   import { store } from './store'
@@ -29,6 +30,7 @@ import { ErrorElement } from './components'
 
 //actions
 import {action as registerAction} from './pages/Register'
+import {action as adminregisterAction} from './pages/AdminRegister'
 import {action as loginAction} from './pages/Login'
 import {action as verifyAction} from './pages/Verification'
 // import {action as addworksiteAction} from './pages/AddWorksite'
@@ -132,6 +134,12 @@ const router = createBrowserRouter([
     element: <Register />,
     errorElement:<Error />,
     action: registerAction
+  },
+  {
+    path: '/adminregister',
+    element: <AdminRegister />,
+    errorElement: <Error />,
+    action:adminregisterAction
   },
   {
   path: '/verifycode',

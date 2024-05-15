@@ -1,7 +1,9 @@
 {
     "nodata": "Ei dataa",
     "address": "Osoite",
+    "companyAddress": "Yrityksen osoite",
     "city": "Kaupunki",
+    "companyCity": "Yrityksen kaupunki",
     "startingDate": "Aloitus ajankohta",
     "type": "Tyyppi",
     "privateClient": "Yksityisasiakas",
@@ -142,7 +144,12 @@
     "monthlyFee": "Kuukausittainen maksu",
     "how": "Voit lisätä",
     "contst": "työmaata",
-    "fullorder": "Täysi jäsenyys. Voit lisätä työmaita loputtomasti."
+    "fullorder": "Täysi jäsenyys. Voit lisätä työmaita loputtomasti.",
+
+    "adminregister-text": "Rekisteröidy admin käyttäjäksi",
+    "adminregister-Linktext": "Admin rekisteröinti",
+    "registerStandardUser": "Rekisteröi normi käyttäjäksi"
+    
 
 
     

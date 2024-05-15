@@ -1,7 +1,9 @@
 {
   "nodata": "No data",
   "address": "Address",
+  "companyAddress": "Company address",
   "city": "City",
+  "companyCity": "Company city",
   "startingDate": "Starting date",
   "type": "Type",
   "privateClient": "Private Client",
@@ -140,7 +142,11 @@
   "monthlyFee": "Monthly fee",
   "how": "You can create",
   "contst": "worksites",
-  "fullorder": "Full membership. You can add an unlimited number of worksites."
+  "fullorder": "Full membership. You can add an unlimited number of worksites.",
+
+  "adminregister-text": "Register as an admin user",
+  "adminregister-Linktext": "Admin registration",
+  "registerStandardUser": "Register as a standard user"
 
     
   }

@@ -44,6 +44,7 @@ const Register = () => {
                 </div>
               
                 <p className="text-center">{t('RegisterText')} <Link to="/login" className="ml-2 link-hover link-primary capitalize" >{t('login')}</Link> </p>
+                <p className="text-center">{t('adminregister-text')} <Link to="/adminregister" className="ml-2 link-hover link-primary capitalize" >{t('adminregister-Linktext')}</Link> </p>
               
               </Form>
             
