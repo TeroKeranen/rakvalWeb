@@ -4,7 +4,7 @@ import { customFetch } from "../../utils";
 
 import { handleTokenExpiry } from "../../utils/calculateTokenExp";
 import apiMiddleware from "../middleWare/refresMiddleWare";
-import { addCalendarEntry, deleteCalendarEntry } from "../worksite/worksiteSlice";
+import { addCalendarEntry, deleteCalendarEntry,addProductToWorksite, deleteProductFromWorksite, updateProductOnWorksite } from "../worksite/worksiteSlice";
 
 
 export const addNewWorksite = createAsyncThunk(
@@ -567,6 +567,38 @@ const companySlice = createSlice({
       .addCase(deleteCalendarEntry.fulfilled, (state,action) => {
         state.worksiteDetails = action.payload;
       })
+
+      // Tuotteen lisäys
+      .addCase(addProductToWorksite.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+      })
+      .addCase(addProductToWorksite.fulfilled, (state, action) => {
+          state.loading = false;
+                // console.log("AAAAAAAACTION",action.payload);
+          state.worksiteDetails.products = action.payload.worksite.products;
+                // Voit päivittää worksiten tuotteita tai muita tietoja tässä
+                // Esimerkiksi:
+                // state.worksite.products.push(action.payload.newProduct);
+      })
+      .addCase(addProductToWorksite.rejected, (state, action) => {
+          state.error = action.payload;
+          state.loading = false;
+      })
+
+      // Tuotteen poisto
+      .addCase(deleteProductFromWorksite.fulfilled, (state, action) => {
+        if (state.worksiteDetails && state.worksiteDetails._id === action.payload.worksite._id) {
+            state.worksiteDetails.products = action.payload.worksite.products;
+        }
+      })
+      .addCase(updateProductOnWorksite.fulfilled, (state, action) => {
+        // Päivitä tuotetiedot työmaan tuoteluettelossa
+        if (state.worksiteDetails && state.worksiteDetails._id === action.payload.worksite._id) {
+            state.worksiteDetails.products = action.payload.worksite.products;
+        }
+      })
+
     }
 })
 

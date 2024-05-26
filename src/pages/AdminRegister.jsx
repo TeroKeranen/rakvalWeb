@@ -3,6 +3,8 @@ import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { FormInput, SubmitBtn } from "../components";
+import i18n from '../utils/i18n'
+
 
 
 export const action = async ({request}) => {
@@ -21,18 +23,20 @@ export const action = async ({request}) => {
     try {
         const response = await customFetch.post('/signupAdmin', data);
         // console.log("RESPONSE", response);
-        toast.success("Onnistui");
+
+        
+        toast.success(i18n.t('succeeded'));
         return redirect('/verifycode')
         // return redirect('/dashboard'); // Oletetaan, että käyttäjä ohjataan hallintapaneeliin
     } catch (error) {
-        console.log("ERROR", error);
-
-        if (error.response && error.response.data) {
-            console.log("ERROR", error.response.data.error);
-            toast.error(error.response.data.error);
+        
+        if (error.response.data.invalidData) {
+            toast.error(i18n.t('signup-missingDataError'))
+        } else if (error.response.data.existingUser) {
+            toast.error(i18n.t('signup-userExist'))
         } else {
             // Yleinen virheviesti, jos error.response.data ei ole saatavilla
-            toast.error("An unexpected error occurred");
+            toast.error(i18n.t('fail'));
         }
     }
     return null;

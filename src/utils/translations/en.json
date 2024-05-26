@@ -26,6 +26,9 @@
   "verificationCode": "Verification code",
   "verify": "Verify",
   "name": "Name of the company",
+  "no": "No",
+  "update": "Update",
+  "cancel": "Cancel",
 
   "RegisterText": "Sign in with your credentials",
   "loginText": "No account? Register from this link.",
@@ -82,6 +85,7 @@
   "sidenavbarEntries": "Records",
   "sidenavbarCalendar": "Calendar",
   "sidenavbarWorkers": "Workers",
+  "sidenavbarProducts": "Products",
 
   "worksiteWorkersSelectEmp": "Select an employee",
   "worksiteWorkersPeopleAdded": "People added to the construction site",
@@ -99,6 +103,7 @@
   "company": "Company",
   "worksites": "Worksites",
   "about": "About",
+  "pricing": "Pricing",
 
   "landingOne": "Welcome to our platform designed for efficient and seamless management and monitoring of construction sites. You can harness the power of technology to streamline your construction management tasks in several ways.",
   "landingTwo" : "How can you leverage the Rakival platform?",
@@ -146,7 +151,13 @@
 
   "adminregister-text": "Register as an admin user",
   "adminregister-Linktext": "Admin registration",
-  "registerStandardUser": "Register as a standard user"
+  "registerStandardUser": "Register as a standard user",
+  "signup-userExist": "Username is already in use",
+  "signup-missingDataError": "Data is missing",
+
+  
+  "product-delete-title": "Delete product",
+  "product-delete-text": "Are you sure you want to delete the product?"
 
     
   }

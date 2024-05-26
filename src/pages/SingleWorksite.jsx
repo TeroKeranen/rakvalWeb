@@ -2,7 +2,7 @@ import { createElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleWorksite, clearWorksiteDetails } from "../features/company/companySlice";
 import { Outlet, useParams } from "react-router-dom";
-import { AddFloorplanImg, Floorplan, SideNavbar, SingleWorksiteLanding, WorkEntries, WorkEntriesButton, WorksiteWorkers } from "../components";
+import { AddFloorplanImg, Floorplan, Products, SideNavbar, SingleWorksiteLanding, WorkEntries, WorkEntriesButton, WorksiteWorkers } from "../components";
 import WorksiteCalendar from "../components/WorksiteCalendar";
 
 const SingleWorksite = () => {
@@ -80,6 +80,7 @@ const SingleWorksite = () => {
                 {ActiveComponent === 'workEntries' && <WorkEntries />}
                 {ActiveComponent === 'worksiteCalendar' && <WorksiteCalendar />}
                 {ActiveComponent === 'worksiteWorkers' && <WorksiteWorkers />}
+                {ActiveComponent === 'products' && <Products worksiteDetails={worksiteDetails}/>}
                 
             </div>
         </div>

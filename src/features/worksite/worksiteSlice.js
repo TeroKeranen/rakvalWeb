@@ -121,6 +121,81 @@ export const deleteCalendarEntry = createAsyncThunk(
     }
 )
 
+export const addProductToWorksite = createAsyncThunk(
+    'worksite/addProductToWorksite',
+    async({worksiteId, productData}, thunkAPI) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = thunkAPI.getState().userState.user.token;
+                const response = await customFetch.post(`worksites/${worksiteId}/add-product`, productData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                if (response.status === 201) {
+                    // Jos tarpeen, voit päivittää tilaa tähän tai palauttaa tiedot
+                    return response.data;
+                } else {
+                    throw new Error('Failed to add product');
+                }
+                
+            } catch (error) {
+                return thunkAPI.rejectWithValue(error.response.data);
+            }
+        })
+    }
+)
+
+export const deleteProductFromWorksite = createAsyncThunk(
+    'worksite/deleteProductFromWorksite',
+    async({worksiteId, productId}, thunkAPI) => {
+        return apiMiddleware(async () => {
+            console.log("WORKSITEiD",worksiteId);
+            console.log("PRODUCTID",productId);
+            try {
+                const token = thunkAPI.getState().userState.user.token;
+                const response = await customFetch.delete(`worksites/${worksiteId}/products/${productId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                
+                if (response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Failed to delete product');
+                }
+            } catch (error) {
+                return thunkAPI.rejectWithValue(error.response.data);
+            }
+        })
+    }
+)
+
+export const updateProductOnWorksite = createAsyncThunk(
+    'worksite/updateProductOnWorksite',
+    async({worksiteId, productId, productData}, thunkAPI) => {
+        return apiMiddleware(async () => {
+            console.log("SLICE", worksiteId)
+            try {
+                const token = thunkAPI.getState().userState.user.token;
+                const response = await customFetch.put(`worksites/${worksiteId}/products/${productId}`, productData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Failed to update product');
+                }
+            } catch (error) {
+                return thunkAPI.rejectWithValue(error.response.data);
+            }
+        })
+    }
+)
+
 
 
 
@@ -197,6 +272,10 @@ const worksiteSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             });
+
+
+
+            
             
     }
 

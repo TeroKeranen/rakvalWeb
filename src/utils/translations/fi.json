@@ -26,6 +26,9 @@
      "verificationCode": "Vahvistuskoodi",
     "verify": "Vahvista",
     "name": "Yrityksen nimi",
+    "no": "Ei",
+    "update": "Muokkaa",
+    "cancel": "Peruuta",
 
     "RegisterText": "Kirjaudu omilla tunnuksilla sisään",
     "loginText": "Ei tunnuksia? Rekisteröidy tästä linkistä",
@@ -84,6 +87,7 @@
     "sidenavbarEntries": "Kirjaukset",
     "sidenavbarCalendar": "Kalenteri",
     "sidenavbarWorkers": "Työntekijät",
+    "sidenavbarProducts": "Tuotteet",
 
     "worksiteWorkersSelectEmp": "Valitse työntekijä",
     "worksiteWorkersPeopleAdded": "Työmaalle lisätyt henkilöt",
@@ -101,6 +105,7 @@
     "company": "Yritys",
     "worksites": "Työmaat",
     "about": "Tietoa",
+    "pricing": "Hinnasto",
 
     "landingOne": "Tervetuloa alustallemme, joka on suunniteltu tehokkaaseen ja vaivattomaan rakennustyömaiden hallintaan ja seurantaan. Voit hyödyntää teknologian voimaa ja tehostaa rakennushallinnon tehtäviäsi useilla tavoilla",
     "landingTwo" : "Miten voit hyödyntää Rakival alustaa",
@@ -148,7 +153,13 @@
 
     "adminregister-text": "Rekisteröidy admin käyttäjäksi",
     "adminregister-Linktext": "Admin rekisteröinti",
-    "registerStandardUser": "Rekisteröi normi käyttäjäksi"
+    "registerStandardUser": "Rekisteröi normi käyttäjäksi",
+    "signup-userExist": "Käyttäjänimi on jo käytössä",
+    "signup-missingDataError": "Tietoja puuttuu",
+
+    "product-delete-title": "Poista tuote",
+    "product-delete-text": "Oletko varma että haluat poistaa tuotteen?"
+
     
 
 
