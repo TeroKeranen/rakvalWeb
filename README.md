@@ -104,3 +104,39 @@ To get the project up and running on your local machine, follow these steps:
     http://localhost:5173/
 
 
+## User Registration and Account Activation
+
+After accessing the Rakval application in your browser, you can register an account to start managing or joining construction projects. There are two main types of user roles you can register as:
+
+### Register as an Admin User
+If you want to manage your own construction company within Rakval, you should register as an Admin user. Here’s how you can do it:
+
+1. Go to the registration page.
+2. Select the "Admin" option.
+3. Fill in the required fields, including your name, email, and password.
+4. As an Admin, you will also need to create a company. Provide your company name and any other necessary details as prompted.
+5. Submit the registration form.
+
+### Register as a Standard User
+If you plan to join an existing company, you should register as a Standard user. Here’s the process:
+
+1. Go to the registration page.
+2. Select the "Standard User" option.
+3. Fill in the required fields, including your name, email, and password.
+4. Submit the registration form.
+
+### Account Activation
+After you register, an activation code will be sent to the email address you provided. It is important to use an email address to which you have access, as you will need to retrieve the activation code from it. Here's how to activate your account:
+
+1. Check your email for a message from Rakval containing the activation code.
+2. Go back to the Rakval application and navigate to the activation page.
+3. Enter the activation code in the provided field.
+4. Click on the "Activate" button to complete your registration and activate your account.
+
+### Important Notes
+- Ensure that you have access to the email account you register with, as the activation process is crucial for verifying your identity and securing your account.
+- If you do not receive the activation email, check your spam folder. If it is still not there, you can request a resend of the activation code through the application.
+
+## Getting Started
+Once your account is activated, you can log in and start using the Rakval application to manage or participate in construction projects based on your user role.
+
