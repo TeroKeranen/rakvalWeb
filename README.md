@@ -62,25 +62,25 @@ Rakval is a comprehensive solution for efficient and effortless management and m
 4. Also create a file named amplifyconfiguration.json in the root directory with the following content:
     ```bash
     {
-  "aws_project_region": "eu-west-1",
-  "aws_cognito_identity_pool_id": "eu-west-1:9636ef46-1c04-4bc5-8004-5aeba30acd1f",
-  "aws_cognito_region": "eu-west-1",
-  "aws_user_pools_id": "eu-west-1_lrHumy0Zk",
-  "aws_user_pools_web_client_id": "113t6lvlnuu7jrn6j3r0sjm4p0",
-  "oauth": {},
-  "aws_cognito_username_attributes": ["EMAIL"],
-  "aws_cognito_social_providers": [],
-  "aws_cognito_signup_attributes": ["EMAIL"],
-  "aws_cognito_mfa_configuration": "OFF",
-  "aws_cognito_mfa_types": ["SMS"],
-  "aws_cognito_password_protection_settings": {
-    "passwordPolicyMinLength": 8,
-    "passwordPolicyCharacters": []
-  },
-  "aws_cognito_verification_mechanisms": ["EMAIL"],
-  "aws_user_files_s3_bucket": "rakval7aa91a47d6bf4bffbcb7aa26cf06c2b294331-rakval",
-  "aws_user_files_s3_bucket_region": "eu-west-1"
-}
+    "aws_project_region": "eu-west-1",
+    "aws_cognito_identity_pool_id": "eu-west-1:9636ef46-1c04-4bc5-8004-5aeba30acd1f",
+    "aws_cognito_region": "eu-west-1",
+    "aws_user_pools_id": "eu-west-1_lrHumy0Zk",
+    "aws_user_pools_web_client_id": "113t6lvlnuu7jrn6j3r0sjm4p0",
+    "oauth": {},
+    "aws_cognito_username_attributes": ["EMAIL"],
+    "aws_cognito_social_providers": [],
+    "aws_cognito_signup_attributes": ["EMAIL"],
+    "aws_cognito_mfa_configuration": "OFF",
+    "aws_cognito_mfa_types": ["SMS"],
+    "aws_cognito_password_protection_settings": {
+        "passwordPolicyMinLength": 8,
+        "passwordPolicyCharacters": []
+    },
+    "aws_cognito_verification_mechanisms": ["EMAIL"],
+    "aws_user_files_s3_bucket": "rakval7aa91a47d6bf4bffbcb7aa26cf06c2b294331-rakval",
+    "aws_user_files_s3_bucket_region": "eu-west-1"
+    }
 
 5. Install dependencies with the command:
     ```bash
