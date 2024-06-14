@@ -14,12 +14,12 @@ const Profile = () => {
     
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
 
-    const handleTheme = () => {
+    // const handleTheme = () => {
         
-        dispatch(toggleTheme());
+    //     dispatch(toggleTheme());
         
         
-    }
+    // }
 
     return (
         <section className="h-screen">
@@ -39,7 +39,7 @@ const Profile = () => {
                     </Link>
                 </div>
 
-                <div className="py-5 lg:py-5 my-auto">
+                {/* <div className="py-5 lg:py-5 my-auto">
                     
                         <label className="swap swap-rotate">
                             <input type="checkbox" onChange={handleTheme} />
@@ -49,7 +49,7 @@ const Profile = () => {
                             <BsMoonFill className="swap-off h-4 w-4" />
                         </label>
                     
-                </div>
+                </div> */}
             
             </div>
             
