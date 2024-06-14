@@ -83,14 +83,14 @@ const WorksiteWorkers = () => {
                     setIsLoading(false);
                     
                     if (updatedWorksite.message) {
-                        toast.error("joo",updatedWorksite.message);
+                        toast.error(t('fail'));
                     } else {
-                        toast.success("Työntekijä lisätty työmaalle2")
+                        toast.success(t('succeeded'))
                     }
                 })
                 
                 .catch(error => {
-                    console.log("hääää", error);
+                    toast.error(t('fail'))
                 })
         
     }

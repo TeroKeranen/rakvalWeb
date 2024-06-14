@@ -73,9 +73,16 @@ export const changePassword = createAsyncThunk(
                 if (response.status === 200) {
                     return response.data
                 } else {
+                    const errorData = await response.json();
+                    console.log("errordata", errorData)
+                    
                     return rejectWithValue(response.data.error || "Password change failed");
                 }
             } catch (error) {
+                console.log("error", error)
+                if (error.response.data.passwordtypeError) {
+                    return error.response.data
+                }
                 return rejectWithValue(error.message);
             }
         })
@@ -128,6 +135,26 @@ export const fetchAwsUrl = createAsyncThunk(
                 return response.data;
             } catch (error) {
                 return rejectWithValue(error.message);
+            }
+        })
+    }
+)
+
+export const getSignedUrl = createAsyncThunk(
+    'aws/signedurl',
+    async({bucketName, objectKey}, {getState, rejectWithValue}) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = getState().userState.user.token;
+                const response = await customFetch.get(`/get-signed-url?bucketName=${encodeURIComponent(bucketName)}&objectKey=${encodeURIComponent(objectKey)}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                return response.data;
+            } catch (error) {
+                return rejectWithValue(error.message)
+                
             }
         })
     }
@@ -251,6 +278,9 @@ const authSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state,action ) => {
         const userData = action.payload;
         state.usersById[userData._id] = userData;
+      })
+      .addCase(getSignedUrl.fulfilled, (state,action) => {
+        state.urls = action.payload
       })
 
       // tokenin uusiminen

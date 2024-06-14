@@ -46,22 +46,22 @@ const Header = () => {
                         {showTooltip && (
                             <div className="absolute top-full left-40 mt-5 p-5 bg-base-200 shadow-lg rounded z-50">
                                 <ul>
-                                    <li><Link to="/settings" className="text-blue-500 hover:text-blue-700">Settings</Link></li>
+                                    {/* <li><Link to="/settings" className="text-blue-500 hover:text-blue-700">Settings</Link></li> */}
                                     <li><Link to="/profile" className="text-blue-500 hover:text-blue-700" onClick={handleLinkClick}>{t('profile')}</Link></li>
-                                    <li><Link to="/help" className="text-blue-500 hover:text-blue-700">Help</Link></li>
+                                    {/* <li><Link to="/help" className="text-blue-500 hover:text-blue-700">Help</Link></li> */}
                                 </ul>
                             </div>
                         )}
 
-                        <button className="btn btn-xs btn-outline btn-primary" onClick={handleLogout}>logout</button>
+                        <button className="btn btn-xs btn-outline btn-primary" onClick={handleLogout}>{t('logout')}</button>
                     </div> :
 
                     <div className="flex gap-x-6 justify-center items-center">
                         <Link to="/login" className="link link-hover text-xs sm:text-sm" >
-                            Sign in
+                            {t('signinHeader')}
                         </Link>
                         <Link to="/register" className="link link-hover text-xs sm:text-sm" >
-                            create account
+                            {t('registerHeader')}
                         </Link>
                     </div>
 

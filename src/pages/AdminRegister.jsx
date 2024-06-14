@@ -9,6 +9,8 @@ import i18n from '../utils/i18n'
 
 export const action = async ({request}) => {
     const formData = await request.formData();
+    
+    const terms = formData.get('termsAndConditions')
     const data = {
         email: formData.get('email'),
         password: formData.get('password'),
@@ -19,6 +21,11 @@ export const action = async ({request}) => {
             city: formData.get('companyDetails[city]')
         }
     };
+
+        // Check if terms and conditions are accepted
+        if (!terms) {
+            return toast.error(i18n.t('register-privacyError'))
+        }
     // console.log("DATA",data);
     try {
         const response = await customFetch.post('/signupAdmin', data);
@@ -29,6 +36,9 @@ export const action = async ({request}) => {
         return redirect('/verifycode')
         // return redirect('/dashboard'); // Oletetaan, että käyttäjä ohjataan hallintapaneeliin
     } catch (error) {
+        if (error && error.response.data.passwordtypeError) {
+            toast.error(i18n.t('register-passregexErr'))
+        }
         
         if (error.response.data.invalidData) {
             toast.error(i18n.t('signup-missingDataError'))
@@ -57,6 +67,14 @@ const AdminRegister = () => {
                 <FormInput type="text" label={t('name')} name="companyDetails[name]" />
                 <FormInput type="text" label={t('companyAddress')} name="companyDetails[address]" />
                 <FormInput type="text" label={t('companyCity')} name="companyDetails[city]" />
+
+                {/* Checkbox for Privacy Policy and Terms & Conditions */}
+                <div className="flex items-start mb-4">
+                    <input type="checkbox" id="termsAndConditions" name="termsAndConditions" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                    <label htmlFor="termsAndConditions" className="ml-2 text-sm font-medium  dark:text-gray-300">
+                        {t('agreeterms')} <Link to="/terms-and-conditions" className="text-blue-600 hover:underline dark:text-blue-500">{t('termsandconditions')}</Link> & <Link to="/privacypolicy" className="text-blue-600 hover:underline dark:text-blue-500">{t('privacypolicy')}</Link>
+                    </label>
+                </div>
 
                 <div className="mt-4">
                     <SubmitBtn text={t('register')} />

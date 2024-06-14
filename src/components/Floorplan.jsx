@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import MarkerDetails from "./MarkerDetails";
-import {fetchAwsUrl} from '../features/auth/authSlice'
+import {fetchAwsUrl, getSignedUrl} from '../features/auth/authSlice'
 import { MdDeleteOutline } from "react-icons/md";
 
 
@@ -11,11 +11,11 @@ const Floorplan = () => {
     
     const {id} = useParams();
     
-
+   
     const worksiteDetails = useSelector(state => state.companyState.worksiteDetails)
     const loading = useSelector(state => state.companyState);
-    const url = useSelector(state => state.userState.urls)
-    
+    const url = useSelector(state => state.userState.urls) // HAKEE routen kautta aws url...
+    const [floorplans, setFloorplans] = useState([]);
     
     
     const [activeMarker, setActiveMarker] = useState(null); // asetetaan klikattavan markerin tiedot tänne, josta ne viedään MarkerDetails komponenttiin.
@@ -23,10 +23,33 @@ const Floorplan = () => {
     useEffect(() => {
         dispatch(fetchAwsUrl()); // haetaan backendistä aws url
     },[])
-
+        
+        
 
     const worksiteFloorplankeys = worksiteDetails.floorplanKeys;
     const markers = worksiteDetails.markers;
+
+
+    // presigned url hakeminen
+
+    useEffect(() => {
+        if (worksiteFloorplankeys) {
+            const fetchUrls = async () => {
+                const updatedFloorplans = await Promise.all(worksiteFloorplankeys.map(async floorplan => {
+                    const response = await dispatch(getSignedUrl({
+                        bucketName: import.meta.env.VITE_BUCKET_NAME,
+                        objectKey: floorplan.key
+                    })).unwrap()
+                    return {...floorplan, signedUrl: response.url}
+                }))
+                setFloorplans(updatedFloorplans);
+            }
+            // Varmista, että floorplanKeys ei ole muuttunut
+    if (worksiteFloorplankeys) {
+        fetchUrls();
+    }
+        }
+    },[dispatch])
     
 
     
@@ -57,7 +80,7 @@ const Floorplan = () => {
             
             
             <div className=" max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
-                {worksiteFloorplankeys.map((floorplan, index) => (
+                {floorplans.map((floorplan, index) => (
                     <div id={`item${index}`} className=" w-full flex justify-center my-4 border-2 p-5 rounded-lg" key={floorplan._id}>
                         <div className="w-full max-w-sm lg:max-w-md mx-auto relative">
                             <div className="flex flex-row justify-between my-2">
@@ -69,7 +92,7 @@ const Floorplan = () => {
                             {/* <div style={{width: "500px", height: "600px", overflow: "hidden", position: "relative"}}>
 
                             </div> */}
-                                <img src={`${url}${floorplan.key}`} style={{ width: "100%", height: "auto",objectFit: 'contain' }}  />
+                                <img src={floorplan.signedUrl || 'fallbackURL'} style={{ width: "100%", height: "auto",objectFit: 'contain' }}  />
                             {/* Renderöi tämän kuvan markerit */}
                             {markers.filter(marker => marker.floorplanIndex === index).map((marker, markerIndex) => {
                                 

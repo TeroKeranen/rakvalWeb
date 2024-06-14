@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
+
 import {
    About,
   Company,
@@ -16,7 +17,9 @@ import {
   Profile,
   Changepassword,
   Pricing,
-  AdminRegister
+  AdminRegister,
+  Privacypolicy,
+  TAC
   
   } from './pages'
   import { store } from './store'
@@ -118,6 +121,18 @@ const router = createBrowserRouter([
           <ProtectedRoute>
             <Changepassword />
           </ProtectedRoute>
+        )
+      },
+      {
+        path: 'privacypolicy',
+        element: (
+          <Privacypolicy />
+        )
+      },
+      {
+        path: 'terms-and-conditions',
+        element: (
+          <TAC />
         )
       }
     ]

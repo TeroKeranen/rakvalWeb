@@ -29,6 +29,13 @@
     "no": "Ei",
     "update": "Muokkaa",
     "cancel": "Peruuta",
+    "agreeterms": "Hyväksyn tietosuojakäytännön ja käyttöehdot",
+    "privacypolicy": "Tietosuojakäytäntö",
+    "termsandconditions" : "Käyttöehtot",
+    "contact": "Ota yhteyttä",
+    "signinHeader": "Kirjaudu sisään",
+    "registerHeader": "Luo tunnus",
+    "logout": "Kirjaudu ulos",
 
     "RegisterText": "Kirjaudu omilla tunnuksilla sisään",
     "loginText": "Ei tunnuksia? Rekisteröidy tästä linkistä",
@@ -40,6 +47,8 @@
     "register": "Rekisteröidy",
     "register-success": "Käyttäjä luotu onnistuneesti",
     "register-userExist": "Käyttäjä nimi on jo käytössä",
+    "register-passregexErr": "Salasanan tulee olla vähintään 6 merkkiä pitkä ja sisältää ainakin yhden erikoismerkin",
+    "register-privacyError": "Sinun täytyy hyväksyä tietosuojakäytäntö ja käyttöehdot.",
 
     "verification-Success": "Vahvistus onnistui",
     "verification-error": "Vahvistus epäonnistui",

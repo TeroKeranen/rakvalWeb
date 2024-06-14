@@ -29,6 +29,13 @@
   "no": "No",
   "update": "Update",
   "cancel": "Cancel",
+  "agreeterms": "I accept the Privacy Policy and the Terms and Conditions",
+  "privacypolicy": "Privacy Policy",
+  "termsandconditions" : "Terms and Conditions",
+  "contact": "Contact us",
+  "signinHeader": "Sign in",
+  "registerHeader": "Create account",
+  "logout": "Logout",
 
   "RegisterText": "Sign in with your credentials",
   "loginText": "No account? Register from this link.",
@@ -39,6 +46,8 @@
   "register": "Register",
   "register-success": "User created successfully.",
   "register-userExist": "Username is already in use.",
+  "register-passregexErr": "The password must be at least 6 characters long and include at least one special character",
+  "register-privacyError": "You need to accept the Privacy Policy and the Terms and Conditions.",
 
   "verification-Success": "verification successful",
   "verification-error": "verification failed",

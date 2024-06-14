@@ -25,7 +25,7 @@ const Changepassword = () => {
         // const newData = {...data, worktype:workType}
         
         if (data.newPassword !== data.newPasswordAgain) {
-            toast.error('Jotain meni väärin')
+            toast.error(t('fail'))
             setIsLoading(false)
             return;
         }
@@ -33,14 +33,23 @@ const Changepassword = () => {
             
             dispatch(changePassword({oldPassword:data.oldPassword, newPassword:data.newPassword}))
                 .unwrap()
-                .then(() => {
-                    toast.success(t('succeeded'))
-                    navigate(-1); // Palaa takaisin edelliselle sivulle
-                    setIsLoading(false)
+                .then((response) => {
+                    
+                    if (response.passwordtypeError) {
+                        toast.error(t('register-passregexErr'))
+                        setIsLoading(false)
+                    } else if (response.success) {
+                        toast.success(t('succeeded'))
+                        navigate(-1); // Palaa takaisin edelliselle sivulle
+                        setIsLoading(false)
+
+                    }
 
                 })
                 .catch((error) => {
+                    
                     toast.error(error.message || 'error changing password')
+                    setIsLoading(false)
                 })
                 
         

@@ -16,8 +16,8 @@ const LoggedOutLanding = () => {
                     <div className="hero-content text-center text-neutral-content">
                         <div className="max-w-md">
                             <h1 className="mb-5 text-5xl font-bold">Tervetuloa</h1>
-                            <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                            <button className="btn btn-primary">Get Started</button>
+                            <p className="mb-5 text-white">Käyttämään helppokäyttöistä hallintatyökalua</p>
+                            {/* <button className="btn btn-primary">Get Started</button> */}
                         </div>
                     </div>
                     
@@ -75,17 +75,17 @@ const LoggedOutLanding = () => {
                     </div>
                 </div>
 
-                <div className="flex-row justify-around card bg-base-300 rounded-box">
+                <div className="flex-col lg:flex-row lg:justify-around card bg-base-300 rounded-box">
 
                     <div className="rounded-box">    
-                        <div className="w-4/5 bg-base-100 shadow-xl my-5 mx-auto">
+                        <div className="lg:w-4/5 bg-base-100 shadow-xl my-5 mx-auto">
                             <figure className=''><img src={mobile} alt="Shoes" className='rounded-lg' style={{width: "500px", height:"500px"}}/></figure>
                                 
                         </div>
 
                     </div>
 
-                    <div className='w-3/5 mt-10'>
+                    <div className='lg:w-3/5 mt-10'>
                         <div className='bg-base-100 rounded-box p-10'>
 
                         <h2 className='text-xl font-medium p-2'>{t('landingTitleFive')}</h2>
