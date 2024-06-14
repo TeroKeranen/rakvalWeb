@@ -16,11 +16,11 @@ export const action = (store)=> async({request}) => {
 
     try {
         const response = await customFetch.post('/verify', data);
-        console.log(response);
+        
             if (response.status === 200) {
                 store.dispatch(verifyUser())
                 toast.success(i18n.t('verification-Success'))
-                console.log("mennään profiiliin")
+                
                 return redirect('/profile');
             } else {
                 toast.error(i18n.t('verification-error'))
@@ -31,7 +31,7 @@ export const action = (store)=> async({request}) => {
         
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error(i18n.t('verification-error'))
         return null;
     }

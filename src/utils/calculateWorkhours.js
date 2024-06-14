@@ -15,7 +15,7 @@ export function calculateTotaWorkTime (workDays) {
     workDays.forEach(workDay => {
 
         if (!workDay.startDate || !workDay.startTime || !workDay.endDate || !workDay.endTime) {
-            console.log("Puuttuvia päivämäärä- tai aikatietoja, ohitetaan tämä workDay");
+            // console.log("Puuttuvia päivämäärä- tai aikatietoja, ohitetaan tämä workDay");
             return; // Ohita tämä iteraatio, koska tarvittavat tiedot puuttuvat
         }
         
@@ -24,7 +24,7 @@ export function calculateTotaWorkTime (workDays) {
         const endDateString = convertDate(workDay.endDate) + 'T' + workDay.endTime;
 
         if (!startDateString || !endDateString) {
-            console.log("Virheelliset päivämäärät, ohitetaan tämä workDay");
+            // console.log("Virheelliset päivämäärät, ohitetaan tämä workDay");
             return; // Ohita tämä iteraatio, koska päivämäärämuunnos epäonnistui
         }
 
@@ -33,7 +33,7 @@ export function calculateTotaWorkTime (workDays) {
 
         // Varmista, että päivämääräobjektit ovat kelvollisia
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-            console.log("Virheelliset päivämääräobjektit, ohitetaan tämä workDay");
+            // console.log("Virheelliset päivämääräobjektit, ohitetaan tämä workDay");
             return; // Ohita tämä iteraatio, jos päivämääräobjektit eivät ole kelvollisia
         }
 

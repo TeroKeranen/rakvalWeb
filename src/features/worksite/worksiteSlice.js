@@ -71,7 +71,7 @@ export const worksiteReady = createAsyncThunk(
                     }
                 })
 
-                console.log("WORKSITEREADY",response);
+                
                 // Päivitä worksiteDetails companySlicessa
                 const updatedWorksiteDetails = response.data; // Oletetaan, että tämä on päivitetty worksite
                 thunkAPI.dispatch(updateWorksiteDetails(updatedWorksiteDetails));
@@ -150,8 +150,7 @@ export const deleteProductFromWorksite = createAsyncThunk(
     'worksite/deleteProductFromWorksite',
     async({worksiteId, productId}, thunkAPI) => {
         return apiMiddleware(async () => {
-            console.log("WORKSITEiD",worksiteId);
-            console.log("PRODUCTID",productId);
+            
             try {
                 const token = thunkAPI.getState().userState.user.token;
                 const response = await customFetch.delete(`worksites/${worksiteId}/products/${productId}`, {
@@ -176,7 +175,7 @@ export const updateProductOnWorksite = createAsyncThunk(
     'worksite/updateProductOnWorksite',
     async({worksiteId, productId, productData}, thunkAPI) => {
         return apiMiddleware(async () => {
-            console.log("SLICE", worksiteId)
+            
             try {
                 const token = thunkAPI.getState().userState.user.token;
                 const response = await customFetch.put(`worksites/${worksiteId}/products/${productId}`, productData, {

@@ -79,7 +79,7 @@ const WorkEntriesButton = ({companyWorksites}) => {
             toast.success('Aloitetaan nauhoitus')
             dispatch(startWorkDay({ worksiteId }));
         }
-        console.log("jatketaan");
+        // console.log("jatketaan");
      
     };
 

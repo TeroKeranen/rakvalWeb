@@ -4,7 +4,7 @@ const ErrorElement = () => {
 
     const error = useRouteError();
 
-    console.log(error);
+    // console.log(error);
 
     return (
         <h4 className="font-bold text-4xl">errorororelement</h4>

@@ -7,14 +7,14 @@ import WorksiteCalendar from "../components/WorksiteCalendar";
 
 const SingleWorksite = () => {
     const {id} = useParams();
-    console.log("id", id);
+    
     const dispatch = useDispatch();
     const company = useSelector(state => state.companyState)
     const userRole = useSelector(state => state.userState.user.role);
     const [ActiveComponent, setActiveComponent] = useState(null);
     const worksiteDetails = company?.worksiteDetails
     const worksiteId = worksiteDetails?._id;
-    console.log("WORKSITEDETAILS", worksiteId)
+    
     
 
     

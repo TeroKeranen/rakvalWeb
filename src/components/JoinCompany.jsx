@@ -39,7 +39,7 @@ const JoinCompany = ({userInfo}) => {
             }
         } catch (error) {
             setIsLoading(false);
-            console.log("error");
+            // console.log("error");
             toast.error(t('fail'))
         }
 

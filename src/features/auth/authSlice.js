@@ -74,12 +74,12 @@ export const changePassword = createAsyncThunk(
                     return response.data
                 } else {
                     const errorData = await response.json();
-                    console.log("errordata", errorData)
+                    // console.log("errordata", errorData)
                     
                     return rejectWithValue(response.data.error || "Password change failed");
                 }
             } catch (error) {
-                console.log("error", error)
+                // console.log("error", error)
                 if (error.response.data.passwordtypeError) {
                     return error.response.data
                 }
@@ -111,7 +111,7 @@ export const fetchUserDetails = createAsyncThunk(
             
             return response.data
             } catch (error) {
-                console.log("errrrooooooo");
+                // console.log("errrrooooooo");
                 return rejectWithValue(error.message);
             }
         })

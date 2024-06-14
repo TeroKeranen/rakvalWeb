@@ -13,14 +13,14 @@ export const addNewWorksite = createAsyncThunk(
     return apiMiddleware(async () => {
       try {
         const {address,city, startTime, worktype, duehours} = data;
-        console.log("lisätäääääää", address, city,startTime,worktype,duehours)
+        // console.log("lisätäääääää", address, city,startTime,worktype,duehours)
         const token = getState().userState.user.token;
         const response = await customFetch.post(`/worksites`, {address, city,startTime,worktype, duehours}, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         })
-        console.log("API response received", response);
+        // console.log("API response received", response);
         
         
         if (!response.status === 200) {
@@ -51,7 +51,7 @@ export const deleteWorksite = createAsyncThunk(
           }
         })
         
-        console.log("DELETE",response);
+        // console.log("DELETE",response);
         if (response.status !== 200) {
           throw new Error('Jotain meni vikaan työmaan poistossa')
         }
@@ -123,7 +123,7 @@ export const fetchCompanyDetails = createAsyncThunk(
         try {
           const token = getState().userState.user.token;
 
-          console.log("companySlice token", token);
+          
           
           const response = await customFetch.get('/company', {
             headers: {
@@ -372,7 +372,7 @@ const companySlice = createSlice({
       
         .addCase(addNewWorksite.fulfilled, (state, action) => {
 
-          console.log("AADCASE", action.payload);
+         
           // state.worksites.push(action.payload);  // Olettaen, että palautat uuden työmaan datan
           // state.loading = false;
         })
@@ -382,7 +382,7 @@ const companySlice = createSlice({
       })
       .addCase(fetchCompanyDetails.fulfilled, (state, action) => {
         
-        console.log("KSKSKSK", action.payload)
+        
         state.company = action.payload;
         state.loading = false;
       })
@@ -501,7 +501,7 @@ const companySlice = createSlice({
           state.message = action.payload.message;
         } else {
           const updatedWorksite = action.payload.data;
-          console.log("updatedworksite", updatedWorksite)
+          
           if (state.worksiteDetails && state.worksiteDetails._id === updatedWorksite._id) {
             state.worksiteDetails = updatedWorksite;
           }

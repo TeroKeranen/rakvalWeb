@@ -51,7 +51,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
                         
                         dispatch(deleteWorksite(worksiteId))
                             .then(response => {
-                                console.log("DELETE2", response);
+                                // console.log("DELETE2", response);
                                 toast.success(t('succeeded'))
                             })
                             .catch(error => {

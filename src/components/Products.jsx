@@ -30,7 +30,7 @@ const Products = ({worksiteDetails}) => {
         const formData = new FormData(event.currentTarget);
         const data = Object.fromEntries(formData);
 
-        console.log(data);
+        
 
         dispatch(addProductToWorksite({
             worksiteId,
