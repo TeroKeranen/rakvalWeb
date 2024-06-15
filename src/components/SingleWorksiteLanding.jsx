@@ -1,4 +1,4 @@
-import mapImage from '../assets/map.jpg'
+import mapImage from '../assets/map-min.jpg'
 import { calculateTotaWorkTime, convertDate, convertToMinutes } from '../utils/calculateWorkhours';
 import { useTranslation } from 'react-i18next';
 

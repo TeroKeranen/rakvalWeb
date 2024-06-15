@@ -18,10 +18,10 @@ const Footer = () => {
             </div>
         </nav> */}
         <nav>
-            <h6 className="footer-title">Privacy policy & terms and conditions</h6>
+            <h6 className="footer-title text-white">Privacy policy & terms and conditions</h6>
             <div className="grid grid-flow-col gap-4">
-                <Link to="/privacypolicy" className="text-blue-500 hover:text-blue-700">Privacy policy</Link>
-                <Link to="/terms-and-conditions" className="text-blue-500 hover:text-blue-700">Terms and conditions</Link>
+                <Link to="/privacypolicy" className="text-white hover:text-blue-700">Privacy policy</Link>
+                <Link to="/terms-and-conditions" className="text-white hover:text-blue-700">Terms and conditions</Link>
             </div>
         </nav>
     </footer>

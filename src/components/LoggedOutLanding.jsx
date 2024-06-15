@@ -1,4 +1,4 @@
-import heroImage from '../assets/kuva.jpg'
+import heroImage from '../assets/kuva.webp'
 import worksiteImage from '../assets/worksiteImg.jpg'
 import mobile from '../assets/mobile.png'
 import './LoggedOutLanding.css'
@@ -52,22 +52,22 @@ const LoggedOutLanding = () => {
                         <h1 className='p-3 mb-10 text-4xl font-bold'>{t('landingTwo')}</h1>
 
                         <div className='flex md:flex-row flex-col justify-between'>
-                            <div className='md:w-4/12 p-4'>
+                            <div className='md:w-4/12 w-full p-4 min-w-0'>
                                 <h2 className='text-xl font-medium p-2'>{t('landingTitleOne')}</h2>
                                 <p>{t('landingTextOne')}</p>
                             </div>
                             <div className="divider lg:divider-horizontal"></div>
-                            <div className='md:w-4/12 p-4'>
+                            <div className='md:w-4/12 w-full p-4 min-w-0'>
                                 <h2 className='text-xl font-medium p-2'>{t('landingTitleTwo')}</h2>
                                 <p>{t('landingTextTwo')}</p>
                             </div>
                             <div className="divider lg:divider-horizontal"></div>
-                            <div className='md:w-4/12 p-4'>
+                            <div className='md:w-4/12 w-full p-4 min-w-0'>
                                 <h2 className='text-xl font-medium p-2'>{t('landingTitleThree')}</h2>
                                 <p>{t('landingTextThree')}</p>
                             </div>
                             <div className="divider lg:divider-horizontal"></div>
-                            <div className='md:w-4/12 p-4'>
+                            <div className='md:w-4/12 w-full p-4 min-w-0'>
                                 <h2 className='text-xl font-medium p-2'>{t('landingTitleFour')}</h2>
                                 <p>{t('landingTextFour')}</p>
                             </div>

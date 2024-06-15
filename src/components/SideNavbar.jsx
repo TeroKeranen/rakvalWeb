@@ -25,7 +25,7 @@ const SideNavbar = ({userRole,onLinkClick, address, setActiveComponent}) => {
 
     return (
        
-        <section className="flex flex-col ">
+        <section className="flex flex-col">
 
             <div className="mx-auto">
                 
@@ -35,7 +35,7 @@ const SideNavbar = ({userRole,onLinkClick, address, setActiveComponent}) => {
                 }}>{address}</h1>
             </div>
 
-            <div className="flex flex-row justify-center items-center lg:flex-col lg:items-stretch">
+            <div className="flex flex-row flex-wrap justify-center items-center lg:flex-col lg:items-stretch">
                 {links.map((link) => {
 
                     if (link.componentType === 'worksiteWorkers' && userRole !== 'admin') {
