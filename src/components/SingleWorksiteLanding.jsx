@@ -25,7 +25,7 @@ const SingleWorksiteLanding = ({worksiteDetails}) => {
             <div className="bg-base-200 h-full w-full">
                 
                 <div className="card w-96 bg-base-100 shadow-xl image-full mx-auto w-full">
-                    <figure><img src={mapImage} alt="Shoes" style={{opacity: 0.7}}/></figure>
+                    <figure><img src={mapImage} alt="mapImage" style={{opacity: 0.7, width: '100%', height: '100%'}}/></figure>
                     <div className="card-body">
                         <h1 className="card-title mx-auto">{worksiteDetails.city}</h1>
                         <h2 className="mx-auto">{worksiteDetails.address}</h2>

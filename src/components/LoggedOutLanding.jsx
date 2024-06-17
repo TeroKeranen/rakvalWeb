@@ -1,6 +1,6 @@
 import heroImage from '../assets/kuva.webp'
-import worksiteImage from '../assets/worksiteImg.jpg'
-import mobile from '../assets/mobile.png'
+import worksiteImage from '../assets/worksiteImg.webp'
+import mobile from '../assets/mobile3.png'
 import './LoggedOutLanding.css'
 import { useTranslation } from 'react-i18next'
 
@@ -79,7 +79,7 @@ const LoggedOutLanding = () => {
 
                     <div className="rounded-box">    
                         <div className="lg:w-4/5 bg-base-100 shadow-xl my-5 mx-auto">
-                            <figure className=''><img src={mobile} alt="Shoes" className='rounded-lg' style={{width: "500px", height:"500px"}}/></figure>
+                            <img src={mobile} alt="mobileapp" className='rounded-lg' style={{width: "500px", height:"500px"}}/>
                                 
                         </div>
 

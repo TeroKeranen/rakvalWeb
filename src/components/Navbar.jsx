@@ -73,7 +73,9 @@ const Navbar = () => {
                         <BsMoonFill className="swap-off h-4 w-4" />
                     </label> */}
                     <button onClick={toggleLanguage}>
-                        <img src={languageFlag} alt={languageAlt} style={{ width: '30px', height: '20px' }}/>
+                        <div style={{ width: '30px', height: '20px' }}>
+                            <img src={languageFlag} alt={languageAlt} style={{ width: '100%' }}/>
+                        </div>
                     </button>
                 </div>
             </div>
