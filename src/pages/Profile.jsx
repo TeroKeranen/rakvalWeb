@@ -65,9 +65,9 @@ const Profile = () => {
 
                 <div className=" text-end py-5 lg:py-5">
                     <Link to="/changepassword">
-                            <button className="btn border-blue-100 mr-10">vaihda salasana</button>
+                            <button className="btn border-blue-100 mr-10">{t('changePassword')}</button>
                     </Link>
-                <button className="btn border-blue-100" onClick={() => deletesAccount()} >Poista tunnuksesi</button>
+                <button className="btn border-blue-100" onClick={() => deletesAccount()} >{t('deleteAccount')}</button>
                 </div>
                 {/* <div className="py-5 lg:py-5 my-auto">
                     
