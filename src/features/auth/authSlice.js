@@ -182,6 +182,33 @@ export const fetchUser = createAsyncThunk(
     }
 )
 
+export const deleteAccount = createAsyncThunk(
+    'user/deleteAccount',
+    async(_, {getState, dispatch, rejectWithValue}) => {
+        return apiMiddleware(async () => {
+            try {
+                const token = getState().userState.user.token;
+                const response = await customFetch.delete('/deleteAccount', {
+                    headers: {
+                        'Authorization' : `Bearer ${token}`
+                    }
+                })
+
+                if (response.status === 200) {
+                    dispatch(logout()); // Olettaen että logout kutsuu localStoragen puhdistusta
+                    return response.data;
+                }else {
+                    const errorData = await response.json();
+                    return rejectWithValue(errorData.error || "Failed to delete account");
+                }
+                
+            } catch (error) {
+                return rejectWithValue(error.message);
+            }
+        })
+    }
+)
+
 
 
 
@@ -282,6 +309,19 @@ const authSlice = createSlice({
       .addCase(getSignedUrl.fulfilled, (state,action) => {
         state.urls = action.payload
       })
+
+      // käyttäjän poisto
+      .addCase(deleteAccount.pending, (state) => {
+        // Voit lisätä tilaan indikaation, että poisto on käynnissä
+        })
+        .addCase(deleteAccount.fulfilled, (state, action) => {
+            // Käsittele tila, kun käyttäjätili on onnistuneesti poistettu
+            state.user = null; // Aseta käyttäjätila tyhjäksi
+        })
+        .addCase(deleteAccount.rejected, (state, action) => {
+            // Käsittele virhetilanne, jos pyyntö epäonnistuu
+            state.error = action.error.message;
+        });
 
       // tokenin uusiminen
     //   .addCase(refreshAccessToken.fulfilled, (state,action) => {

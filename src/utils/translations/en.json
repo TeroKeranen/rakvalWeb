@@ -36,6 +36,8 @@
   "signinHeader": "Sign in",
   "registerHeader": "Create account",
   "logout": "Logout",
+  "deleteAccount": "Delete your account",
+  "areUsure": "Are you sure?",
 
   "RegisterText": "Sign in with your credentials",
   "loginText": "No account? Register from this link.",

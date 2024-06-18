@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import {BsCart3, BsMoonFill, BsSunFill} from 'react-icons/bs'
-import { toggleTheme } from "../features/auth/authSlice";
+import { deleteAccount } from "../features/auth/authSlice";
+import { confirmAlert } from 'react-confirm-alert'; // Import
 
 
 const Profile = () => {
@@ -21,6 +23,34 @@ const Profile = () => {
         
     // }
 
+    const deletesAccount = async () => {
+        confirmAlert({
+            title: t('deleteAccount'),
+            message: t('areUsure'),
+            buttons: [
+                {
+                    label: 'Ok',
+                    onClick: () => {
+                        
+                        dispatch(deleteAccount())
+                            .then(response => {
+                                // console.log("DELETE2", response);
+                                toast.success(t('succeeded'))
+                            })
+                            .catch(error => {
+                                toast.error(t('fail'))
+                            })     
+                        
+                    }
+                },
+                {
+                    label: "No",
+                    onClick: () => {}
+                }
+            ]
+        })
+    }
+
     return (
         <section className="h-screen">
 
@@ -37,8 +67,8 @@ const Profile = () => {
                     <Link to="/changepassword">
                             <button className="btn border-blue-100 mr-10">vaihda salasana</button>
                     </Link>
+                <button className="btn border-blue-100" onClick={() => deletesAccount()} >Poista tunnuksesi</button>
                 </div>
-
                 {/* <div className="py-5 lg:py-5 my-auto">
                     
                         <label className="swap swap-rotate">

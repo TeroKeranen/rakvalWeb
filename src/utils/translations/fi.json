@@ -36,6 +36,8 @@
     "signinHeader": "Kirjaudu sisään",
     "registerHeader": "Luo tunnus",
     "logout": "Kirjaudu ulos",
+    "deleteAccount": "Poista tämä käyttäjä",
+    "areUsure": "Oletko varma?",
 
     "RegisterText": "Kirjaudu omilla tunnuksilla sisään",
     "loginText": "Ei tunnuksia? Rekisteröidy tästä linkistä",
