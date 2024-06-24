@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# local env files
+.env*.local
+.env
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
