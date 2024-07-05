@@ -49,7 +49,7 @@ const About = () => {
             </div>
 
             {/* Kolmas osio */}
-            <div className=" p-5 my-5 flex flex-col lg:flex-row rounded-lg ">
+            {/* <div className=" p-5 my-5 flex flex-col lg:flex-row rounded-lg ">
 
             <section className={`bg-base-200 lg:w-2/5 m-4 py-4 h-96 rounded-lg ${boxShadowClass} `}>
 
@@ -100,7 +100,7 @@ const About = () => {
             </section>
             {/* <PriceComponent price="12" type="pieni" worksiteAmount="10"/> */}
                
-            </div>
+            {/* </div> */} 
             </div>
         </div>
     )

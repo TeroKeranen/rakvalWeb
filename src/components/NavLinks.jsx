@@ -13,7 +13,7 @@ const NavLinks = () => {
         {id: 2, url: 'company', text: 'company'},
         {id: 3, url: 'worksites', text: 'worksites'},
         {id: 4, url: 'about', text: 'about'},
-        {id: 5, url: '/pricing', text: 'pricing'}
+        // {id: 5, url: '/pricing', text: 'pricing'}
     ]
 
 
