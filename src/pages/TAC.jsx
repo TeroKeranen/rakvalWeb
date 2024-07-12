@@ -195,7 +195,7 @@ const TAC = () => {
                 {/* seitsemäs osio päättyy*/}
 
                 {/* seitsemäs osio */}
-                <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
+                {/* <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
                     <div className="mt-10 lg:w-3/5">
                         <h1 className="text-3xl font-bold">6. PURCHASES AND PAYMENT</h1>
                         <p className="mt-5">We accept the following forms of payment:</p>
@@ -218,11 +218,11 @@ const TAC = () => {
                         
                     </div>
 
-                </div>
+                </div> */}
                 {/* seitsemäs osio päättyy*/}
 
                 {/* kahdeksas osio */}
-                <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
+                {/* <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
                     <div className="mt-10 lg:w-3/5">
                         <h1 className="text-3xl font-bold">7. SUBSCRIPTIONS</h1>
                        
@@ -248,7 +248,7 @@ const TAC = () => {
                         <p className="mt-5">We may, from time to time, make changes to the subscription fee and will communicate any price changes to you in accordance with applicable law.</p>
 
                     </div>
-                </div>
+                </div> */}
                 {/* kahdeksas osio päättyy*/}
 
                 {/* yhdesäs osio */}
@@ -312,7 +312,7 @@ const TAC = () => {
 
                                 <li>Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Services, or use or launch any unauthorized script or other software.</li>
 
-                                <li>Use a buying agent or purchasing agent to make purchases on the Services.</li>
+                                {/* <li>Use a buying agent or purchasing agent to make purchases on the Services.</li> */}
 
                                 <li>Make any unauthorized use of the Services, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.</li>
 
@@ -586,7 +586,7 @@ const TAC = () => {
                 {/* kkolmastoista osio päättyy*/}
                 {/* kolmastoista osio */}
 
-                <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
+                {/* <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
                     <div className="mt-10 lg:w-3/5">
                         <h1 className="text-3xl font-bold">
                         24. ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</h1>
@@ -597,7 +597,7 @@ const TAC = () => {
                     </div>
 
                  
-                </div>
+                </div> */}
                 {/* kkolmastoista osio päättyy*/}
                 {/* kolmastoista osio */}
 
