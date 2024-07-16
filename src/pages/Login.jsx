@@ -67,6 +67,7 @@ const Login = () => {
                         <SubmitBtn text={t('loginbtn')} />
                     </div>
                     <p className="text-center">{t('loginText')} <Link to="/register" className="ml-2 link link-hover link-primary capitalize">{t('register')}</Link> </p>
+                    <p className="text-center"><Link to="/forgot-password" className="ml-2 link link-hover link-primary capitalize">{t('login-forgotPassword')}</Link> </p>
                 </Form>
             
         </section>

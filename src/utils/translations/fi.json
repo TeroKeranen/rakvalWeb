@@ -44,6 +44,7 @@
     "loginbtn": "Kirjaudu",
     "loginLabelPass": "Salasana",
     "loginLabelEmail": "Sähköpostiosoite",
+    "login-forgotPassword": "Salasana unohtunut?",
 
 
     "register": "Rekisteröidy",
@@ -169,7 +170,17 @@
     "signup-missingDataError": "Tietoja puuttuu",
 
     "product-delete-title": "Poista tuote",
-    "product-delete-text": "Oletko varma että haluat poistaa tuotteen?"
+    "product-delete-text": "Oletko varma että haluat poistaa tuotteen?",
+
+    "resetPassword-succesMessage": "Salasana vaihdettu onnistuneesti",
+    "resetPassword-failPasswordNotSame": "Salasanat eivät täsmää",
+    "resetPassword-failTypeError": "Salasanan tulee olla vähintään 6 merkkiä pitkä ja sisältää ainakin yhden erikoismerkin",
+    "resetPassword-fail": "Salasanan vaihto epäonnistui",
+    "resetPassword-title": "Resetoi salasana",
+    "resetPassword-newpassPlaceholder": "Uusi salasana",
+    "resetPassword-newpassAgainPlaceholder": "Syötä salasana uudestaan",
+    "resetPassword-button": "Luo uusi salasana"
+
 
     
 

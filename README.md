@@ -104,6 +104,10 @@ To get the project up and running on your local machine, follow these steps:
     http://localhost:5173/
 
 
+### Building dist
+1. npm run build
+
+
 ## User Registration and Account Activation
 
 After accessing the Rakval application in your browser, you can register an account to start managing or joining construction projects. There are two main types of user roles you can register as:

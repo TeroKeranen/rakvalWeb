@@ -44,6 +44,7 @@
   "loginbtn": "Login",
   "loginLabelPass": "Password",
   "loginLabelEmail": "Email",
+   "login-forgotPassword": "Forgot password?",
   
   "register": "Register",
   "register-success": "User created successfully.",
@@ -168,8 +169,16 @@
 
   
   "product-delete-title": "Delete product",
-  "product-delete-text": "Are you sure you want to delete the product?"
+  "product-delete-text": "Are you sure you want to delete the product?",
 
+  "resetPassword-successMessage": "Password changed successfully",
+  "resetPassword-failPasswordNotSame": "Passwords do not match",
+  "resetPassword-failTypeError": "Password must be at least 6 characters long and include at least one special character",
+  "resetPassword-fail": "Password reset failed",
+  "resetPassword-title": "Reset Password",
+  "resetPassword-newpassPlaceholder": "New password",
+  "resetPassword-newpassAgainPlaceholder": "Enter password again",
+  "resetPassword-button": "Create new password"
     
   }
   

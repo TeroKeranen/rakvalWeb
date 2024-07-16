@@ -19,7 +19,9 @@ import {
   Pricing,
   AdminRegister,
   Privacypolicy,
-  TAC
+  TAC,
+  ForgotPassword,
+  ResetPassword
   
   } from './pages'
   import { store } from './store'
@@ -134,7 +136,9 @@ const router = createBrowserRouter([
         element: (
           <TAC />
         )
-      }
+      },
+
+      
     ]
   },
   
@@ -161,6 +165,17 @@ const router = createBrowserRouter([
   element: <Verification />,
   errorElement: <Error />,
   action: verifyAction(store)
+  },
+  {
+    path:'reset-password/:token',
+    element: <ResetPassword />
+    
+  },
+  {
+    path:'forgot-password',
+    element: (
+      <ForgotPassword /> 
+    )
   },
  
 ])
