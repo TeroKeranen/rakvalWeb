@@ -101,9 +101,20 @@ const Privacypolicy = () => {
                             </ul>
 
                             {/* Lisää tämä kun ostetaan jotain                         */}
-                            {/* <p className="my-5">
-                            <span class="font-bold">Payment Data.</span> We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by Stripe. You may find their privacy notice link(s) here: <span class="font-bold"><a href="https://stripe.com/en-fi/privacy" target="_blank">https://stripe.com/en-fi/privacy.</a></span>
-                            </p> */}
+                            <p className="my-5">
+                            <span class="font-bold">Payment Data.</span> We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by the relevant payment processor depending on the platform you use:
+                            </p>
+                            <ul class="list-disc ml-8">
+                                <li>
+                                    <span class="font-bold">Apple App Store:</span> If you make a purchase through an Apple device, payment data is handled and stored by Apple. You can find their privacy notice here: <span class="font-bold"><a href="https://www.apple.com/legal/privacy/" target="_blank">https://www.apple.com/legal/privacy/</a></span>
+                                </li>
+                                <li>
+                                    <span class="font-bold">Google Play Store:</span> If you make a purchase through a Google device, payment data is handled and stored by Google. You can find their privacy notice here: <span class="font-bold"><a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></span>
+                                </li>
+                                {/* <li>
+                                    <span class="font-bold">Stripe:</span> If you make a purchase through a method that uses Stripe, payment data is handled and stored by Stripe. You can find their privacy notice here: <span class="font-bold"><a href="https://stripe.com/en-fi/privacy" target="_blank">https://stripe.com/en-fi/privacy</a></span>
+                                </li> */}
+                            </ul>
 
                             <p className="my-5">
                             <span class="font-bold">Application Data.</span> If you use our application(s), we also may collect the following information if you choose to provide us with access or permission:
@@ -132,7 +143,7 @@ const Privacypolicy = () => {
                         <ul  class="list-disc ml-8">
                             <li><span class="font-bold">To facilitate account creation and authentication and otherwise manage user accounts.</span> We may process your information so you can create and log in to your account, as well as keep your account in working order.</li>
                             <li><span class="font-bold">To send administrative information to you.</span> We may process your information to send you details about our products and services, changes to our terms and policies, and other similar information.</li>
-                            {/* <li><span class="font-bold">To fulfill and manage your orders.</span> We may process your information to fulfill and manage your orders, payments, returns, and exchanges made through the Services.</li> */}
+                            <li><span class="font-bold">To fulfill and manage your orders.</span> We may process your information to fulfill and manage your orders, payments, returns, and exchanges made through the Services.</li>
                             <li><span class="font-bold">To request feedback.</span> We may process your information when necessary to request feedback and to contact you about your use of our Services.</li>
                             <li><span class="font-bold">To save or protect an individual's vital interest.</span> We may process your information when necessary to save or protect an individual’s vital interest, such as to prevent harm.</li>
                         </ul>
@@ -327,12 +338,12 @@ const Privacypolicy = () => {
                                     <td>NO</td>
                                     
                                 </tr>
-                                {/* <tr>
+                                <tr>
                                     <th>D. Commercial information</th>
                                     <td>Transaction information, purchase history, financial details, and payment information</td>
                                     <td>YES</td>
                                     
-                                </tr> */}
+                                </tr>
                                 <tr>
                                     <th>E. Biometric information</th>
                                     <td>Fingerprints and voiceprints</td>

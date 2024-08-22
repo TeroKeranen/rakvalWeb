@@ -179,7 +179,14 @@
     "resetPassword-title": "Resetoi salasana",
     "resetPassword-newpassPlaceholder": "Uusi salasana",
     "resetPassword-newpassAgainPlaceholder": "Syötä salasana uudestaan",
-    "resetPassword-button": "Luo uusi salasana"
+    "resetPassword-button": "Luo uusi salasana",
+
+    "forgotPassword-title":"Unohditko salasanasi?",
+    "forgotPassword-placeholder":"Sähköpostiosoite",
+    "forgotPassword-button":"Lähetä resetointilinkki",
+    "forgotPassword-successMessage":"Resetointilinkki lähetetty onnistuneesti, jos sähköpostia ei löydy saapuneista, tarkista roskaposti.",
+    "forgotPassword-errorMessage":"Jotain meni väärin, yritä uudestaan."
+      
 
 
     

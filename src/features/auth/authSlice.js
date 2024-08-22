@@ -209,6 +209,28 @@ export const deleteAccount = createAsyncThunk(
     }
 )
 
+export const resetPasswordRequest = createAsyncThunk(
+    'user/resetPasswordRequest',
+    async(email, {rejectWithValue}) => {
+        try {
+            const response = await customFetch.post('/password-reset', {email});
+
+            
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                const errorData = await response.json();
+                return rejectWithValue(errorData.error || 'plääh')
+            }
+        } catch (error) {
+            
+            
+                
+            return rejectWithValue(error.response.data);
+        }
+    }
+)
+
 export const resetPassword = createAsyncThunk(
     'user/resetPassword',
     async({token, newPassword}, {rejectWithValue}) => {

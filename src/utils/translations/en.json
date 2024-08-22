@@ -178,7 +178,13 @@
   "resetPassword-title": "Reset Password",
   "resetPassword-newpassPlaceholder": "New password",
   "resetPassword-newpassAgainPlaceholder": "Enter password again",
-  "resetPassword-button": "Create new password"
+  "resetPassword-button": "Create new password",
+
+  "forgotPassword-title":"Forgot Password",
+  "forgotPassword-placeholder":"Email address",
+  "forgotPassword-button":"Send reset link",
+  "forgotPassword-successMessage":"Reset link sent successfully. If the email is not in your inbox, check your spam folder.",
+  "forgotPassword-errorMessage":"Something went wrong, please try again."
     
   }
   

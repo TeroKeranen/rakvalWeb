@@ -195,13 +195,14 @@ const TAC = () => {
                 {/* seitsemäs osio päättyy*/}
 
                 {/* seitsemäs osio */}
-                {/* <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
+                <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
                     <div className="mt-10 lg:w-3/5">
                         <h1 className="text-3xl font-bold">6. PURCHASES AND PAYMENT</h1>
                         <p className="mt-5">We accept the following forms of payment:</p>
 
                         <ul  class="list-disc ml-8">
-                                <li>Stripe</li>
+                            <li>Apple In-App Purchases</li>
+                            <li>Google Play In-App Purchases</li>
                                 
                         </ul>
 
@@ -218,11 +219,11 @@ const TAC = () => {
                         
                     </div>
 
-                </div> */}
+                </div>
                 {/* seitsemäs osio päättyy*/}
 
                 {/* kahdeksas osio */}
-                {/* <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
+                <div className="flex flex-col items-center p-5 mt-5 rounded-lg">
                     <div className="mt-10 lg:w-3/5">
                         <h1 className="text-3xl font-bold">7. SUBSCRIPTIONS</h1>
                        
@@ -238,17 +239,17 @@ const TAC = () => {
                     <div className="my-10 text-lg  lg:w-3/5">
                         <h2 className="my-5 font-bold">Cancellation</h2>
 
-                        <p className="mt-5">You can cancel your subscription at any time by logging into your account. Your cancellation will take effect at the end of the current paid term. If you have any questions or are unsatisfied with our Services, please email us at rakivalafinland@gmail.com.</p>
+                        <p className="mt-5">You can cancel your subscription at any time by logging into your Apple App Store or Google Play Store account settings. Your cancellation will take effect at the end of the current paid term. If you have any questions or are unsatisfied with our Services, please contact us at rakivalafinland@gmail.com.</p>
 
                     </div>
 
                     <div className="my-10 text-lg  lg:w-3/5">
                         <h2 className="my-5 font-bold">Fee Changes</h2>
 
-                        <p className="mt-5">We may, from time to time, make changes to the subscription fee and will communicate any price changes to you in accordance with applicable law.</p>
+                        <p className="mt-5">We may, from time to time, make changes to the subscription fee and will communicate any price changes to you in accordance with applicable law. Subscription fees may vary based on your location and chosen subscription plan. Any changes to subscription fees will be communicated to you through the Apple App Store or Google Play Store.</p>
 
                     </div>
-                </div> */}
+                </div>
                 {/* kahdeksas osio päättyy*/}
 
                 {/* yhdesäs osio */}
