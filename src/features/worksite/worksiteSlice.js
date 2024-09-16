@@ -13,12 +13,12 @@ import apiMiddleware from "../middleWare/refresMiddleWare";
 
 export const startWorkDay = createAsyncThunk(
     'worksite/startWorkDay',
-    async({worksiteId}, thunkAPI) => {
+    async({worksiteId,userId, startTime}, thunkAPI) => {
         return apiMiddleware(async () => {
             try {
                 const token = thunkAPI.getState().userState.user.token;
             
-                const response = await customFetch.post(`/worksites/${worksiteId}/startday`,{}, {
+                const response = await customFetch.post(`/worksites/${worksiteId}/startday`,{userId,startTime}, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -36,11 +36,12 @@ export const startWorkDay = createAsyncThunk(
 
 export const endWorkDay = createAsyncThunk(
     'worksite/endWorkDay',
-    async({worksiteId}, thunkAPI) => {
+    async({worksiteId, workDayId, endTime}, thunkAPI) => {
         return apiMiddleware(async () => {
            try {
+            
             const token = thunkAPI.getState().userState.user.token;
-            const response = await customFetch.post(`/worksites/${worksiteId}/endday`, {}, {
+            const response = await customFetch.post(`/worksites/${worksiteId}/endday`, {workDayId, endTime}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -126,20 +127,26 @@ export const addProductToWorksite = createAsyncThunk(
     async({worksiteId, productData}, thunkAPI) => {
         return apiMiddleware(async () => {
             try {
+               
                 const token = thunkAPI.getState().userState.user.token;
                 const response = await customFetch.post(`worksites/${worksiteId}/add-product`, productData, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 })
+
+            //    console.log("response", response);
+            //    console.log("response.data", response.data)
                 if (response.status === 201) {
                     // Jos tarpeen, voit päivittää tilaa tähän tai palauttaa tiedot
                     return response.data;
                 } else {
                     throw new Error('Failed to add product');
+                    
                 }
                 
             } catch (error) {
+                console.log("error", error);
                 return thunkAPI.rejectWithValue(error.response.data);
             }
         })
@@ -173,12 +180,14 @@ export const deleteProductFromWorksite = createAsyncThunk(
 
 export const updateProductOnWorksite = createAsyncThunk(
     'worksite/updateProductOnWorksite',
-    async({worksiteId, productId, productData}, thunkAPI) => {
+    async({worksiteId, productId, productData, companyId}, thunkAPI) => {
         return apiMiddleware(async () => {
             
+            const {productName, quantity, barcode} = productData;
+
             try {
                 const token = thunkAPI.getState().userState.user.token;
-                const response = await customFetch.put(`worksites/${worksiteId}/products/${productId}`, productData, {
+                const response = await customFetch.put(`worksites/${worksiteId}/products/${productId}`, {productName, quantity, companyId, barcode}, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

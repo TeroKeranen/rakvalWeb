@@ -336,6 +336,27 @@ export const leaveCompany = createAsyncThunk(
 )
 
 
+export const fetchCompanyProducts = createAsyncThunk(
+  'company/companyProducts',
+  async(companyId, {getState,rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        
+        const token = getState().userState.user.token;
+        const response = await customFetch.get(`/companyProducts?companyId=${companyId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        // console.log("response.data", response.data)
+        return response.data.products;
+      } catch (error) {
+        console.log("errorororor", error);
+      }
+    })
+  }
+)
+
 
 const initialState = {
     company: null,
@@ -346,6 +367,7 @@ const initialState = {
     message: null,
     error: null,
     events: null,
+    products: null,
   };
 
 const companySlice = createSlice({
@@ -597,6 +619,12 @@ const companySlice = createSlice({
         if (state.worksiteDetails && state.worksiteDetails._id === action.payload.worksite._id) {
             state.worksiteDetails.products = action.payload.worksite.products;
         }
+      })
+
+      // yrityksen tuotteiden nouto
+      .addCase(fetchCompanyProducts.fulfilled, (state, action ) => {
+        // state.products = action.payload;
+        state.company.products = action.payload;
       })
 
     }

@@ -142,7 +142,7 @@ const JoinCompany = ({userInfo}) => {
     }
     return (
         <div>
-            {role === 'admin' ? renderAdminForm() : renderUserForm()}
+            {(role ==='admin' || role === 'superAdmin') ? renderAdminForm() : renderUserForm()}
         </div>
     )
 

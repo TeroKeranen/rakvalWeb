@@ -38,6 +38,15 @@
     "logout": "Kirjaudu ulos",
     "deleteAccount": "Poista tämä käyttäjä",
     "areUsure": "Oletko varma?",
+    "quantity": "Määrä",
+    "product": "Tuote",
+    "products": "Tuotteet",
+    "description": "Kuvaus",
+    "price": "Hinta",
+    "barcodeNumber": "Viivakoodin numero",
+     "productDatabase-open-btn": "Yrityksen tuotteet",
+     "add-product-title": "Lisää tuote",
+     "kpl": "kpl",
 
     "RegisterText": "Kirjaudu omilla tunnuksilla sisään",
     "loginText": "Ei tunnuksia? Rekisteröidy tästä linkistä",
@@ -171,6 +180,8 @@
 
     "product-delete-title": "Poista tuote",
     "product-delete-text": "Oletko varma että haluat poistaa tuotteen?",
+    "productScreen-updateTitle": "Muokkaa tuotetta",
+    "productScreen-updateSure": "Oletko varma että haluat muokata tuotetta?",
 
     "resetPassword-succesMessage": "Salasana vaihdettu onnistuneesti",
     "resetPassword-failPasswordNotSame": "Salasanat eivät täsmää",

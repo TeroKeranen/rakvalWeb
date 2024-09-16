@@ -51,33 +51,54 @@ const WorkEntriesButton = ({companyWorksites}) => {
 
     },[workDay,worksiteId])
 
+    const datePicker = () => {
+        const currentDate = new Date();
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Muista lisätä 1 kuukauteen
+        const year = currentDate.getFullYear();
+        const thisDay = `${day}.${month}.${year}`;
+    
+        const hours = String(currentDate.getHours()).padStart(2, '0');
+        const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+        const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+    
+        const timeOnly = `${hours}:${minutes}:${seconds}`;
+        console.log("timeonly", timeOnly);
+        return timeOnly;
+    }
 
     const handleEndDay = () => {
+        const endTime = datePicker();
         const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
-
+        const workDayId = onGoingWorkDay?._id;
+        
         if (onGoingWorkDay) {
             setDayIsOn(false);
-            dispatch(endWorkDay({worksiteId}))
+            dispatch(endWorkDay({worksiteId, workDayId,  endTime}))
             toast.success("Nauhoitus suljettu")
         } else {
             toast.error("Tapahtui virhe");
         }
 
     }
+    
+
+
+
     const handleStartDay = () => {
 
         
         // Katsotana onko käyttäjällä työpäivä käynnissä jossain työmaalla
         const onGoingWorkDayAnyWorksite = isRunningWorkDayOnAnyWorksite(userId);
         const onGoingWorkDay = workDay.find((workDay) => workDay.workerId === userId && workDay.running === true);
-        
+        const startTime = datePicker();
         
         if (onGoingWorkDayAnyWorksite || onGoingWorkDay) {
             toast.error('Nauhoitus päällä jossain')
         } else {
             setDayIsOn(true);
             toast.success('Aloitetaan nauhoitus')
-            dispatch(startWorkDay({ worksiteId }));
+            dispatch(startWorkDay({ worksiteId,userId, startTime }));
         }
         // console.log("jatketaan");
      

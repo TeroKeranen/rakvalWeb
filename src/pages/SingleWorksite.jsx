@@ -1,6 +1,6 @@
 import { createElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleWorksite, clearWorksiteDetails } from "../features/company/companySlice";
+import { fetchSingleWorksite, clearWorksiteDetails, fetchCompanyProducts } from "../features/company/companySlice";
 import { Outlet, useParams } from "react-router-dom";
 import { AddFloorplanImg, Floorplan, Products, SideNavbar, SingleWorksiteLanding, WorkEntries, WorkEntriesButton, WorksiteWorkers } from "../components";
 import WorksiteCalendar from "../components/WorksiteCalendar";
@@ -14,6 +14,8 @@ const SingleWorksite = () => {
     const [ActiveComponent, setActiveComponent] = useState(null);
     const worksiteDetails = company?.worksiteDetails
     const worksiteId = worksiteDetails?._id;
+    const companyId = company?.company?._id
+    
     
     
 
@@ -26,6 +28,7 @@ const SingleWorksite = () => {
     useEffect(() => {
         if (!worksiteDetails) {
             dispatch(fetchSingleWorksite(id))
+            fetchCompanyProducts(companyId)
         }
     },[dispatch, worksiteDetails])
 

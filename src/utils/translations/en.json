@@ -38,6 +38,15 @@
   "logout": "Logout",
   "deleteAccount": "Delete your account",
   "areUsure": "Are you sure?",
+  "quantity": "Quantity",
+  "product": "Product",
+  "products": "Products",
+  "description": "Description",
+  "price": "Price",
+  "barcodeNumber": "Barcode number",
+  "productDatabase-open-btn": "Company products",
+  "add-product-title": "Add product",
+  "kpl": "pcs",
 
   "RegisterText": "Sign in with your credentials",
   "loginText": "No account? Register from this link.",
@@ -170,6 +179,8 @@
   
   "product-delete-title": "Delete product",
   "product-delete-text": "Are you sure you want to delete the product?",
+  "productScreen-updateTitle": "Edit product",
+  "productScreen-updateSure": "Are you sure you want to edit the product?",
 
   "resetPassword-successMessage": "Password changed successfully",
   "resetPassword-failPasswordNotSame": "Passwords do not match",

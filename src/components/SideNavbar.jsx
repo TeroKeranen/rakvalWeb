@@ -9,6 +9,8 @@ import { MdArrowBack } from "react-icons/md";
 
 
 const SideNavbar = ({userRole,onLinkClick, address, setActiveComponent}) => {
+
+    
     const [selectedId, setSelectedId] = useState(null);
     const {t} = useTranslation();
     const links = [
@@ -38,7 +40,7 @@ const SideNavbar = ({userRole,onLinkClick, address, setActiveComponent}) => {
             <div className="flex flex-row flex-wrap justify-center items-center lg:flex-col lg:items-stretch">
                 {links.map((link) => {
 
-                    if (link.componentType === 'worksiteWorkers' && userRole !== 'admin') {
+                    if (link.componentType === 'worksiteWorkers' && userRole !== 'admin' && userRole !== 'superAdmin') {
                         return null;
                     }
                     return (

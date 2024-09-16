@@ -12,7 +12,7 @@ const LandingpageWorksiteProgress = ({worksites,  userInfo}) => {
     
     // filteröidään työmaat ja näytetään peruskäyttäjälle vain ne johon hänet on liitetty
     const filteredWorksites = worksites.filter(worksite => {
-        if (userRole === 'admin') {
+        if (userRole === 'admin' || userRole === 'superAdmin') {
             return true;
         } else {
             return worksite.workers.includes(userId);

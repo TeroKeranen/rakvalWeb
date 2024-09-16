@@ -38,7 +38,7 @@ const LandingPageWorkOn = ({worksites, userInfo}) => {
     }, []);
 
     const filteredRunningWorksites = runningWorkSites.filter(site => {
-        if (userRole === 'admin') {
+        if (userRole === 'admin' || userRole === 'superAdmin') {
             return true;
         } else {
             return site.activeWorkerIds.includes(userId);

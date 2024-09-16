@@ -33,7 +33,7 @@ const WorkEntries = () => {
     
     useEffect(() => {
 
-        if (userRole === 'admin') {
+        if (userRole === 'admin' || userRole === 'superAdmin') {
             setOwnWorkEntries(allWorkEntries);
         } else {
             const ownWorksites = allWorkEntries.filter(workEntry => workEntry.workerId === userId);
@@ -44,7 +44,7 @@ const WorkEntries = () => {
     },[allWorkEntries, userId])
 
     useEffect(() => {
-        if (userRole === 'admin' && allWorkEntries.length > 0) {
+        if ((userRole === 'admin' || userRole === 'superAdmin') && allWorkEntries.length > 0) {
             const fetchUsers = async () => {
                 const userDetailsPromises = allWorkEntries.map(workEntry => {
                     const userInStore = usersById[workEntry.workerId];
@@ -73,7 +73,7 @@ const WorkEntries = () => {
     //   console.log(workEntriesWithUserDetails)
 
      
-    const entriesToShow = userRole === 'admin' ? workEntriesWithUserDetails : ownWorkEntries;
+    const entriesToShow = (userRole === 'admin' || userRole === 'superAdmin') ? workEntriesWithUserDetails : ownWorkEntries;
 
     
     
@@ -89,7 +89,7 @@ const WorkEntries = () => {
                     if (workEntry.running) {
                         return (
                             <div className=" bg-red-400 border-2 rounded-lg p-2 my-2 w-3/5 mx-auto" key={index}>
-                                {userRole === 'admin' && <p className="text-neutral-800 font-bold">{workEntry.userName}</p>}
+                                {(userRole === 'admin'|| userRole === 'superAdmin') && <p className="text-neutral-800 font-bold">{workEntry.userName}</p>}
                                 <p className="text-neutral-800 text-lg">Aloitettu: {workEntry.startDate} {workEntry.startTime}</p>
                                 <p className="text-neutral-800 text-lg">Lopetettu: {workEntry.endDate}</p>
                             </div>
@@ -98,7 +98,7 @@ const WorkEntries = () => {
 
                         return (
                             <div className="bg-base-200 border-2 rounded-lg p-2 my-2 bg- w-3/5 mx-auto" key={index}>
-                                {userRole === 'admin' && <p className=" font-bold">{workEntry.userName}</p>}
+                                {(userRole === 'admin' || userRole === 'superAdmin') && <p className=" font-bold">{workEntry.userName}</p>}
                                 <p className=" text-lg">Aloitettu: {workEntry.startDate} {workEntry.startTime}</p>
                                 <p className=" text-lg">Lopetettu: {workEntry.endDate} {workEntry.endTime}</p>
                             </div>

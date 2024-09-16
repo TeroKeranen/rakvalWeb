@@ -28,11 +28,11 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
      // Suodata työmaat tyypin perusteella
      const regularWorksites = worksites.filter(worksite =>
         (worksite.worktype === 'Construction site' || worksite.worktype === "Työmaa") && 
-        (role ==='admin' || worksite.workers.includes(_id)));
+        ((role ==='admin' || role === 'superAdmin') || worksite.workers.includes(_id)));
 
      const smallWorksites = worksites.filter(worksite =>
         (worksite.worktype === 'Private client' || worksite.worktype === "Yksityisasiakas") &&
-        ( role ==='admin' || worksite.workers.includes(_id)));
+        ( (role ==='admin' || role === 'superAdmin') || worksite.workers.includes(_id)));
 
     
      useEffect(() => {
@@ -78,7 +78,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
         worksites.map(({ address, city, _id }, index) => (
             <div key={_id} className={`bg-slate-100 py-4 ${boxShadowClass} rounded-lg overflow-hidden mb-4 text-center mx-auto w-full lg:w-1/2 ${index === 0 ? 'mt-4' : ''}`}>
             
-            {userRole === 'admin' && 
+            {userRole === 'admin' || userRole === 'superAdmin' && 
                 <MdDeleteOutline onClick={() => handleDelete(_id)} className="hover:text-red-600 w-6 h-6 cursor-pointer active:bg-violet-600 "/>
             }
             <Link to={`/worksites/${_id}`} key={_id} className="block">
@@ -99,7 +99,7 @@ const WorksitesComponent = ({worksites, userInfo, userRole}) => {
             
 
             <div className="flex justify-center py-3">
-                {role === 'admin' && 
+                {role === 'admin' || role === 'superAdmin' && 
                 
                 <Link to="/addworksite">
                         <button className="btn border-blue-100">{t('worksiteCompAddWorksitebtn')}</button>
