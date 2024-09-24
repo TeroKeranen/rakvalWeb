@@ -10,7 +10,7 @@ const LandingPageEvents = ({ events }) => {
     
     const boxShadowClass = theme === 'dracula' ? 'shadow-customDracula' : 'shadow-customWinter'
 
-    // console.log("events", events)
+    
     const eventTypeToText = {
         "work-start": t('work-start'),
         "work-end": t('work-end'),
@@ -46,9 +46,9 @@ const LandingPageEvents = ({ events }) => {
             const userEmail = event.user && event.user.email ? event.user.email : "Ei sähköpostia";
             const workSite = event.worksite && event.worksite.address ? event.worksite.address : "Ei löydy työmaan tietoja";
             return (
-                <div className="mx-auto border-b my-0 p-0 rounded-lg" style={{width: '300px'}} key={index}>
+                <div className="mx-auto border-b my-0 p-0 rounded" style={{width: '300px'}} key={index}>
                     <div className="p-1 flex flex-col items-center">
-                        <h1 className="text-lg text-center">{workSite}</h1>
+                        <h1 className="text-lg text-center font-bold">{workSite}</h1>
                         {event.timestamp && <p>{changeEventsTimestamp(event.timestamp)}</p>}
                         <p>{displayText}</p>
                         <p>{userEmail}</p>

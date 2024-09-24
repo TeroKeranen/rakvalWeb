@@ -86,6 +86,11 @@
     "companyComponentCompanyCode": "Yrityskoodi",
     "companyComponentCompanyDelete": "Poista yritys itseltäsi",
     "companyComponentCompanySure": "Oletko varma että haluat poistua yrityksestä",
+    "companyScreen-titleTwo": "Anna Admin oikeudet",
+    "companyScreen-roleChange": "Roolin vaihto",
+    "companyScreen-roleChange-sure": "Haluatko varmasti vaihtaa käyttäjän roolin",
+    "companyScreen-roleChange-admin": "adminiksi",
+    "companyScreen-roleChange-user": "normi käyttäjäksi",
 
     "companyPageNoCompany" : "Ei yritystä",
 

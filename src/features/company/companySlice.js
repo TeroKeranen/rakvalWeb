@@ -357,6 +357,26 @@ export const fetchCompanyProducts = createAsyncThunk(
   }
 )
 
+export const updateUsersRole = createAsyncThunk(
+  'company/updateUsersRole',
+  async({userId, newRole}, {getState, rejectWithValue}) => {
+    return apiMiddleware(async () => {
+      try {
+        const token = getState().userState.user.token;
+        const response = await customFetch.put(`/update-role/${userId}`, {role: newRole}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+
+        return response.data;
+      } catch (error) {
+        console.log("error", error);
+      }
+    })
+  }
+)
+
 
 const initialState = {
     company: null,
@@ -625,6 +645,11 @@ const companySlice = createSlice({
       .addCase(fetchCompanyProducts.fulfilled, (state, action ) => {
         // state.products = action.payload;
         state.company.products = action.payload;
+      })
+
+      // käyttäjien roolian vaihto
+      .addCase(updateUsersRole.fulfilled, (state, action) => {
+       
       })
 
     }

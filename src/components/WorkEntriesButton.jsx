@@ -63,7 +63,7 @@ const WorkEntriesButton = ({companyWorksites}) => {
         const seconds = String(currentDate.getSeconds()).padStart(2, '0');
     
         const timeOnly = `${hours}:${minutes}:${seconds}`;
-        console.log("timeonly", timeOnly);
+        
         return timeOnly;
     }
 

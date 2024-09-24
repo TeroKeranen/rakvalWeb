@@ -18,6 +18,8 @@ const LandingpageWorksiteProgress = ({worksites,  userInfo}) => {
             return worksite.workers.includes(userId);
         }
     })
+
+    
     
     return (
         <div className={`bg-base-200 max-h-100 grid grid-cols-3 gap-1 rounded-lg ${boxShadowClass}`}>
@@ -52,6 +54,7 @@ const LandingpageWorksiteProgress = ({worksites,  userInfo}) => {
                     )
                 }
             })}
+            
         </div>
     )
 

@@ -84,6 +84,11 @@
   "companyComponentCompanyCode": "Company code",
   "companyComponentCompanyDelete": "Exit the company",
   "companyComponentCompanySure": "Are you sure you want to leave the company?",
+  "companyScreen-titleTwo": "Grant Admin Rights",
+  "companyScreen-roleChange": "Role Change",
+  "companyScreen-roleChange-sure": "Are you sure you want to change the user's role to",
+  "companyScreen-roleChange-admin": "admin",
+  "companyScreen-roleChange-user": "regular user",
 
   "companyPageNoCompany" : "No company found",
 

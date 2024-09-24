@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 const HomeLayout = () => {
     return (
         <div className="">
-            <Header />
+            {/* <Header /> */}
             <Navbar />
             <section className="">
                 <Outlet />

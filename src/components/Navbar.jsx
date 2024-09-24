@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 import finlandFlag from '../assets/suomi.jpg'
 import ukFlag from '../assets/eng.jpg'
+import Header from "./Header";
 
 
 
@@ -40,7 +41,7 @@ const Navbar = () => {
     
 
     return (
-        <nav className="bg-base-200">
+        <nav className="bg-base-200 flex flex-col lg:flex-row">
             <div className="navbar align-element">
                 <div className="navbar-start">
                     {/* TITLE */}
@@ -71,13 +72,17 @@ const Navbar = () => {
                         <BsSunFill className="swap-on h-4 w-4" />
                         
                         <BsMoonFill className="swap-off h-4 w-4" />
-                    </label> */}
+                        </label> */}
                     <button onClick={toggleLanguage}>
                         <div style={{ width: '30px', height: '20px' }}>
                             <img src={languageFlag} alt={languageAlt} style={{ width: '100%' }}/>
                         </div>
                     </button>
                 </div>
+            </div>
+
+            <div className="flex items-center">
+                <Header />
             </div>
         </nav>
     )

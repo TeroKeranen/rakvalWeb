@@ -2,6 +2,10 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      changa: ['Changa', 'sans-serif'],
+      bruno: ["Bruno Ace SC", " sans-serif"]
+    },
     extend: {
       boxShadow: {
         'customWinter':'0 10px 30px 0px rgba(40, 36, 36, 0.2)',
@@ -15,7 +19,16 @@ export default {
       },
       minHeight: {
         '100' : '32rem'
-      }
+      },
+      keyframes: {
+        heartbeat: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.2)' },
+        },
+      },
+      animation: {
+        heartbeat: 'heartbeat 1.5s ease-in-out infinite',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
